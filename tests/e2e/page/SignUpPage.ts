@@ -1,3 +1,3 @@
 export class SignUpPage {
-  static readonly url = "http://localhost:3000/signup";
+  static readonly url = "/signup";
 }

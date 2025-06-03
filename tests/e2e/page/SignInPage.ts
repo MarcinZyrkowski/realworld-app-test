@@ -1,7 +1,7 @@
 import { Locator, Page } from "playwright-core";
 
 export class SignInPage {
-  static readonly url = "http://localhost:3000/signin";
+  static readonly url = "/signin";
   readonly page: Page;
   readonly signUpButton: Locator;
 

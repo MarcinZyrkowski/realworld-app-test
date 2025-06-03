@@ -15,7 +15,6 @@ test.describe("register new user", () => {
 
     // bug: Bugs.SIGN_UP_BUTTON
     await signInPage.signUpButton.click();
-
     await signInPage.signUpButton.click();
     await expect(page).toHaveURL(SignUpPage.url);
   });
