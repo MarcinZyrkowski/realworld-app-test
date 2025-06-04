@@ -5,7 +5,7 @@ import { HomePageGenerator } from "../src/generator/HomePageGenerator";
 import { expect, test } from "@playwright/test";
 import { HomePage } from "../src/page/HomePage";
 
-test("setup login new user for first time", async ({ page }) => {
+test("setup: login new user for first time", async ({ page }) => {
   const signInPage = new SignInPage(page);
   const homePage = new HomePage(page);
   const homeAssertion = new HomeAssertion(homePage);

@@ -1,6 +1,10 @@
+# project files
 /node_modules
 /test-results
 /json-report
 /playwright-report
 /playwright
 package-lock.json
+
+# system files
+.DS_Store

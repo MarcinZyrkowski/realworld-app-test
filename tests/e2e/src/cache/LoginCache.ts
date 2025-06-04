@@ -1,11 +1,11 @@
+import { TypeMapper } from "../mapper/TypeMapper";
 import { SignInData } from "../types/page/SignInTypes";
 import { SignUpData } from "../types/page/SignUpTypes";
-import { SignInDataGenerator } from "../generator/SignInDataGenerator";
 import * as fs from "fs";
 import * as path from "path";
 
 export class LoginCache {
-  private static userPath = "../../../playwright/user";
+  private static userPath = "../../../../playwright/user";
   private static signUpDataFile = "signUpData.json";
 
   static cacheSignUpData(signUpData: SignUpData): void {
@@ -27,6 +27,6 @@ export class LoginCache {
     }
     const signUpDataRaw = fs.readFileSync(filePath, "utf-8");
     const signUpData: SignUpData = JSON.parse(signUpDataRaw);
-    return SignInDataGenerator.of(signUpData);
+    return TypeMapper.mapSignUpDataToSignInData(signUpData);
   }
 }

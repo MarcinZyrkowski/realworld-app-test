@@ -4,7 +4,7 @@ import { SignInPage } from "../src/page/SignInPage";
 import { SignUpPage } from "../src/page/SignUpPage";
 import { SignUpDataGenerator } from "../src/generator/SignUpDataGenerator";
 
-test("setup new user", async ({ page }) => {
+test("setup: register new user", async ({ page }) => {
   const signInPage = new SignInPage(page);
   const signUpPage = new SignUpPage(page);
 

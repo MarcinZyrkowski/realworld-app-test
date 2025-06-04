@@ -1,6 +1,5 @@
 import { BankDetails } from "../types/page/HomePageTypes";
 
-
 export class HomePageGenerator {
   static generateRandomBankDetails(): BankDetails {
     return {
