@@ -1,8 +1,8 @@
 import { expect, test } from "@playwright/test";
-import { SignInPage } from "../page/SignInPage";
-import { SignUpPage } from "../page/SignUpPage";
-import { SignUpDataGenerator } from "../generator/SignUpDataGenerator";
-import { LoginCache } from "../cache/LoginCache";
+import { LoginCache } from "../src/cache/LoginCache";
+import { SignInPage } from "../src/page/SignInPage";
+import { SignUpPage } from "../src/page/SignUpPage";
+import { SignUpDataGenerator } from "../src/generator/SignUpDataGenerator";
 
 test("setup new user", async ({ page }) => {
   const signInPage = new SignInPage(page);

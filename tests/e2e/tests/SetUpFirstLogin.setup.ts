@@ -1,9 +1,9 @@
-import test, { expect } from "@playwright/test";
-import { SignInPage } from "../page/SignInPage";
-import { HomePage } from "../page/HomePage";
-import { LoginCache } from "../cache/LoginCache";
-import { HomeAssertion } from "../assertion/HomeAssertion";
-import { HomePageGenerator } from "../generator/HomePageGenerator";
+import { SignInPage } from "../src/page/SignInPage";
+import { LoginCache } from "../src/cache/LoginCache";
+import { HomeAssertion } from "../src/assertion/HomeAssertion";
+import { HomePageGenerator } from "../src/generator/HomePageGenerator";
+import { expect, test } from "@playwright/test";
+import { HomePage } from "../src/page/HomePage";
 
 test("setup login new user for first time", async ({ page }) => {
   const signInPage = new SignInPage(page);

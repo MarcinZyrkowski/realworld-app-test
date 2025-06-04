@@ -1,8 +1,8 @@
 import test, { expect } from "@playwright/test";
-import { LoginCache } from "../cache/LoginCache";
-import { HomePage } from "../page/HomePage";
-import { SignInPage } from "../page/SignInPage";
-import { SignInAssertion } from "../assertion/SignInAssertion";
+import { LoginCache } from "../src/cache/LoginCache";
+import { HomePage } from "../src/page/HomePage";
+import { SignInPage } from "../src/page/SignInPage";
+import { SignInAssertion } from "../src/assertion/SignInAssertion";
 
 test("login with existing user", async ({ page }) => {
   const signInPage = new SignInPage(page);
