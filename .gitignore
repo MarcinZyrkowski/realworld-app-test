@@ -1,3 +1,5 @@
 /node_modules
 /test-results
+/json-report
+/playwright-report
 package-lock.json
