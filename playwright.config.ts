@@ -15,11 +15,17 @@ export default defineConfig({
   },
   projects: [
     {
+      name: "setup",
+      ...devices["Desktop Chrome"],
+      testMatch: 'SetUpNewUser.setup.ts',
+    },
+    {
       name: "dev",
       use: {
         ...devices["Desktop Chrome"],
         // baseURL: "http://localhost:3000", we can set a default baseURL here
       },
+      dependencies: ["setup"],
     },
     {
       name: "qa",
@@ -27,6 +33,7 @@ export default defineConfig({
         ...devices["Desktop Firefox"],
         // baseURL: "http://localhost:3000", we can set a default baseURL here
       },
+      dependencies: ["setup"],
     },
   ],
   reporter: [
