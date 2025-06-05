@@ -15,11 +15,23 @@ export default defineConfig({
   },
   projects: [
     {
+      name: "setupNewUser",
+      ...devices["Desktop Chrome"],
+      testMatch: 'SetUpNewUser.setup.ts',
+    },
+    {
+      name: "setupFirstLogin",
+      ...devices["Desktop Chrome"],
+      testMatch: 'SetUpFirstLogin.setup.ts',
+      dependencies: ["setupNewUser"],
+    },
+    {
       name: "dev",
       use: {
         ...devices["Desktop Chrome"],
         // baseURL: "http://localhost:3000", we can set a default baseURL here
       },
+      dependencies: ["setupFirstLogin"],
     },
     {
       name: "qa",
@@ -27,10 +39,11 @@ export default defineConfig({
         ...devices["Desktop Firefox"],
         // baseURL: "http://localhost:3000", we can set a default baseURL here
       },
+      dependencies: ["setupFirstLogin"],
     },
   ],
   reporter: [
-    ["json", { outputFile: "json-report/test-results.json" }],
-    ["html", { open: "never" }],
+    ["json", { outputFile: "reports/json-report.json" }],
+    ["html", { open: "never", outputFolder: "reports/html-report" }],
   ],
 });
