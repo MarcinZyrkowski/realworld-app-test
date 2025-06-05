@@ -1,9 +1,9 @@
 # project files
 /node_modules
 /test-results
-/json-report
 /playwright-report
 /playwright
+/reports
 package-lock.json
 
 # system files

@@ -43,7 +43,7 @@ export default defineConfig({
     },
   ],
   reporter: [
-    ["json", { outputFile: "json-report/test-results.json" }],
-    ["html", { open: "never" }],
+    ["json", { outputFile: "reports/json-report.json" }],
+    ["html", { open: "never", outputFolder: "reports/html-report" }],
   ],
 });

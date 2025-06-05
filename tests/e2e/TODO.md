@@ -1,4 +1,4 @@
 ## What should be done
-- implement reporting
+- implement reporting (allure?)
 - implement checkstyle (linter vs prettier)
 - test tags
