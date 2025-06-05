@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "allure": "allure generate ./reports/allure-results --clean -o ./reports/allure-report && allure open ./reports/allure-report"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +15,7 @@
     "dotenv": "^16.5.0"
   },
   "dependencies": {
-    "@faker-js/faker": "^9.8.0"
+    "@faker-js/faker": "^9.8.0",
+    "allure-playwright": "^3.2.2"
   }
 }

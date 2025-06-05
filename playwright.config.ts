@@ -12,18 +12,19 @@ export default defineConfig({
     launchOptions: {
       slowMo: 0,
     },
+    trace: "off",
   },
   projects: [
     {
-      name: "setupNewUser",
+      name: "setup new user",
       ...devices["Desktop Chrome"],
       testMatch: 'SetUpNewUser.setup.ts',
     },
     {
-      name: "setupFirstLogin",
+      name: "setup first login",
       ...devices["Desktop Chrome"],
       testMatch: 'SetUpFirstLogin.setup.ts',
-      dependencies: ["setupNewUser"],
+      dependencies: ["setup new user"],
     },
     {
       name: "dev",
@@ -31,7 +32,7 @@ export default defineConfig({
         ...devices["Desktop Chrome"],
         // baseURL: "http://localhost:3000", we can set a default baseURL here
       },
-      dependencies: ["setupFirstLogin"],
+      dependencies: ["setup first login"],
     },
     {
       name: "qa",
@@ -39,11 +40,12 @@ export default defineConfig({
         ...devices["Desktop Firefox"],
         // baseURL: "http://localhost:3000", we can set a default baseURL here
       },
-      dependencies: ["setupFirstLogin"],
+      dependencies: ["setup first login"],
     },
   ],
   reporter: [
     ["json", { outputFile: "reports/json-report.json" }],
     ["html", { open: "never", outputFolder: "reports/html-report" }],
+    ["allure-playwright", { resultsDir: "reports/allure-results" }],
   ],
 });
