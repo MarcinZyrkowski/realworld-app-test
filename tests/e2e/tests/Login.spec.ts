@@ -51,4 +51,8 @@ test.describe("login tests", () => {
       await signInAssertion.assertSignInFormVisible();
     });
   });
+
+  test.afterEach(async () => {
+    await allureSteps.attachVideoIfExists();
+  });
 });

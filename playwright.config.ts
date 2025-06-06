@@ -5,17 +5,16 @@ export default defineConfig({
   timeout: 30_000,
   globalTimeout: 60_000,
   testDir: "./tests",
-  retries: 2,
+  retries: 1,
   use: {
     // baseURL: "http://localhost:3000", default url if project doesn't override it
     baseURL: process.env.base_url,
     launchOptions: {
       slowMo: 0,
     },
-    viewport: { width: 1920, height: 1080 },
+    viewport: { width: 1280, height: 720 },
     video: {
       mode: "on-first-retry",
-      size: { width: 1920, height: 1080 },
     },
     trace: "off",
   },
