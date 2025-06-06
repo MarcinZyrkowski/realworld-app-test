@@ -29,10 +29,10 @@ test.describe("login tests", () => {
       const signInData = LoginCache.retrieveSignInData();
       await signInPage.fillForm(signInData);
       await allureSteps.makeScreenShot("Filled Sign In Form");
-      await signInPage.signInButton.click();
     });
 
     await allureSteps.step("verify successful login", async () => {
+      await signInPage.signInButton.click();
       await expect(page).toHaveURL(HomePage.url);
       await allureSteps.makeScreenShot("Home Page");
     });

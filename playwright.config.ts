@@ -51,5 +51,6 @@ export default defineConfig({
     ["json", { outputFile: "reports/json-report.json" }],
     ["html", { open: "never", outputFolder: "reports/html-report" }],
     ["allure-playwright", { resultsDir: "reports/allure-results" }],
+    ["list"]
   ],
 });

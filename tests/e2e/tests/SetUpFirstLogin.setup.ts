@@ -31,24 +31,24 @@ test("setup: login new user for first time", async ({ page }) => {
   await allureSteps.step("get started is visible", async () => {
     await homeAssertion.assertGetStartedDialogVisible();
     await allureSteps.makeScreenShot("Get Started Dialog");
-    await homePage.getStartedDialog.nextButton.click();
   });
 
   await allureSteps.step("create bank account dialog is visible", async () => {
+    await homePage.getStartedDialog.nextButton.click();
     await homeAssertion.assertCreateBankAccountDialogVisible();
     const bankDetails = HomePageGenerator.generateRandomBankDetails();
     await homePage.createBankAccountDialog.fillBankAccountForm(bankDetails);
     await allureSteps.makeScreenShot("Filled Create Bank Account Form");
-    await homePage.createBankAccountDialog.saveButton.click();
   });
 
   await allureSteps.step("finished dialog is visible", async () => {
+    await homePage.createBankAccountDialog.saveButton.click();
     await homeAssertion.assertFinishedDialogVisible();
     await allureSteps.makeScreenShot("Finished Dialog");
-    await homePage.finishedDialog.doneButton.click();
   });
 
   await allureSteps.step("no dialog is visible", async () => {
+    await homePage.finishedDialog.doneButton.click();
     await homeAssertion.assertNoDialogIsVisible();
     await allureSteps.makeScreenShot("No Dialog Visible");
   });
