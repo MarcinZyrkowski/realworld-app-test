@@ -31,3 +31,7 @@ After running tests you can find test reports under `./reports`. There are 3 typ
 To open html report it is enough to open html file `index.html` in your browser.
 To open allure report use command:
 `npm run allure`
+
+## debugging failed tests
+For debbiging failed tests reports may be useful. However to utilize more detailed way of debbuing you can open trace:
+`npx playwright show-trace {your_trace.zip}`
