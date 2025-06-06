@@ -21,3 +21,13 @@ possible flags:
 
 flags could be mixed e.g.
 `npx playwright test --ui --project=dev`
+
+## reporting
+After running tests you can find test reports under `./reports`. There are 3 types of reports:
+- allure report
+- html report
+- json report
+
+To open html report it is enough to open html file `index.html` in your browser.
+To open allure report use command:
+`npm run allure`
