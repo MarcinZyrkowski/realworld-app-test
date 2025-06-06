@@ -12,18 +12,23 @@ export default defineConfig({
     launchOptions: {
       slowMo: 0,
     },
+    viewport: { width: 1920, height: 1080 },
+    video: {
+      mode: "on-first-retry",
+      size: { width: 1920, height: 1080 },
+    },
     trace: "off",
   },
   projects: [
     {
       name: "setup new user",
       ...devices["Desktop Chrome"],
-      testMatch: 'SetUpNewUser.setup.ts',
+      testMatch: "SetUpNewUser.setup.ts",
     },
     {
       name: "setup first login",
       ...devices["Desktop Chrome"],
-      testMatch: 'SetUpFirstLogin.setup.ts',
+      testMatch: "SetUpFirstLogin.setup.ts",
       dependencies: ["setup new user"],
     },
     {

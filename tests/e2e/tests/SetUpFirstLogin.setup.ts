@@ -29,8 +29,8 @@ test("setup: login new user for first time", async ({ page }) => {
   });
 
   await allureSteps.step("get started is visible", async () => {
-    await allureSteps.makeScreenShot("Get Started Dialog");
     await homeAssertion.assertGetStartedDialogVisible();
+    await allureSteps.makeScreenShot("Get Started Dialog");
     await homePage.getStartedDialog.nextButton.click();
   });
 
