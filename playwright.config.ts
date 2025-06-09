@@ -6,6 +6,8 @@ export default defineConfig({
   globalTimeout: 60_000,
   testDir: "./tests",
   retries: 1,
+  fullyParallel: true,
+  workers: 5,
   use: {
     // baseURL: "http://localhost:3000", default url if project doesn't override it
     baseURL: process.env.base_url,
@@ -16,7 +18,7 @@ export default defineConfig({
     video: {
       mode: "on-first-retry",
     },
-    trace: "off",
+    trace: "on-first-retry",
   },
   projects: [
     {
@@ -50,7 +52,12 @@ export default defineConfig({
   reporter: [
     ["json", { outputFile: "reports/json-report.json" }],
     ["html", { open: "never", outputFolder: "reports/html-report" }],
-    ["allure-playwright", { resultsDir: "reports/allure-results" }],
-    ["list"]
+    [
+      "allure-playwright",
+      {
+        resultsDir: "reports/allure-results",
+      },
+    ],
+    ["list"],
   ],
 });

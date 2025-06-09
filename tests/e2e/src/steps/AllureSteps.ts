@@ -21,7 +21,7 @@ export class AllureSteps {
   }
 
   async suite(name: string) {
-    allure.suite(name);
+    await allure.suite(name);
   }
 
   async attachVideoIfExists() {
