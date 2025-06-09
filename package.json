@@ -8,7 +8,10 @@
     "allure:generate": "allure generate ./reports/allure-results --clean -o ./reports/allure-report",
     "allure:open": "allure open ./reports/allure-report",
     "allure": "npm run allure:generate && npm run allure:clean && npm run allure:open",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "prettier:check": "npx prettier . --check",
+    "prettier:write": "npx prettier . --write",
+    "codecheck": "npm run lint && npm run prettier:check"
   },
   "keywords": [],
   "author": "",

@@ -1,4 +1,5 @@
 ## What should be done
+
 - eslint
 - sonar qube
 - missing awaits in playwright
