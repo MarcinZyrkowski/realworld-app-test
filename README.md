@@ -1,10 +1,10 @@
-## Description
+## project description
 
 Test automation project for realworld-app
 (should be cloned and run separately -
 [realworld-app](https://github.com/MarcinZyrkowski/realworld-app) )
 
-## App url
+## service url
 
 `http://localhost:3000`
 
@@ -45,9 +45,9 @@ You can always add flag `--debug` to run live debugger e.g.
 ## formatting
 
 To verify format issues use:
-`npm run lint`
+`npm run codecheck` - runs eslint and prettier
 
-## running test framework
+## adjusting node version
 
 If you have different version of node than specified in `.nvmrc` use:
 `nvm use` command in terminal after opening project.
