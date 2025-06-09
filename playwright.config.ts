@@ -1,10 +1,10 @@
-import { defineConfig, devices } from "@playwright/test";
-import "dotenv/config";
+import { defineConfig, devices } from '@playwright/test'
+import 'dotenv/config'
 
 export default defineConfig({
   timeout: 30_000,
   globalTimeout: 60_000,
-  testDir: "./tests",
+  testDir: './tests',
   retries: 1,
   fullyParallel: true,
   workers: 5,
@@ -16,48 +16,48 @@ export default defineConfig({
     },
     viewport: { width: 1280, height: 720 },
     video: {
-      mode: "on-first-retry",
+      mode: 'on-first-retry',
     },
-    trace: "on-first-retry",
+    trace: 'on-first-retry',
   },
   projects: [
     {
-      name: "setup new user",
-      ...devices["Desktop Chrome"],
-      testMatch: "SetUpNewUser.setup.ts",
+      name: 'setup new user',
+      ...devices['Desktop Chrome'],
+      testMatch: 'SetUpNewUser.setup.ts',
     },
     {
-      name: "setup first login",
-      ...devices["Desktop Chrome"],
-      testMatch: "SetUpFirstLogin.setup.ts",
-      dependencies: ["setup new user"],
+      name: 'setup first login',
+      ...devices['Desktop Chrome'],
+      testMatch: 'SetUpFirstLogin.setup.ts',
+      dependencies: ['setup new user'],
     },
     {
-      name: "dev",
+      name: 'dev',
       use: {
-        ...devices["Desktop Chrome"],
+        ...devices['Desktop Chrome'],
         // baseURL: "http://localhost:3000", we can set a default baseURL here
       },
-      dependencies: ["setup first login"],
+      dependencies: ['setup first login'],
     },
     {
-      name: "qa",
+      name: 'qa',
       use: {
-        ...devices["Desktop Firefox"],
+        ...devices['Desktop Firefox'],
         // baseURL: "http://localhost:3000", we can set a default baseURL here
       },
-      dependencies: ["setup first login"],
+      dependencies: ['setup first login'],
     },
   ],
   reporter: [
-    ["json", { outputFile: "reports/json-report.json" }],
-    ["html", { open: "never", outputFolder: "reports/html-report" }],
+    ['json', { outputFile: 'reports/json-report.json' }],
+    ['html', { open: 'never', outputFolder: 'reports/html-report' }],
     [
-      "allure-playwright",
+      'allure-playwright',
       {
-        resultsDir: "reports/allure-results",
+        resultsDir: 'reports/allure-results',
       },
     ],
-    ["list"],
+    ['list'],
   ],
-});
+})
