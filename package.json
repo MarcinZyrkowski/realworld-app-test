@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "allure:clean": "rm -rf ./reports/allure-results",
     "allure:generate": "allure generate ./reports/allure-results --clean -o ./reports/allure-report",
     "allure:open": "allure open ./reports/allure-report",
-    "allure": "npm run allure:generate && npm run allure:open"
+    "allure": "npm run allure:generate && npm run allure:clean && npm run allure:open"
   },
   "keywords": [],
   "author": "",
