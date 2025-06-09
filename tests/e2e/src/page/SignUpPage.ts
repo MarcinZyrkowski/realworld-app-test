@@ -10,6 +10,7 @@ export class SignUpPage {
   readonly passwordInput: Locator;
   readonly confirmPasswordInput: Locator;
   readonly signUpButton: Locator;
+  readonly signInButton: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -24,6 +25,7 @@ export class SignUpPage {
       exact: true,
       name: "Sign Up",
     });
+    this.signInButton = this.page.getByText("Have an account? Sign In");
   }
 
   async fillForm(data: SignUpData) {
