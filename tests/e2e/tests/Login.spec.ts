@@ -3,7 +3,7 @@ import { LoginCache } from "../src/cache/LoginCache";
 import { HomePage } from "../src/page/HomePage";
 import { SignInPage } from "../src/page/SignInPage";
 import { SignInAssertion } from "../src/assertion/SignInAssertion";
-import { AllureSteps } from "../src/steps/AllureSteps.ts";
+import { AllureSteps } from "../src/steps/AllureSteps";
 
 test.describe("login tests", () => {
   let signInPage: SignInPage;
