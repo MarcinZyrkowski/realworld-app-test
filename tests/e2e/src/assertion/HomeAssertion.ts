@@ -31,6 +31,6 @@ export class HomeAssertion {
 
   async assertNoDialogIsVisible(): Promise<void> {
     const dialog = this.homePage.page.getByRole('dialog')
-    await expect(dialog).not.toBeVisible()
+    await expect(dialog).toBeHidden()
   }
 }
