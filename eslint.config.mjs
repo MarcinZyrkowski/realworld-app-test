@@ -1,21 +1,41 @@
-import js from '@eslint/js'
 import globals from 'globals'
-import tseslint from 'typescript-eslint'
-import { defineConfig } from 'eslint/config'
+import tsParser from '@typescript-eslint/parser'
+import tsPlugin from '@typescript-eslint/eslint-plugin'
+import playwright from 'eslint-plugin-playwright'
 
-export default defineConfig([
+const tsRecommended = tsPlugin.configs.recommended
+const playwrightRecommended = playwright.configs.recommended
+
+export default [
   {
-    // ignores packages runtime generated and test reports
+    // typescript rules
+    files: ['**/*.{ts,tsx,mts,cts}'],
+    ignores: ['playwright.config.ts'],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        ecmaVersion: 2020,
+        sourceType: 'module',
+        project: './tsconfig.json',
+      },
+      globals: globals.browser,
+    },
+    plugins: {
+      '@typescript-eslint': tsPlugin,
+    },
+    rules: {
+      ...tsRecommended.rules,
+    },
+  },
+  {
+    // playwright rules
+    files: ['**/*.{js,mjs,cjs,ts,tsx,mts,cts}'],
+    plugins: {
+      playwright: playwright,
+    },
+    rules: {
+      ...playwrightRecommended.rules,
+    },
     ignores: ['**/node_modules/**', '**/reports/**', '**/playwright-report/**'],
   },
-  {
-    files: ['**/*.{js,mjs,cjs,ts,mts,cts}'],
-    plugins: { js },
-    extends: ['js/recommended'],
-  },
-  {
-    files: ['**/*.{js,mjs,cjs,ts,mts,cts}'],
-    languageOptions: { globals: globals.browser },
-  },
-  tseslint.configs.recommended,
-])
+]
