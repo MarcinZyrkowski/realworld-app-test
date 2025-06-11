@@ -33,4 +33,13 @@ export class HomeAssertion {
     const dialog = this.homePage.page.getByRole('dialog')
     await expect(dialog).toBeHidden()
   }
+
+  async assertAccountBalanceVisible(): Promise<void> {
+    await expect(this.homePage.accountBalanceValue).toBeVisible()
+    await expect(this.homePage.accountBalanceTitle).toBeVisible()
+  }
+
+  async assertAccountBalanceValue(value: string): Promise<void> {
+    await expect(this.homePage.accountBalanceValue).toHaveText(value)
+  }
 }

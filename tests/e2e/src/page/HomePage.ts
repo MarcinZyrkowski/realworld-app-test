@@ -4,12 +4,16 @@ import { BankDetails } from '../types/page/HomePageTypes'
 export class HomePage {
   static readonly url = '/'
   readonly page: Page
+  readonly accountBalanceValue: Locator
+  readonly accountBalanceTitle: Locator
   readonly getStartedDialog: GetStartedDialog
   readonly createBankAccountDialog: CreateBankAccountDialog
   readonly finishedDialog: FinishedDialog
 
   constructor(page: Page) {
     this.page = page
+    this.accountBalanceValue = this.page.locator('[data-test="sidenav-user-balance"]')
+    this.accountBalanceTitle = this.page.getByText('Account Balance')
     this.getStartedDialog = new GetStartedDialog(page)
     this.createBankAccountDialog = new CreateBankAccountDialog(page)
     this.finishedDialog = new FinishedDialog(page)
