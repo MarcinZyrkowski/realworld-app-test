@@ -31,8 +31,12 @@ test.describe('login tests', () => {
       await allureSteps.makeScreenShot('Filled Sign In Form')
     })
 
-    await allureSteps.step('verify successful login', async () => {
+    await allureSteps.step('sign in', async () => {
       await signInPage.signInButton.click()
+      await allureSteps.makeScreenShot('Sign In Button Clicked')
+    })
+
+    await allureSteps.step('verify successful login', async () => {
       await expect(page).toHaveURL(HomePage.url)
       await allureSteps.makeScreenShot('Home Page')
     })

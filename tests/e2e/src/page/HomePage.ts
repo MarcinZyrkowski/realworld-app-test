@@ -4,15 +4,53 @@ import { BankDetails } from '../types/page/HomePageTypes'
 export class HomePage {
   static readonly url = '/'
   readonly page: Page
+  readonly menuDrawerButton: Locator
+  readonly menuDrawer: MenuDrawer
+  readonly logo: Locator
+  readonly everyoneTab: Locator
+  readonly friendsTab: Locator
+  readonly mineTab: Locator
   readonly getStartedDialog: GetStartedDialog
+  readonly newTransactionButton: Locator
+  readonly notificationsBellButton: Locator
   readonly createBankAccountDialog: CreateBankAccountDialog
   readonly finishedDialog: FinishedDialog
 
   constructor(page: Page) {
     this.page = page
+    this.menuDrawerButton = this.page.locator('[data-test="sidenav-toggle"]')
+    this.menuDrawer = new MenuDrawer(page)
+    this.logo = this.page.locator('[data-test="app-name-logo"]')
+    this.everyoneTab = this.page.getByRole('tab', { name: 'Everyone' })
+    this.friendsTab = this.page.getByRole('tab', { name: 'Friends' })
+    this.mineTab = this.page.getByRole('tab', { name: 'Mine' })
+    this.newTransactionButton = this.page.getByRole('button', { name: 'New' })
+    this.notificationsBellButton = this.page.locator('[data-test="nav-top-notifications-link"]')
     this.getStartedDialog = new GetStartedDialog(page)
     this.createBankAccountDialog = new CreateBankAccountDialog(page)
     this.finishedDialog = new FinishedDialog(page)
+  }
+}
+
+export class MenuDrawer {
+  readonly page: Page
+  readonly accountBalanceValue: Locator
+  readonly accountBalanceTitle: Locator
+  readonly homeButton: Locator
+  readonly myAccountButton: Locator
+  readonly bankAccountsButton: Locator
+  readonly notificationsButton: Locator
+  readonly logOutButton: Locator
+
+  constructor(page: Page) {
+    this.page = page
+    this.accountBalanceValue = this.page.locator('[data-test="sidenav-user-balance"]')
+    this.accountBalanceTitle = this.page.getByText('Account Balance')
+    this.homeButton = this.page.getByRole('button', { name: 'Home' })
+    this.myAccountButton = this.page.getByRole('button', { name: 'My Account' })
+    this.bankAccountsButton = this.page.getByRole('button', { name: 'Bank Accounts' })
+    this.notificationsButton = this.page.getByRole('button', { name: 'Notifications' })
+    this.logOutButton = this.page.getByRole('button', { name: 'Logout' })
   }
 }
 

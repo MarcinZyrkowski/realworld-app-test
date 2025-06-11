@@ -29,8 +29,11 @@ test.describe('register tests', () => {
     await allureSteps.step('open sign up page', async () => {
       await signInPage.signUpButton.click()
       await signInPage.signUpButton.click()
-      await signUpAssertion.assertSignUpFormVisible()
       await allureSteps.makeScreenShot('Sign Up Page')
+    })
+
+    await allureSteps.step('assert sign up form is visible', async () => {
+      await signUpAssertion.assertSignUpFormVisible()
       await expect(page).toHaveURL(SignUpPage.url)
     })
   })

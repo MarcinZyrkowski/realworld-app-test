@@ -25,6 +25,7 @@ export default [
     },
     rules: {
       ...tsRecommended.rules,
+      '@typescript-eslint/no-floating-promises': 'error',
     },
   },
   {
@@ -35,6 +36,7 @@ export default [
     },
     rules: {
       ...playwrightRecommended.rules,
+      'playwright/expect-expect': 'off',
     },
     ignores: ['**/node_modules/**', '**/reports/**', '**/playwright-report/**'],
   },
