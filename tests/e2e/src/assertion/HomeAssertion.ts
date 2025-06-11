@@ -35,11 +35,33 @@ export class HomeAssertion {
   }
 
   async assertAccountBalanceVisible(): Promise<void> {
-    await expect(this.homePage.accountBalanceValue).toBeVisible()
-    await expect(this.homePage.accountBalanceTitle).toBeVisible()
+    const menu = this.homePage.menuDrawer
+    await expect(menu.accountBalanceValue).toBeVisible()
+    await expect(menu.accountBalanceTitle).toBeVisible()
   }
 
   async assertAccountBalanceValue(value: string): Promise<void> {
-    await expect(this.homePage.accountBalanceValue).toHaveText(value)
+    await expect(this.homePage.menuDrawer.accountBalanceValue).toHaveText(value)
+  }
+
+  async assertHomePageElementsVisible(): Promise<void> {
+    await expect(this.homePage.logo).toBeVisible()
+    await expect(this.homePage.everyoneTab).toBeVisible()
+    await expect(this.homePage.friendsTab).toBeVisible()
+    await expect(this.homePage.mineTab).toBeVisible()
+    await expect(this.homePage.newTransactionButton).toBeVisible()
+    await expect(this.homePage.notificationsBellButton).toBeVisible()
+  }
+
+  async assertMenuDrawerVisible(): Promise<void> {
+    const drawer = this.homePage.menuDrawer
+    await expect(this.homePage.menuDrawerButton).toBeVisible()
+    await expect(drawer.accountBalanceValue).toBeVisible()
+    await expect(drawer.accountBalanceTitle).toBeVisible()
+    await expect(drawer.homeButton).toBeVisible()
+    await expect(drawer.myAccountButton).toBeVisible()
+    await expect(drawer.bankAccountsButton).toBeVisible()
+    await expect(drawer.notificationsButton).toBeVisible()
+    await expect(drawer.logOutButton).toBeVisible()
   }
 }

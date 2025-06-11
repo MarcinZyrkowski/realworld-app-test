@@ -18,7 +18,7 @@ test.describe('home page tests', () => {
     homeAssertion = new HomeAssertion(homePage)
   })
 
-  test('verify home page balance', async () => {
+  test('verify account balance', async () => {
     await allureSteps.suite('home page')
 
     await signInSteps.loginWithExistingUser()
@@ -29,6 +29,20 @@ test.describe('home page tests', () => {
 
     await allureSteps.step('assert home page account balance value is $0.00', async () => {
       await homeAssertion.assertAccountBalanceValue('$0.00')
+    })
+  })
+
+  test('verify home page elements', async () => {
+    await allureSteps.suite('home page')
+
+    await signInSteps.loginWithExistingUser()
+
+    await allureSteps.step('assert home page elements are visible', async () => {
+      await homeAssertion.assertHomePageElementsVisible()
+    })
+
+    await allureSteps.step('assert menu drawer is visible', async () => {
+      await homeAssertion.assertMenuDrawerVisible()
     })
   })
 
