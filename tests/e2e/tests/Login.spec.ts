@@ -22,23 +22,23 @@ test.describe('login tests', () => {
     await allureSteps.step('open sign in page', async () => {
       await signInPage.open()
       await expect(page).toHaveURL(SignInPage.url)
-      await allureSteps.makeScreenShot('Sign In Page')
+      await allureSteps.makeScreenshot('Sign In Page')
     })
 
     await allureSteps.step('fill sign in form', async () => {
       const signInData = LoginCache.retrieveSignInData()
       await signInPage.fillForm(signInData)
-      await allureSteps.makeScreenShot('Filled Sign In Form')
+      await allureSteps.makeScreenshot('Filled Sign In Form')
     })
 
     await allureSteps.step('sign in', async () => {
       await signInPage.signInButton.click()
-      await allureSteps.makeScreenShot('Sign In Button Clicked')
+      await allureSteps.makeScreenshot('Sign In Button Clicked')
     })
 
     await allureSteps.step('verify successful login', async () => {
       await expect(page).toHaveURL(HomePage.url)
-      await allureSteps.makeScreenShot('Home Page')
+      await allureSteps.makeScreenshot('Home Page')
     })
   })
 
@@ -48,7 +48,7 @@ test.describe('login tests', () => {
     await allureSteps.step('open sign in page', async () => {
       await signInPage.open()
       await expect(page).toHaveURL(SignInPage.url)
-      await allureSteps.makeScreenShot('Sign In Page')
+      await allureSteps.makeScreenshot('Sign In Page')
     })
 
     await allureSteps.step('assert sign in form is visible', async () => {

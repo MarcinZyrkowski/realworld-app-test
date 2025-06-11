@@ -15,7 +15,7 @@ test('setup: register new user', async ({ page }) => {
   await allureSteps.step('open sign in page', async () => {
     await signInPage.open()
     await expect(page).toHaveURL(SignInPage.url)
-    await allureSteps.makeScreenShot('Sign In Page')
+    await allureSteps.makeScreenshot('Sign In Page')
   })
 
   await allureSteps.step('open sign up page', async () => {
@@ -23,19 +23,19 @@ test('setup: register new user', async ({ page }) => {
     await signInPage.signUpButton.click()
     await signInPage.signUpButton.click()
     await expect(page).toHaveURL(SignUpPage.url)
-    await allureSteps.makeScreenShot('Sign Up Page')
+    await allureSteps.makeScreenshot('Sign Up Page')
   })
 
   await allureSteps.step('fill sign up form', async () => {
     const signUpData = SignUpDataGenerator.generateRandomSignUpData()
     LoginCache.cacheSignUpData(signUpData)
     await signUpPage.fillForm(signUpData)
-    await allureSteps.makeScreenShot('Filled Sign Up Form')
+    await allureSteps.makeScreenshot('Filled Sign Up Form')
   })
 
   await allureSteps.step('submit sign up form', async () => {
     await signUpPage.signUpButton.click()
     await expect(page).toHaveURL(SignInPage.url)
-    await allureSteps.makeScreenShot('Sign Up Successful')
+    await allureSteps.makeScreenshot('Sign Up Successful')
   })
 })

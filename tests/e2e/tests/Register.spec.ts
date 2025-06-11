@@ -23,13 +23,13 @@ test.describe('register tests', () => {
     await allureSteps.step('open sign in page', async () => {
       await signInPage.open()
       await expect(page).toHaveURL(SignInPage.url)
-      await allureSteps.makeScreenShot('Sign In Page')
+      await allureSteps.makeScreenshot('Sign In Page')
     })
 
     await allureSteps.step('open sign up page', async () => {
       await signInPage.signUpButton.click()
       await signInPage.signUpButton.click()
-      await allureSteps.makeScreenShot('Sign Up Page')
+      await allureSteps.makeScreenshot('Sign Up Page')
     })
 
     await allureSteps.step('assert sign up form is visible', async () => {

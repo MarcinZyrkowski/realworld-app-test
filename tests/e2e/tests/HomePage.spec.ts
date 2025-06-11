@@ -4,6 +4,7 @@ import { AllureSteps } from '../src/steps/AllureSteps'
 import { SignInSteps } from '../src/steps/SignInSteps'
 import { HomePage } from '../src/page/HomePage'
 import { HomeAssertion } from '../src/assertion/HomeAssertion'
+import { LoginCache } from '../src/cache/LoginCache'
 
 test.describe('home page tests', () => {
   let homePage: HomePage
@@ -43,6 +44,18 @@ test.describe('home page tests', () => {
 
     await allureSteps.step('assert menu drawer is visible', async () => {
       await homeAssertion.assertMenuDrawerVisible()
+    })
+  })
+
+  test('verify user account details', async () => {
+    await allureSteps.suite('home page')
+
+    await signInSteps.loginWithExistingUser()
+
+    await allureSteps.step('verify user account details', async () => {
+      const expectedDisplayName = LoginCache.retrieveDisplayName()
+      const expectedUsername = '@' + LoginCache.retrieveUsername()
+      await homeAssertion.verifyUserAccountDetails(expectedDisplayName, expectedUsername)
     })
   })
 

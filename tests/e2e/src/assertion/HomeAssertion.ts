@@ -56,6 +56,8 @@ export class HomeAssertion {
   async assertMenuDrawerVisible(): Promise<void> {
     const drawer = this.homePage.menuDrawer
     await expect(this.homePage.menuDrawerButton).toBeVisible()
+    await expect(drawer.userFullName).toBeVisible()
+    await expect(drawer.username).toBeVisible()
     await expect(drawer.accountBalanceValue).toBeVisible()
     await expect(drawer.accountBalanceTitle).toBeVisible()
     await expect(drawer.homeButton).toBeVisible()
@@ -63,5 +65,11 @@ export class HomeAssertion {
     await expect(drawer.bankAccountsButton).toBeVisible()
     await expect(drawer.notificationsButton).toBeVisible()
     await expect(drawer.logOutButton).toBeVisible()
+  }
+
+  async verifyUserAccountDetails(userFullName: string, username: string): Promise<void> {
+    const drawer = this.homePage.menuDrawer
+    await expect(drawer.userFullName).toHaveText(userFullName)
+    await expect(drawer.username).toHaveText(username)
   }
 }
