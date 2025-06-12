@@ -2,12 +2,12 @@ import { defineConfig, devices } from '@playwright/test'
 import 'dotenv/config'
 
 export default defineConfig({
-  timeout: 30_000,
-  globalTimeout: 60_000,
+  timeout: 20_000,
+  globalTimeout: 30_000,
   testDir: './tests',
   retries: 1,
   fullyParallel: true,
-  workers: 5,
+  workers: 10,
   use: {
     // baseURL: "http://localhost:3000", default url if project doesn't override it
     baseURL: process.env.base_url,
