@@ -1,5 +1,6 @@
 import { expect } from '@playwright/test'
 import { HomePage } from '../page/HomePage'
+import { TransactionDetails } from '../types/page/HomePageTypes'
 
 export class HomeAssertion {
   readonly homePage: HomePage
@@ -51,6 +52,7 @@ export class HomeAssertion {
     await expect(this.homePage.mineTab).toBeVisible()
     await expect(this.homePage.newTransactionButton).toBeVisible()
     await expect(this.homePage.notificationsBellButton).toBeVisible()
+    await expect(this.homePage.transactionsList).toBeVisible()
   }
 
   async assertMenuDrawerVisible(): Promise<void> {
@@ -71,5 +73,22 @@ export class HomeAssertion {
     const drawer = this.homePage.menuDrawer
     await expect(drawer.userFullName).toHaveText(userFullName)
     await expect(drawer.username).toHaveText(username)
+  }
+
+  async assertTransactionsHistoryIsDisplayed(): Promise<void> {
+    const transactions = await this.homePage.getVisibleTransactions()
+    expect(transactions.length).toBeGreaterThan(0)
+  }
+
+  async verifyTransactionDetails(details: TransactionDetails): Promise<void> {
+    expect([' requested ', ' paid ', ' charged ']).toContain(details.action)
+    expect(
+      details.description.includes('Request: ') || details.description.includes('Payment: '),
+    ).toBe(true)
+    expect(details.title).toBe('Transaction Detail')
+    expect(details.sender).not.toBeNull()
+    expect(details.receiver).not.toBeNull()
+    expect(details.amount).toContain('$')
+    expect(details.likeCount).toBeGreaterThanOrEqual(0)
   }
 }
