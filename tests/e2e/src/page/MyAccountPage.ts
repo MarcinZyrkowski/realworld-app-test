@@ -1,4 +1,5 @@
 import { Locator, Page } from '@playwright/test'
+import { MyAccountData } from '../types/page/MyAccountTypes'
 
 export class MyAccountPage {
   readonly page: Page
@@ -16,6 +17,21 @@ export class MyAccountPage {
     this.lastNameInput = this.page.locator('[id="user-settings-lastName-input"]')
     this.emailInput = this.page.locator('[id="user-settings-email-input"]')
     this.phoneInput = this.page.locator('[id="user-settings-phoneNumber-input"]')
-    this.saveButton = this.page.getByRole('button', { name: 'Save' })
+    this.saveButton = this.saveButton = this.page.getByRole('button', { name: 'Save' })
+  }
+
+  async fillUserDetails(data: MyAccountData) {
+    if (typeof data.firstName === 'string') {
+      await this.firstNameInput.fill(data.firstName)
+    }
+    if (typeof data.lastName === 'string') {
+      await this.lastNameInput.fill(data.lastName)
+    }
+    if (typeof data.email === 'string') {
+      await this.emailInput.fill(data.email)
+    }
+    if (typeof data.phone === 'string') {
+      await this.phoneInput.fill(data.phone)
+    }
   }
 }
