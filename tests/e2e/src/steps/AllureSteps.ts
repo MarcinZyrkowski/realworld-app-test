@@ -9,7 +9,7 @@ export class AllureSteps {
     this.page = page
   }
 
-  async makeScreenShot(name: string) {
+  async makeScreenshot(name: string) {
     const screenshot = await this.page.screenshot()
     allure.attachment(name, screenshot, 'image/png')
   }
