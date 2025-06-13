@@ -1,5 +1,6 @@
 import { Locator, Page } from '@playwright/test'
-import { BankDetails, TransactionDetails } from '../types/page/HomePageTypes'
+import { TransactionDetails } from '../types/page/HomePageTypes'
+import { BankDetails } from '../types/page/CommonTypes'
 
 export class HomePage {
   static readonly url = '/'

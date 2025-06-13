@@ -3,11 +3,11 @@ import 'dotenv/config'
 
 export default defineConfig({
   timeout: 20_000,
-  globalTimeout: 30_000,
+  globalTimeout: 20_000,
   testDir: './tests',
   retries: 1,
   fullyParallel: true,
-  workers: 10,
+  workers: 8,
   use: {
     // baseURL: "http://localhost:3000", default url if project doesn't override it
     baseURL: process.env.base_url,
