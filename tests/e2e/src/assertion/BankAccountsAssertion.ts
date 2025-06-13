@@ -8,8 +8,13 @@ export class BankAccountsAssertion {
     this.bankAccountsPage = bankAccountsPage
   }
 
-  async assertBankAccountCreation(bankName: string): Promise<void> {
+  async assertBankAccountVisible(bankName: string): Promise<void> {
     const bankList = await this.bankAccountsPage.getBankAccountsNames()
     expect(bankList).toContain(bankName)
+  }
+
+  async assertBankAccountAbsent(bankName: string): Promise<void> {
+    const bankList = await this.bankAccountsPage.getBankAccountsNames()
+    expect(bankList).not.toContain(bankName)
   }
 }

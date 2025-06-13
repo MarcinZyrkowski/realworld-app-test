@@ -49,8 +49,46 @@ test.describe('bank accounts tests', () => {
     })
 
     await allureSteps.step('verify bank account creation', async () => {
-      await bankAccountsAssertion.assertBankAccountCreation(bankDetails.bankName!)
+      await bankAccountsAssertion.assertBankAccountVisible(bankDetails.bankName!)
       await allureSteps.makeScreenshot('Bank Account List Updated')
+    })
+  })
+
+  test('delete bank account', async () => {
+    await allureSteps.suite('bank accounts')
+
+    await signInSteps.loginWithExistingUser()
+
+    await allureSteps.step('open bank accounts page', async () => {
+      await homePage.menuDrawer.bankAccountsButton.click()
+      await allureSteps.makeScreenshot('Bank Accounts')
+    })
+
+    await allureSteps.step('click create bank account button', async () => {
+      await bankAccountsPage.createBankAccountButton.click()
+      await allureSteps.makeScreenshot('Create Bank Account Form')
+    })
+
+    const bankDetails = BankDetailsGenerator.generateRandomBankDetails()
+    await allureSteps.step('fill bank account form', async () => {
+      await bankAccountsPage.createBankAccountForm.fillBankAccountForm(bankDetails)
+      await allureSteps.makeScreenshot('Filled Bank Account Form')
+    })
+
+    await allureSteps.step('save new bank account', async () => {
+      await bankAccountsPage.createBankAccountForm.saveButton.click()
+      await allureSteps.makeScreenshot('Bank Account Created')
+    })
+
+    await allureSteps.step('delete bank account', async () => {
+      await bankAccountsPage.deleteBankAccount(bankDetails.bankName!)
+      await allureSteps.makeScreenshot('Bank Account Deleted')
+    })
+
+    await allureSteps.step('verify bank account is deleted', async () => {
+      await bankAccountsAssertion.assertBankAccountAbsent(bankDetails.bankName!)
+      // deleted bank account should still be visible with "(Deleted)" suffix
+      await bankAccountsAssertion.assertBankAccountVisible(bankDetails.bankName! + ' (Deleted)')
     })
   })
 

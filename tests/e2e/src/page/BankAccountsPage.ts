@@ -25,4 +25,12 @@ export class BankAccountsPage {
     }
     return bankNames
   }
+
+  async deleteBankAccount(bankName: string): Promise<void> {
+    const bankElement = this.bankList.locator('li').filter({ hasText: bankName }).first()
+
+    if (await bankElement.isVisible()) {
+      await bankElement.locator('button', { hasText: 'Delete' }).click()
+    }
+  }
 }
