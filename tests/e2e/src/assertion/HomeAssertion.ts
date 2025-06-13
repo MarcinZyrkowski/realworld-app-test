@@ -15,15 +15,6 @@ export class HomeAssertion {
     await expect(dialog.nextButton).toBeVisible()
   }
 
-  async assertCreateBankAccountDialogVisible(): Promise<void> {
-    const dialog = this.homePage.createBankAccountDialog
-    await expect(dialog.title).toBeVisible()
-    await expect(dialog.saveButton).toBeVisible()
-    await expect(dialog.bankNameInput).toBeVisible()
-    await expect(dialog.routingNumberInput).toBeVisible()
-    await expect(dialog.accountNumberInput).toBeVisible()
-  }
-
   async assertFinishedDialogVisible(): Promise<void> {
     const dialog = this.homePage.finishedDialog
     await expect(dialog.title).toBeVisible()

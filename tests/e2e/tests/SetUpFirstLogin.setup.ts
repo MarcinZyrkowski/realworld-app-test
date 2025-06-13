@@ -1,10 +1,11 @@
 import { SignInPage } from '../src/page/SignInPage'
 import { LoginCache } from '../src/cache/LoginCache'
 import { HomeAssertion } from '../src/assertion/HomeAssertion'
-import { HomePageGenerator } from '../src/generator/HomePageGenerator'
+import { BankDetailsGenerator } from '../src/generator/BankDetailsGenerator'
 import { expect, test } from '@playwright/test'
 import { HomePage } from '../src/page/HomePage'
 import { AllureSteps } from '../src/steps/AllureSteps'
+import { CreateBankAccountComponentAssertion } from '../src/assertion/component/CreateBankAccountComponentAssertion'
 
 test('setup: login new user for first time', async ({ page }) => {
   const signInPage = new SignInPage(page)
@@ -35,8 +36,10 @@ test('setup: login new user for first time', async ({ page }) => {
 
   await allureSteps.step('create bank account dialog is visible', async () => {
     await homePage.getStartedDialog.nextButton.click()
-    await homeAssertion.assertCreateBankAccountDialogVisible()
-    const bankDetails = HomePageGenerator.generateRandomBankDetails()
+    await CreateBankAccountComponentAssertion.assertThat(
+      homePage.createBankAccountDialog,
+    ).assertCreateBankAccountComponentVisible()
+    const bankDetails = BankDetailsGenerator.generateRandomBankDetails()
     await homePage.createBankAccountDialog.fillBankAccountForm(bankDetails)
     await allureSteps.makeScreenshot('Filled Create Bank Account Form')
   })

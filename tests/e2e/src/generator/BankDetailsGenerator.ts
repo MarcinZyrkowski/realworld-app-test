@@ -1,7 +1,7 @@
-import { BankDetails } from '../types/page/HomePageTypes'
+import { BankDetails } from '../types/page/CommonTypes'
 import { MathUtils } from '../utils/MathUtils'
 
-export class HomePageGenerator {
+export class BankDetailsGenerator {
   static generateRandomBankDetails(): BankDetails {
     return {
       bankName: `Bank ${Math.random().toString(36).substring(2, 15)}`,
