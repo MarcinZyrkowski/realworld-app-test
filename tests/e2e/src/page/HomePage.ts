@@ -1,6 +1,6 @@
 import { Locator, Page } from '@playwright/test'
 import { TransactionDetails } from '../types/page/HomePageTypes'
-import { BankDetails } from '../types/page/CommonTypes'
+import { CreateBankAccountFormComponent } from './component/CreateBankAccountFormComponent'
 
 export class HomePage {
   static readonly url = '/'
@@ -15,7 +15,7 @@ export class HomePage {
   readonly notificationsBellButton: Locator
   readonly transactionsList: Locator
   readonly getStartedDialog: GetStartedDialog
-  readonly createBankAccountDialog: CreateBankAccountDialog
+  readonly createBankAccountDialog: CreateBankAccountFormComponent
   readonly finishedDialog: FinishedDialog
 
   constructor(page: Page) {
@@ -30,7 +30,7 @@ export class HomePage {
     this.notificationsBellButton = this.page.locator('[data-test="nav-top-notifications-link"]')
     this.transactionsList = this.page.locator('[data-test="transaction-list"]')
     this.getStartedDialog = new GetStartedDialog(page)
-    this.createBankAccountDialog = new CreateBankAccountDialog(page)
+    this.createBankAccountDialog = new CreateBankAccountFormComponent(page)
     this.finishedDialog = new FinishedDialog(page)
   }
 
@@ -111,38 +111,6 @@ export class GetStartedDialog {
     this.dialog = this.page.getByRole('dialog')
     this.title = this.dialog.getByText('Get Started with Real World App')
     this.nextButton = this.dialog.getByRole('button', { name: 'Next' })
-  }
-}
-
-export class CreateBankAccountDialog {
-  readonly page: Page
-  readonly dialog: Locator
-  readonly title: Locator
-  readonly saveButton: Locator
-  readonly bankNameInput: Locator
-  readonly routingNumberInput: Locator
-  readonly accountNumberInput: Locator
-
-  constructor(page: Page) {
-    this.page = page
-    this.dialog = this.page.getByRole('dialog')
-    this.title = this.dialog.getByText('Create Bank Account')
-    this.saveButton = this.dialog.getByRole('button', { name: 'Save' })
-    this.bankNameInput = this.dialog.getByPlaceholder('Bank Name')
-    this.routingNumberInput = this.dialog.getByPlaceholder('Routing Number')
-    this.accountNumberInput = this.dialog.getByPlaceholder('Account Number')
-  }
-
-  async fillBankAccountForm(bankDetails: BankDetails): Promise<void> {
-    if (bankDetails.bankName) {
-      await this.bankNameInput.fill(bankDetails.bankName)
-    }
-    if (bankDetails.routingNumber) {
-      await this.routingNumberInput.fill(bankDetails.routingNumber)
-    }
-    if (bankDetails.accountNumber) {
-      await this.accountNumberInput.fill(bankDetails.accountNumber)
-    }
   }
 }
 

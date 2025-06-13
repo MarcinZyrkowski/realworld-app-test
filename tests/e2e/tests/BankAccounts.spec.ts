@@ -39,12 +39,12 @@ test.describe('bank accounts tests', () => {
 
     const bankDetails = BankDetailsGenerator.generateRandomBankDetails()
     await allureSteps.step('fill bank account form', async () => {
-      await bankAccountsPage.createBankAccountFormComponent.fillBankAccountForm(bankDetails)
+      await bankAccountsPage.createBankAccountForm.fillBankAccountForm(bankDetails)
       await allureSteps.makeScreenshot('Filled Bank Account Form')
     })
 
     await allureSteps.step('save new bank account', async () => {
-      await bankAccountsPage.createBankAccountFormComponent.saveButton.click()
+      await bankAccountsPage.createBankAccountForm.saveButton.click()
       await allureSteps.makeScreenshot('Bank Account Created')
     })
 
