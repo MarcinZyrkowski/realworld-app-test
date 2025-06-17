@@ -1,23 +1,23 @@
 import { test } from 'allure-playwright'
 import { SignInPage } from '../src/page/SignInPage'
-import { AllureSteps } from '../src/steps/AllureSteps'
+import { Allure } from '../../Allure'
 import { SignInSteps } from '../src/steps/SignInSteps'
 import { HomePage } from '../src/page/HomePage'
 import { MyAccountPage } from '../src/page/MyAccountPage'
 import { MyAccountAssertion } from '../src/assertion/MyAccountAssertion'
 import { faker } from '@faker-js/faker'
 
-test.describe('my account tests', () => {
+test.describe('my account tests @UI', () => {
   let homePage: HomePage
   let myAccountPage: MyAccountPage
-  let allureSteps: AllureSteps
+  let allureSteps: Allure
   let signInSteps: SignInSteps
   let myAccountAssertion: MyAccountAssertion
 
   test.beforeEach(async ({ page }) => {
     homePage = new HomePage(page)
     myAccountPage = new MyAccountPage(page)
-    allureSteps = new AllureSteps(page)
+    allureSteps = new Allure(page)
     signInSteps = new SignInSteps(page, new SignInPage(page), allureSteps)
     myAccountAssertion = new MyAccountAssertion(myAccountPage)
   })

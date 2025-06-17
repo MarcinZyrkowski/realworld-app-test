@@ -1,16 +1,16 @@
 import { SignInPage } from '../src/page/SignInPage'
-import { LoginCache } from '../src/cache/LoginCache'
+import { UiCache } from '../src/cache/UiCache'
 import { HomeAssertion } from '../src/assertion/HomeAssertion'
 import { BankDetailsGenerator } from '../src/generator/BankDetailsGenerator'
 import { expect, test } from '@playwright/test'
 import { HomePage } from '../src/page/HomePage'
-import { AllureSteps } from '../src/steps/AllureSteps'
+import { Allure } from '../../Allure'
 import { CreateBankAccountComponentAssertion } from '../src/assertion/component/CreateBankAccountComponentAssertion'
 
 test('setup: login new user for first time', async ({ page }) => {
   const signInPage = new SignInPage(page)
   const homePage = new HomePage(page)
-  const allureSteps = new AllureSteps(page)
+  const allureSteps = new Allure(page)
   const homeAssertion = new HomeAssertion(homePage)
 
   await allureSteps.suite('setup first login')
@@ -22,7 +22,7 @@ test('setup: login new user for first time', async ({ page }) => {
   })
 
   await allureSteps.step('fill sign in form', async () => {
-    const signInData = LoginCache.retrieveSignInData()
+    const signInData = UiCache.retrieveSignInData()
     await signInPage.fillForm(signInData)
     await allureSteps.makeScreenshot('Filled Sign In Form')
     await signInPage.signInButton.click()

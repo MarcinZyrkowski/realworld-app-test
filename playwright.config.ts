@@ -33,7 +33,7 @@ export default defineConfig({
       dependencies: ['setup new user'],
     },
     {
-      name: 'dev',
+      name: 'chrome ui',
       use: {
         ...devices['Desktop Chrome'],
         // baseURL: "http://localhost:3000", we can set a default baseURL here
@@ -41,12 +41,19 @@ export default defineConfig({
       dependencies: ['setup first login'],
     },
     {
-      name: 'qa',
+      name: 'firefox ui',
       use: {
         ...devices['Desktop Firefox'],
         // baseURL: "http://localhost:3000", we can set a default baseURL here
       },
       dependencies: ['setup first login'],
+    },
+    {
+      name: 'chrome api',
+      use: {
+        ...devices['Desktop Chrome'],
+        // baseURL: "http://localhost:3000", we can set a default baseURL here
+      },
     },
   ],
   reporter: [

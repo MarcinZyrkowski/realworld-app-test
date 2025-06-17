@@ -11,7 +11,9 @@
     "lint": "eslint .",
     "prettier:check": "npx prettier . --check",
     "prettier:write": "npx prettier . --write",
-    "codecheck": "npm run lint && npm run prettier:check"
+    "codecheck": "npm run lint && npm run prettier:check",
+    "test:ui": "npx playwright test -g '@UI' --project='chrome ui'",
+    "test:api": "npx playwright test -g '@API' --project='chrome api'"
   },
   "keywords": [],
   "author": "",

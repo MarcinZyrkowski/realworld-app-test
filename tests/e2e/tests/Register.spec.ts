@@ -1,20 +1,20 @@
 import { test, expect } from 'allure-playwright'
 import { SignInPage } from '../src/page/SignInPage'
-import { AllureSteps } from '../src/steps/AllureSteps'
+import { Allure } from '../../Allure'
 import { SignUpPage } from '../src/page/SignUpPage'
 import { SignUpAssertion } from '../src/assertion/SignUpAssertion'
 
-test.describe('register tests', () => {
+test.describe('register tests @UI', () => {
   let signInPage: SignInPage
   let signUpPage: SignUpPage
-  let allureSteps: AllureSteps
+  let allureSteps: Allure
   let signUpAssertion: SignUpAssertion
 
   test.beforeEach(async ({ page }) => {
     signInPage = new SignInPage(page)
     signUpPage = new SignUpPage(page)
     signUpAssertion = new SignUpAssertion(signUpPage)
-    allureSteps = new AllureSteps(page)
+    allureSteps = new Allure(page)
   })
 
   test('verify sign up form', async ({ page }) => {
