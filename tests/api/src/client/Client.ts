@@ -1,5 +1,5 @@
 import { APIRequestContext } from '@playwright/test'
-import { LoginRequestDto, SignUpRequestDto } from '../Types/ModelTypes'
+import { SignInRequestDto, SignUpRequestDto } from '../Types/ModelTypes'
 
 export class Client {
   readonly baseUrl: string
@@ -10,7 +10,7 @@ export class Client {
     this.request = request
   }
 
-  async login(login: LoginRequestDto) {
+  async signIn(login: SignInRequestDto) {
     return await this.request.post(this.baseUrl + '/login', {
       data: login,
     })

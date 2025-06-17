@@ -10,82 +10,82 @@ import { BankAccountsAssertion } from '../src/assertion/BankAccountsAssertion'
 test.describe('bank accounts tests @UI', () => {
   let homePage: HomePage
   let bankAccountsPage: BankAccountsPage
-  let allureSteps: Allure
+  let allure: Allure
   let signInSteps: SignInSteps
   let bankAccountsAssertion: BankAccountsAssertion
 
   test.beforeEach(async ({ page }) => {
     homePage = new HomePage(page)
     bankAccountsPage = new BankAccountsPage(page)
-    allureSteps = new Allure(page)
-    signInSteps = new SignInSteps(page, new SignInPage(page), allureSteps)
+    allure = new Allure(page)
+    signInSteps = new SignInSteps(page, new SignInPage(page), allure)
     bankAccountsAssertion = new BankAccountsAssertion(bankAccountsPage)
   })
 
   test('create new bank account', async () => {
-    await allureSteps.suite('bank accounts')
+    await allure.suite('bank accounts')
 
     await signInSteps.loginWithExistingUser()
 
-    await allureSteps.step('open bank accounts page', async () => {
+    await allure.step('open bank accounts page', async () => {
       await homePage.menuDrawer.bankAccountsButton.click()
-      await allureSteps.makeScreenshot('Bank Accounts')
+      await allure.makeScreenshot('Bank Accounts')
     })
 
-    await allureSteps.step('click create bank account button', async () => {
+    await allure.step('click create bank account button', async () => {
       await bankAccountsPage.createBankAccountButton.click()
-      await allureSteps.makeScreenshot('Create Bank Account Form')
+      await allure.makeScreenshot('Create Bank Account Form')
     })
 
     const bankDetails = BankDetailsGenerator.generateRandomBankDetails()
-    await allureSteps.step('fill bank account form', async () => {
+    await allure.step('fill bank account form', async () => {
       await bankAccountsPage.createBankAccountForm.fillBankAccountForm(bankDetails)
-      await allureSteps.makeScreenshot('Filled Bank Account Form')
+      await allure.makeScreenshot('Filled Bank Account Form')
     })
 
-    await allureSteps.step('save new bank account', async () => {
+    await allure.step('save new bank account', async () => {
       await bankAccountsPage.createBankAccountForm.saveButton.click()
-      await allureSteps.makeScreenshot('Bank Account Created')
+      await allure.makeScreenshot('Bank Account Created')
     })
 
-    await allureSteps.step('verify bank account creation', async () => {
+    await allure.step('verify bank account creation', async () => {
       await bankAccountsAssertion.assertBankAccountVisible(bankDetails.bankName!)
-      await allureSteps.makeScreenshot('Bank Account List Updated')
+      await allure.makeScreenshot('Bank Account List Updated')
     })
   })
 
   test('delete bank account', async () => {
-    await allureSteps.suite('bank accounts')
+    await allure.suite('bank accounts')
 
     await signInSteps.loginWithExistingUser()
 
-    await allureSteps.step('open bank accounts page', async () => {
+    await allure.step('open bank accounts page', async () => {
       await homePage.menuDrawer.bankAccountsButton.click()
-      await allureSteps.makeScreenshot('Bank Accounts')
+      await allure.makeScreenshot('Bank Accounts')
     })
 
-    await allureSteps.step('click create bank account button', async () => {
+    await allure.step('click create bank account button', async () => {
       await bankAccountsPage.createBankAccountButton.click()
-      await allureSteps.makeScreenshot('Create Bank Account Form')
+      await allure.makeScreenshot('Create Bank Account Form')
     })
 
     const bankDetails = BankDetailsGenerator.generateRandomBankDetails()
-    await allureSteps.step('fill bank account form', async () => {
+    await allure.step('fill bank account form', async () => {
       await bankAccountsPage.createBankAccountForm.fillBankAccountForm(bankDetails)
-      await allureSteps.makeScreenshot('Filled Bank Account Form')
+      await allure.makeScreenshot('Filled Bank Account Form')
     })
 
-    await allureSteps.step('save new bank account', async () => {
+    await allure.step('save new bank account', async () => {
       await bankAccountsPage.createBankAccountForm.saveButton.click()
-      await allureSteps.makeScreenshot('Bank Account Created')
+      await allure.makeScreenshot('Bank Account Created')
     })
 
-    await allureSteps.step('delete bank account', async () => {
+    await allure.step('delete bank account', async () => {
       await bankAccountsPage.deleteBankAccount(bankDetails.bankName!)
-      await allureSteps.makeScreenshot('Bank Account Deleted')
+      await allure.makeScreenshot('Bank Account Deleted')
     })
 
-    await allureSteps.step('verify bank account is deleted', async () => {
+    await allure.step('verify bank account is deleted', async () => {
       await bankAccountsAssertion.assertBankAccountAbsent(bankDetails.bankName!)
       // deleted bank account should still be visible with "(Deleted)" suffix
       await bankAccountsAssertion.assertBankAccountVisible(bankDetails.bankName! + ' (Deleted)')
@@ -93,6 +93,6 @@ test.describe('bank accounts tests @UI', () => {
   })
 
   test.afterEach(async () => {
-    await allureSteps.attachVideoIfExists()
+    await allure.attachVideoIfExists()
   })
 })

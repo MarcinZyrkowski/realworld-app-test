@@ -1,3 +1,3 @@
 ## What should be done
 
-- change allure steps to allure in ui
+- SetUp.spec.ts is not recognized as e.g. SetUp.setup.ts

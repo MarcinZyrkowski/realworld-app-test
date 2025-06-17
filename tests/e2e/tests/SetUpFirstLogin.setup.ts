@@ -7,52 +7,52 @@ import { HomePage } from '../src/page/HomePage'
 import { Allure } from '../../Allure'
 import { CreateBankAccountComponentAssertion } from '../src/assertion/component/CreateBankAccountComponentAssertion'
 
-test('setup: login new user for first time', async ({ page }) => {
+test('setup: login new user for first time @UI', async ({ page }) => {
   const signInPage = new SignInPage(page)
   const homePage = new HomePage(page)
-  const allureSteps = new Allure(page)
+  const allure = new Allure(page)
   const homeAssertion = new HomeAssertion(homePage)
 
-  await allureSteps.suite('setup first login')
+  await allure.suite('setup first login')
 
-  await allureSteps.step('open sign in page', async () => {
+  await allure.step('open sign in page', async () => {
     await signInPage.open()
     await expect(page).toHaveURL(SignInPage.url)
-    await allureSteps.makeScreenshot('Sign In Page')
+    await allure.makeScreenshot('Sign In Page')
   })
 
-  await allureSteps.step('fill sign in form', async () => {
+  await allure.step('fill sign in form', async () => {
     const signInData = UiCache.retrieveSignInData()
     await signInPage.fillForm(signInData)
-    await allureSteps.makeScreenshot('Filled Sign In Form')
+    await allure.makeScreenshot('Filled Sign In Form')
     await signInPage.signInButton.click()
     await expect(page).toHaveURL(HomePage.url)
   })
 
-  await allureSteps.step('get started is visible', async () => {
+  await allure.step('get started is visible', async () => {
     await homeAssertion.assertGetStartedDialogVisible()
-    await allureSteps.makeScreenshot('Get Started Dialog')
+    await allure.makeScreenshot('Get Started Dialog')
   })
 
-  await allureSteps.step('create bank account dialog is visible', async () => {
+  await allure.step('create bank account dialog is visible', async () => {
     await homePage.getStartedDialog.nextButton.click()
     await CreateBankAccountComponentAssertion.assertThat(
       homePage.createBankAccountDialog,
     ).assertCreateBankAccountComponentVisible()
     const bankDetails = BankDetailsGenerator.generateRandomBankDetails()
     await homePage.createBankAccountDialog.fillBankAccountForm(bankDetails)
-    await allureSteps.makeScreenshot('Filled Create Bank Account Form')
+    await allure.makeScreenshot('Filled Create Bank Account Form')
   })
 
-  await allureSteps.step('finished dialog is visible', async () => {
+  await allure.step('finished dialog is visible', async () => {
     await homePage.createBankAccountDialog.saveButton.click()
     await homeAssertion.assertFinishedDialogVisible()
-    await allureSteps.makeScreenshot('Finished Dialog')
+    await allure.makeScreenshot('Finished Dialog')
   })
 
-  await allureSteps.step('no dialog is visible', async () => {
+  await allure.step('no dialog is visible', async () => {
     await homePage.finishedDialog.doneButton.click()
     await homeAssertion.assertNoDialogIsVisible()
-    await allureSteps.makeScreenshot('No Dialog Visible')
+    await allure.makeScreenshot('No Dialog Visible')
   })
 })

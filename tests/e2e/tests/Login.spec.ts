@@ -8,55 +8,55 @@ import { Allure } from '../../Allure'
 test.describe('login tests @UI', () => {
   let signInPage: SignInPage
   let signInAssertion: SignInAssertion
-  let allureSteps: Allure
+  let allure: Allure
 
   test.beforeEach(async ({ page }) => {
     signInPage = new SignInPage(page)
     signInAssertion = new SignInAssertion(signInPage)
-    allureSteps = new Allure(page)
+    allure = new Allure(page)
   })
 
   test('login with existing user', async ({ page }) => {
-    await allureSteps.suite('login')
+    await allure.suite('login')
 
-    await allureSteps.step('open sign in page', async () => {
+    await allure.step('open sign in page', async () => {
       await signInPage.open()
       await expect(page).toHaveURL(SignInPage.url)
-      await allureSteps.makeScreenshot('Sign In Page')
+      await allure.makeScreenshot('Sign In Page')
     })
 
-    await allureSteps.step('fill sign in form', async () => {
+    await allure.step('fill sign in form', async () => {
       const signInData = UiCache.retrieveSignInData()
       await signInPage.fillForm(signInData)
-      await allureSteps.makeScreenshot('Filled Sign In Form')
+      await allure.makeScreenshot('Filled Sign In Form')
     })
 
-    await allureSteps.step('sign in', async () => {
+    await allure.step('sign in', async () => {
       await signInPage.signInButton.click()
-      await allureSteps.makeScreenshot('Sign In Button Clicked')
+      await allure.makeScreenshot('Sign In Button Clicked')
     })
 
-    await allureSteps.step('verify successful login', async () => {
+    await allure.step('verify successful login', async () => {
       await expect(page).toHaveURL(HomePage.url)
-      await allureSteps.makeScreenshot('Home Page')
+      await allure.makeScreenshot('Home Page')
     })
   })
 
   test('verify sign in form', async ({ page }) => {
-    await allureSteps.suite('login')
+    await allure.suite('login')
 
-    await allureSteps.step('open sign in page', async () => {
+    await allure.step('open sign in page', async () => {
       await signInPage.open()
       await expect(page).toHaveURL(SignInPage.url)
-      await allureSteps.makeScreenshot('Sign In Page')
+      await allure.makeScreenshot('Sign In Page')
     })
 
-    await allureSteps.step('assert sign in form is visible', async () => {
+    await allure.step('assert sign in form is visible', async () => {
       await signInAssertion.assertSignInFormVisible()
     })
   })
 
   test.afterEach(async () => {
-    await allureSteps.attachVideoIfExists()
+    await allure.attachVideoIfExists()
   })
 })

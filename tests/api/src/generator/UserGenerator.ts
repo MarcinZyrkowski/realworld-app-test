@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { SignUpRequestDto } from '../Types/ModelTypes'
+import { SignInRequestDto, SignUpRequestDto } from '../Types/ModelTypes'
 
 export class UserGenerator {
   static generateRandomUser(): SignUpRequestDto {
@@ -9,6 +9,14 @@ export class UserGenerator {
       username: faker.internet.username(),
       password: 'password123',
       confirmPassword: 'password123',
+    }
+  }
+
+  static of(signUpRequestDto: SignUpRequestDto): SignInRequestDto {
+    return {
+      type: 'LOGIN',
+      username: signUpRequestDto.username,
+      password: signUpRequestDto.password,
     }
   }
 }

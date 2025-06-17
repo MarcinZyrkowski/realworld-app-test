@@ -1,4 +1,4 @@
-export type LoginRequestDto = {
+export type SignInRequestDto = {
   type: 'LOGIN'
   username: string
   password: string
@@ -12,7 +12,7 @@ export type SignUpRequestDto = {
   confirmPassword: string
 }
 
-export type SignUpResponseDto = {
+export type SignInUpResponseDto = {
   user: {
     id: string
     uuid: string
