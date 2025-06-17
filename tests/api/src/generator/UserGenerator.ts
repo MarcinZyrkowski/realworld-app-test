@@ -1,12 +1,12 @@
-import { SignUpData } from '../types/page/SignUpTypes'
 import { faker } from '@faker-js/faker'
+import { SignUpRequestDto } from '../Types/ModelTypes'
 
-export class SignUpDataGenerator {
-  static generateRandomSignUpData(): SignUpData {
+export class UserGenerator {
+  static generateRandomUser(): SignUpRequestDto {
     return {
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
-      userName: faker.internet.username(),
+      username: faker.internet.username(),
       password: 'password123',
       confirmPassword: 'password123',
     }

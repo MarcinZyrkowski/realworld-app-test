@@ -1,14 +1,14 @@
 import { expect, test } from '@playwright/test'
-import { LoginCache } from '../src/cache/LoginCache'
+import { UiCache } from '../src/cache/UiCache'
 import { SignInPage } from '../src/page/SignInPage'
 import { SignUpPage } from '../src/page/SignUpPage'
-import { SignUpDataGenerator } from '../src/generator/SignUpDataGenerator'
-import { AllureSteps } from '../src/steps/AllureSteps'
+import { UserGenerator } from '../src/generator/UserGenerator'
+import { Allure } from '../../Allure'
 
 test('setup: register new user', async ({ page }) => {
   const signInPage = new SignInPage(page)
   const signUpPage = new SignUpPage(page)
-  const allureSteps = new AllureSteps(page)
+  const allureSteps = new Allure(page)
 
   await allureSteps.suite('setup register new user')
 
@@ -27,8 +27,8 @@ test('setup: register new user', async ({ page }) => {
   })
 
   await allureSteps.step('fill sign up form', async () => {
-    const signUpData = SignUpDataGenerator.generateRandomSignUpData()
-    LoginCache.cacheSignUpData(signUpData)
+    const signUpData = UserGenerator.generateRandomSignUpData()
+    UiCache.cacheSignUpData(signUpData)
     await signUpPage.fillForm(signUpData)
     await allureSteps.makeScreenshot('Filled Sign Up Form')
   })

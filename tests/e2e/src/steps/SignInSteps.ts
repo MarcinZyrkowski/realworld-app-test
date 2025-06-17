@@ -1,15 +1,15 @@
 import { expect, Page } from '@playwright/test'
 import { SignInPage } from '../page/SignInPage'
-import { AllureSteps } from './AllureSteps'
-import { LoginCache } from '../cache/LoginCache'
+import { Allure } from '../../../Allure'
+import { UiCache } from '../cache/UiCache'
 import { HomePage } from '../page/HomePage'
 
 export class SignInSteps {
   readonly page: Page
   readonly signInPage: SignInPage
-  readonly allureSteps: AllureSteps
+  readonly allureSteps: Allure
 
-  constructor(page: Page, signInPage: SignInPage, allureSteps: AllureSteps) {
+  constructor(page: Page, signInPage: SignInPage, allureSteps: Allure) {
     this.page = page
     this.signInPage = signInPage
     this.allureSteps = allureSteps
@@ -23,7 +23,7 @@ export class SignInSteps {
     })
 
     await this.allureSteps.step('fill sign in form', async () => {
-      const signInData = LoginCache.retrieveSignInData()
+      const signInData = UiCache.retrieveSignInData()
       await this.signInPage.fillForm(signInData)
       await this.allureSteps.makeScreenshot('Filled Sign In Form')
     })

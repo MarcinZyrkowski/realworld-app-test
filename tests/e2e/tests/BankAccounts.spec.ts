@@ -1,23 +1,23 @@
 import { test } from 'allure-playwright'
 import { SignInPage } from '../src/page/SignInPage'
-import { AllureSteps } from '../src/steps/AllureSteps'
+import { Allure } from '../../Allure'
 import { SignInSteps } from '../src/steps/SignInSteps'
 import { HomePage } from '../src/page/HomePage'
 import { BankAccountsPage } from '../src/page/BankAccountsPage'
 import { BankDetailsGenerator } from '../src/generator/BankDetailsGenerator'
 import { BankAccountsAssertion } from '../src/assertion/BankAccountsAssertion'
 
-test.describe('bank accounts tests', () => {
+test.describe('bank accounts tests @UI', () => {
   let homePage: HomePage
   let bankAccountsPage: BankAccountsPage
-  let allureSteps: AllureSteps
+  let allureSteps: Allure
   let signInSteps: SignInSteps
   let bankAccountsAssertion: BankAccountsAssertion
 
   test.beforeEach(async ({ page }) => {
     homePage = new HomePage(page)
     bankAccountsPage = new BankAccountsPage(page)
-    allureSteps = new AllureSteps(page)
+    allureSteps = new Allure(page)
     signInSteps = new SignInSteps(page, new SignInPage(page), allureSteps)
     bankAccountsAssertion = new BankAccountsAssertion(bankAccountsPage)
   })

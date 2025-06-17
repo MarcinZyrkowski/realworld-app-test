@@ -4,17 +4,17 @@ import { SignUpData } from '../types/page/SignUpTypes'
 import * as fs from 'fs'
 import * as path from 'path'
 
-export class LoginCache {
-  private static userPath = '../../../../playwright/user'
+export class UiCache {
+  private static userPath = '../../../../playwright/ui/user'
   private static signUpDataFile = 'signUpData.json'
 
   static cacheSignUpData(signUpData: SignUpData): void {
-    const userDir = path.resolve(__dirname, LoginCache.userPath)
+    const userDir = path.resolve(__dirname, UiCache.userPath)
     if (!fs.existsSync(userDir)) {
       fs.mkdirSync(userDir, { recursive: true })
     }
     fs.writeFileSync(
-      path.join(userDir, LoginCache.signUpDataFile),
+      path.join(userDir, UiCache.signUpDataFile),
       JSON.stringify(signUpData, null, 2),
     )
   }
@@ -25,8 +25,8 @@ export class LoginCache {
   }
 
   static retrieveSignUpData(): SignUpData {
-    const userDir = path.resolve(__dirname, LoginCache.userPath)
-    const filePath = path.join(userDir, LoginCache.signUpDataFile)
+    const userDir = path.resolve(__dirname, UiCache.userPath)
+    const filePath = path.join(userDir, UiCache.signUpDataFile)
     if (!fs.existsSync(filePath)) {
       throw new Error('SignUp data is not cached')
     }

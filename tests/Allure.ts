@@ -2,7 +2,7 @@ import { Page } from '@playwright/test'
 import * as allure from 'allure-js-commons'
 import * as fs from 'fs'
 
-export class AllureSteps {
+export class Allure {
   readonly page: Page
 
   constructor(page: Page) {
@@ -22,6 +22,22 @@ export class AllureSteps {
 
   async suite(name: string) {
     await allure.suite(name)
+  }
+
+  async request(request: unknown) {
+    await allure.attachment('request', JSON.stringify(request, null, 2), 'application/json')
+  }
+
+  async response(response: unknown) {
+    await allure.attachment('response', JSON.stringify(response, null, 2), 'application/json')
+  }
+
+  async responseBody(responseBody: unknown) {
+    await allure.attachment(
+      'responseBody',
+      JSON.stringify(responseBody, null, 2),
+      'application/json',
+    )
   }
 
   async attachVideoIfExists() {

@@ -1,21 +1,21 @@
 import { test } from 'allure-playwright'
 import { SignInPage } from '../src/page/SignInPage'
-import { AllureSteps } from '../src/steps/AllureSteps'
+import { Allure } from '../../Allure'
 import { SignInSteps } from '../src/steps/SignInSteps'
 import { HomePage } from '../src/page/HomePage'
 import { HomeAssertion } from '../src/assertion/HomeAssertion'
-import { LoginCache } from '../src/cache/LoginCache'
+import { UiCache } from '../src/cache/UiCache'
 import { CollectionsUtils } from '../src/utils/CollectionsUtils'
 
-test.describe('home page tests', () => {
+test.describe('home page tests @UI', () => {
   let homePage: HomePage
-  let allureSteps: AllureSteps
+  let allureSteps: Allure
   let signInSteps: SignInSteps
   let homeAssertion: HomeAssertion
 
   test.beforeEach(async ({ page }) => {
     homePage = new HomePage(page)
-    allureSteps = new AllureSteps(page)
+    allureSteps = new Allure(page)
     signInSteps = new SignInSteps(page, new SignInPage(page), allureSteps)
     homeAssertion = new HomeAssertion(homePage)
   })
@@ -54,8 +54,8 @@ test.describe('home page tests', () => {
     await signInSteps.loginWithExistingUser()
 
     await allureSteps.step('verify user account details', async () => {
-      const expectedDisplayName = LoginCache.retrieveDisplayName()
-      const expectedUsername = '@' + LoginCache.retrieveUsername()
+      const expectedDisplayName = UiCache.retrieveDisplayName()
+      const expectedUsername = '@' + UiCache.retrieveUsername()
       await homeAssertion.verifyUserAccountDetails(expectedDisplayName, expectedUsername)
     })
   })
