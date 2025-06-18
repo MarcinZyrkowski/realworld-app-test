@@ -1,0 +1,27 @@
+import { APIResponse, expect } from '@playwright/test'
+import { CreateBankAccountResponse, BankAccount } from '../Types/ModelTypes'
+
+export class CreateBankAccountAssertion {
+  readonly response: APIResponse
+
+  constructor(response: APIResponse) {
+    this.response = response
+  }
+
+  statusIsOk() {
+    expect(this.response.status()).toBe(200)
+  }
+
+  async extractBody(): Promise<CreateBankAccountResponse> {
+    return await this.response.json()
+  }
+
+  verifyResponse(response: CreateBankAccountResponse, bankAccount: BankAccount) {
+    expect(response.data.createBankAccount).toMatchObject({
+      userId: bankAccount.userId,
+      bankName: bankAccount.bankName,
+      accountNumber: bankAccount.accountNumber,
+      routingNumber: bankAccount.routingNumber,
+    })
+  }
+}

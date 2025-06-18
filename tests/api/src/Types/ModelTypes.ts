@@ -25,3 +25,31 @@ export type SignInUpResponseDto = {
     modifiedAt: string
   }
 }
+
+export type GraphQLQuery = {
+  operationName: string
+  query: string
+  variables: object
+}
+
+export type BankAccount = {
+  userId: string
+  bankName: string
+  accountNumber: string
+  routingNumber: string
+}
+
+export type CreateBankAccountResponse = {
+  data: {
+    createBankAccount: {
+      id: string
+      uuid: string
+      userId: string
+      bankName: string
+      accountNumber: string
+      routingNumber: string
+      isDeleted: boolean
+      createdAt: string
+    }
+  }
+}

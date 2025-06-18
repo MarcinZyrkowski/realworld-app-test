@@ -1,7 +1,7 @@
 import { APIResponse, expect } from '@playwright/test'
 import { SignUpRequestDto, SignInUpResponseDto } from '../Types/ModelTypes'
 
-export class SignInUpResponseAssertion {
+export class SignInUpAssertion {
   readonly response: APIResponse
 
   constructor(response: APIResponse) {

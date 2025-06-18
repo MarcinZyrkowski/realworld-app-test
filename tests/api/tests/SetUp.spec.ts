@@ -1,13 +1,17 @@
 import test from '@playwright/test'
 import { Client } from '../src/client/Client'
 import { UserGenerator } from '../src/generator/UserGenerator'
-import { SignInUpResponseAssertion } from '../src/assertion/SignInUpResponseAssertion'
+import { SignInUpAssertion } from '../src/assertion/SignInUpResponseAssertion'
 import { Allure } from '../../Allure'
+import { ApiCache } from '../src/cache/ApiCache'
+import { BankAccountGenerator } from '../src/generator/BankAccountGenerator'
+import { CreateBankAccountAssertion } from '../src/assertion/CreateBankAccountResponseAssertion'
 
 test('setup new user @API', async ({ page, request }) => {
   const client = new Client(request)
   const allure = new Allure(page)
-  let signInUpResponseAssertion: SignInUpResponseAssertion
+  let signInUpAssertion: SignInUpAssertion
+  let createBankAccountAssertion: CreateBankAccountAssertion
 
   await allure.suite('setup')
 
@@ -19,13 +23,14 @@ test('setup new user @API', async ({ page, request }) => {
     response = await client.signUp(signUpRequestDto)
   })
 
-  signInUpResponseAssertion = new SignInUpResponseAssertion(response!)
+  signInUpAssertion = new SignInUpAssertion(response!)
   await allure.step('verify sign up response', async () => {
     await allure.attachResponse(response!)
-    signInUpResponseAssertion.statusIsCreated()
-    const body = await signInUpResponseAssertion.extractBody()
+    signInUpAssertion.statusIsCreated()
+    const body = await signInUpAssertion.extractBody()
+    ApiCache.cacheUserId(body.user.id)
     await allure.attachResponseBody(body)
-    signInUpResponseAssertion.verifyResponse(body, signUpRequestDto)
+    signInUpAssertion.verifyResponse(body, signUpRequestDto)
   })
 
   await allure.step('sign in', async () => {
@@ -34,14 +39,29 @@ test('setup new user @API', async ({ page, request }) => {
     response = await client.signIn(signInRequestDto)
   })
 
-  signInUpResponseAssertion = new SignInUpResponseAssertion(response!)
+  signInUpAssertion = new SignInUpAssertion(response!)
   await allure.step('verify sign in response', async () => {
     await allure.attachResponse(response!)
-    signInUpResponseAssertion.statusIsOk()
-    const body = await signInUpResponseAssertion.extractBody()
+    signInUpAssertion.statusIsOk()
+    ApiCache.cacheCookie(response!.headers()['set-cookie'])
+    const body = await signInUpAssertion.extractBody()
     await allure.attachResponseBody(body)
-    signInUpResponseAssertion.verifyResponse(body, signUpRequestDto)
+    signInUpAssertion.verifyResponse(body, signUpRequestDto)
+  })
 
-    // TODO save cookie
+  let bankAccount
+  await allure.step('create bank account', async () => {
+    bankAccount = BankAccountGenerator.generateRandomBankDetails(ApiCache.retrieveUserId())
+    await allure.attachRequest(bankAccount)
+    response = await client.createBankAccount(ApiCache.retrieveCookie(), bankAccount)
+  })
+
+  createBankAccountAssertion = new CreateBankAccountAssertion(response!)
+  await allure.step('verify created bank account', async () => {
+    await allure.attachResponse(response!)
+    createBankAccountAssertion.statusIsOk()
+    const body = await createBankAccountAssertion.extractBody()
+    await allure.attachResponseBody(body)
+    createBankAccountAssertion.verifyResponse(body, bankAccount!)
   })
 })
