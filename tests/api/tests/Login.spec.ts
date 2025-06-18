@@ -10,7 +10,7 @@ test.describe('login @API', () => {
 
   // TODO finish test
   test('login', async () => {
-    const response = await client.login({
+    const response = await client.signIn({
       type: 'LOGIN',
       username: 'qwe',
       password: '123123',

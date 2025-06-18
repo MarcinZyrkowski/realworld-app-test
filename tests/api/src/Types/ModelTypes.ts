@@ -1,4 +1,4 @@
-export type LoginRequestDto = {
+export type SignInRequestDto = {
   type: 'LOGIN'
   username: string
   password: string
@@ -12,7 +12,7 @@ export type SignUpRequestDto = {
   confirmPassword: string
 }
 
-export type SignUpResponseDto = {
+export type SignInUpResponseDto = {
   user: {
     id: string
     uuid: string
@@ -23,5 +23,33 @@ export type SignUpResponseDto = {
     balance: number
     createdAt: string
     modifiedAt: string
+  }
+}
+
+export type GraphQLQuery = {
+  operationName: string
+  query: string
+  variables: object
+}
+
+export type BankAccount = {
+  userId: string
+  bankName: string
+  accountNumber: string
+  routingNumber: string
+}
+
+export type CreateBankAccountResponse = {
+  data: {
+    createBankAccount: {
+      id: string
+      uuid: string
+      userId: string
+      bankName: string
+      accountNumber: string
+      routingNumber: string
+      isDeleted: boolean
+      createdAt: string
+    }
   }
 }

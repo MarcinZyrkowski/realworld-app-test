@@ -22,15 +22,15 @@ export default defineConfig({
   },
   projects: [
     {
-      name: 'setup new user',
+      name: 'setup new user ui',
       ...devices['Desktop Chrome'],
       testMatch: 'SetUpNewUser.setup.ts',
     },
     {
-      name: 'setup first login',
+      name: 'setup first login ui',
       ...devices['Desktop Chrome'],
       testMatch: 'SetUpFirstLogin.setup.ts',
-      dependencies: ['setup new user'],
+      dependencies: ['setup new user ui'],
     },
     {
       name: 'chrome ui',
@@ -38,7 +38,7 @@ export default defineConfig({
         ...devices['Desktop Chrome'],
         // baseURL: "http://localhost:3000", we can set a default baseURL here
       },
-      dependencies: ['setup first login'],
+      dependencies: ['setup first login ui'],
     },
     {
       name: 'firefox ui',
@@ -46,7 +46,7 @@ export default defineConfig({
         ...devices['Desktop Firefox'],
         // baseURL: "http://localhost:3000", we can set a default baseURL here
       },
-      dependencies: ['setup first login'],
+      dependencies: ['setup first login ui'],
     },
     {
       name: 'chrome api',

@@ -24,15 +24,15 @@ export class Allure {
     await allure.suite(name)
   }
 
-  async request(request: unknown) {
+  async attachRequest(request: unknown) {
     await allure.attachment('request', JSON.stringify(request, null, 2), 'application/json')
   }
 
-  async response(response: unknown) {
+  async attachResponse(response: unknown) {
     await allure.attachment('response', JSON.stringify(response, null, 2), 'application/json')
   }
 
-  async responseBody(responseBody: unknown) {
+  async attachResponseBody(responseBody: unknown) {
     await allure.attachment(
       'responseBody',
       JSON.stringify(responseBody, null, 2),
