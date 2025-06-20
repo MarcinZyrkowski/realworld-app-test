@@ -1,24 +1,25 @@
 import * as fs from 'fs'
 import * as path from 'path'
+import { SignUpRequestDto } from '../Types/Requests'
 
 export class ApiCache {
   private static cookiePath = '../../../../playwright/api/cookie'
-  private static userIdPath = '../../../../playwright/api/id'
+  private static userPath = '../../../../playwright/api/user'
   private static cookieFile = 'cookie.txt'
   private static userIdFile = 'userId.txt'
+  private static userDataFile = 'userData.json'
 
-  private static cache(object: string, dir: string, file: string, stringify: boolean) {
+  private static cache(object: object | string, dir: string, file: string) {
     const userDir = path.resolve(__dirname, dir)
     if (!fs.existsSync(userDir)) {
       fs.mkdirSync(userDir, { recursive: true })
     }
-    let objToSave
-    if (stringify) {
-      objToSave = JSON.stringify(object, null, 2)
+    if (typeof object === 'object') {
+      const objToSave = JSON.stringify(object, null, 2)
+      fs.writeFileSync(path.join(userDir, file), objToSave)
     } else {
-      objToSave = object
+      fs.writeFileSync(path.join(userDir, file), object)
     }
-    fs.writeFileSync(path.join(userDir, file), objToSave)
   }
 
   private static retrieveCache(dir: string, file: string, asJson: boolean) {
@@ -35,7 +36,7 @@ export class ApiCache {
   }
 
   static cacheCookie(cookie: string): void {
-    this.cache(cookie, ApiCache.cookiePath, ApiCache.cookieFile, false)
+    this.cache(cookie, ApiCache.cookiePath, ApiCache.cookieFile)
   }
 
   static retrieveCookie(): string {
@@ -44,10 +45,14 @@ export class ApiCache {
   }
 
   static cacheUserId(id: string): void {
-    this.cache(id, ApiCache.userIdPath, ApiCache.userIdFile, false)
+    this.cache(id, ApiCache.userPath, ApiCache.userIdFile)
   }
 
   static retrieveUserId(): string {
-    return this.retrieveCache(ApiCache.userIdPath, ApiCache.userIdFile, false)
+    return this.retrieveCache(ApiCache.userPath, ApiCache.userIdFile, false)
+  }
+
+  static cacheUserData(userData: SignUpRequestDto): void {
+    this.cache(userData, ApiCache.userPath, ApiCache.userDataFile)
   }
 }
