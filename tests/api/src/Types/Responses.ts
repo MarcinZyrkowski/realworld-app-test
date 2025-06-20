@@ -18,6 +18,13 @@ export type SignInUpResponseDto = {
   }
 }
 
+export type UserProfileResponse = {
+  user: {
+    firstName: string
+    lastName: string
+  }
+}
+
 export type CreateBankAccountResponse = {
   data: {
     createBankAccount: {

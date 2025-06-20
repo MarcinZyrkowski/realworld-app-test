@@ -55,4 +55,8 @@ export class ApiCache {
   static cacheUserData(userData: SignUpRequestDto): void {
     this.cache(userData, ApiCache.userPath, ApiCache.userDataFile)
   }
+
+  static retriveUserData(): SignUpRequestDto {
+    return this.retrieveCache(ApiCache.userPath, ApiCache.userDataFile, true)
+  }
 }
