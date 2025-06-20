@@ -36,3 +36,9 @@ export const LIST_BANK_ACCOUNT = `
     }
   }
 `
+
+export const DELETE_BANK_ACCOUNT = `
+  mutation DeleteBankAccount($id: ID!) {
+    deleteBankAccount(id: $id)
+  }
+`

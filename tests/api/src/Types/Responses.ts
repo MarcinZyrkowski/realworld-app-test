@@ -50,3 +50,9 @@ export type ListBankAccountResponse = {
     ]
   }
 }
+
+export type DeletedBankAccountResponse = {
+  data: {
+    deleteBankAccount: boolean
+  }
+}
