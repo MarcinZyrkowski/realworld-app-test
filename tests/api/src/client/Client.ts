@@ -1,24 +1,23 @@
 import { APIRequestContext, APIResponse } from '@playwright/test'
 import { BankAccount, GraphQLQuery, SignInRequestDto, SignUpRequestDto } from '../Types/ModelTypes'
-import { CREATE_BANK_ACCOUNT } from '../graphql/GraphQL'
+import { CREATE_BANK_ACCOUNT, LIST_BANK_ACCOUNT } from '../graphql/GraphQL'
 
 export class Client {
-  readonly baseUrl: string
-  readonly request: APIRequestContext
+  private static baseUrl = 'http://localhost:3002'
+  private request: APIRequestContext
 
   constructor(request: APIRequestContext) {
-    this.baseUrl = 'http://localhost:3002'
     this.request = request
   }
 
   async signIn(login: SignInRequestDto): Promise<APIResponse> {
-    return await this.request.post(this.baseUrl + '/login', {
+    return await this.request.post(Client.baseUrl + '/login', {
       data: login,
     })
   }
 
   async signUp(signUp: SignUpRequestDto): Promise<APIResponse> {
-    return await this.request.post(this.baseUrl + '/users', {
+    return await this.request.post(Client.baseUrl + '/users', {
       data: signUp,
     })
   }
@@ -29,7 +28,18 @@ export class Client {
       query: CREATE_BANK_ACCOUNT,
       variables: bankAccount,
     }
-    return await this.request.post(this.baseUrl + '/graphql', {
+    return await this.request.post(Client.baseUrl + '/graphql', {
+      data: query,
+      headers: { Cookie: cookie },
+    })
+  }
+
+  async fetchBankAccounts(cookie: string): Promise<APIResponse> {
+    const query: GraphQLQuery = {
+      operationName: 'ListBankAccount',
+      query: LIST_BANK_ACCOUNT,
+    }
+    return await this.request.post(Client.baseUrl + '/graphql', {
       data: query,
       headers: { Cookie: cookie },
     })
