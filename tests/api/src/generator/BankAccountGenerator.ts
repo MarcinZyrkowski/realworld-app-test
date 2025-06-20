@@ -1,4 +1,4 @@
-import { BankAccount } from '../Types/ModelTypes'
+import { BankAccount } from '../Types/Model'
 import { MathUtils } from '../utils/MathUtils'
 
 export class BankAccountGenerator {

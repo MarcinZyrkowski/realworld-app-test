@@ -1,5 +1,8 @@
 import { APIRequestContext, APIResponse } from '@playwright/test'
-import { BankAccount, GraphQLQuery, SignInRequestDto, SignUpRequestDto } from '../Types/ModelTypes'
+import { GraphQLQuery } from '../Types/Responses'
+import { BankAccount } from '../Types/Model'
+import { SignUpRequestDto } from '../Types/Requests'
+import { SignInRequestDto } from '../Types/Requests'
 import { CREATE_BANK_ACCOUNT, LIST_BANK_ACCOUNT } from '../graphql/GraphQL'
 
 export class Client {

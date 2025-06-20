@@ -4,7 +4,7 @@ import { Client } from '../src/client/Client'
 import { ApiCache } from '../src/cache/ApiCache'
 import { ListBankAccountAssertion } from '../src/assertion/ListBankAccountAssertion'
 
-test.describe('register tests @API', () => {
+test.describe('bank accounts tests @API', () => {
   let client: Client
   let cookie: string
   let allure: Allure
