@@ -2,7 +2,7 @@ import { APIResponse, expect } from '@playwright/test'
 import { CreateBankAccountResponse, BankAccount } from '../Types/ModelTypes'
 
 export class CreateBankAccountAssertion {
-  readonly response: APIResponse
+  private response: APIResponse
 
   constructor(response: APIResponse) {
     this.response = response

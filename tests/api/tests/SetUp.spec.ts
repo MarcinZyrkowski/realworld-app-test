@@ -1,23 +1,22 @@
-import test from '@playwright/test'
+import test, { APIResponse } from '@playwright/test'
 import { Client } from '../src/client/Client'
 import { UserGenerator } from '../src/generator/UserGenerator'
-import { SignInUpAssertion } from '../src/assertion/SignInUpResponseAssertion'
+import { SignInUpAssertion } from '../src/assertion/SignInUpAssertion'
 import { Allure } from '../../Allure'
 import { ApiCache } from '../src/cache/ApiCache'
 import { BankAccountGenerator } from '../src/generator/BankAccountGenerator'
-import { CreateBankAccountAssertion } from '../src/assertion/CreateBankAccountResponseAssertion'
+import { CreateBankAccountAssertion } from '../src/assertion/CreateBankAccountAssertion'
 
 test('setup new user @API', async ({ page, request }) => {
   const client = new Client(request)
   const allure = new Allure(page)
   let signInUpAssertion: SignInUpAssertion
   let createBankAccountAssertion: CreateBankAccountAssertion
+  let response: APIResponse
 
   await allure.suite('setup')
 
   const signUpRequestDto = UserGenerator.generateRandomUser()
-
-  let response
   await allure.step('sign up', async () => {
     await allure.attachRequest(signUpRequestDto)
     response = await client.signUp(signUpRequestDto)

@@ -49,11 +49,17 @@ export default defineConfig({
       dependencies: ['setup first login ui'],
     },
     {
+      name: 'setup api',
+      ...devices['Desktop Chrome'],
+      testMatch: 'SetUp.spec.ts',
+    },
+    {
       name: 'chrome api',
       use: {
         ...devices['Desktop Chrome'],
         // baseURL: "http://localhost:3000", we can set a default baseURL here
       },
+      dependencies: ['setup api'],
     },
   ],
   reporter: [
