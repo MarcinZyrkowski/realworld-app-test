@@ -1,6 +1,9 @@
 import { APIRequestContext, APIResponse } from '@playwright/test'
-import { BankAccount, GraphQLQuery, SignInRequestDto, SignUpRequestDto } from '../Types/ModelTypes'
-import { CREATE_BANK_ACCOUNT, LIST_BANK_ACCOUNT } from '../graphql/GraphQL'
+import { GraphQLQuery } from '../Types/Responses'
+import { BankAccount } from '../Types/Model'
+import { SignUpRequestDto } from '../Types/Requests'
+import { SignInRequestDto } from '../Types/Requests'
+import { CREATE_BANK_ACCOUNT, DELETE_BANK_ACCOUNT, LIST_BANK_ACCOUNT } from '../graphql/GraphQL'
 
 export class Client {
   private static baseUrl = 'http://localhost:3002'
@@ -38,6 +41,20 @@ export class Client {
     const query: GraphQLQuery = {
       operationName: 'ListBankAccount',
       query: LIST_BANK_ACCOUNT,
+    }
+    return await this.request.post(Client.baseUrl + '/graphql', {
+      data: query,
+      headers: { Cookie: cookie },
+    })
+  }
+
+  async deleteBankAccount(cookie: string, bankId: string) {
+    const query: GraphQLQuery = {
+      operationName: 'DeleteBankAccount',
+      query: DELETE_BANK_ACCOUNT,
+      variables: {
+        id: bankId,
+      },
     }
     return await this.request.post(Client.baseUrl + '/graphql', {
       data: query,

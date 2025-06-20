@@ -1,5 +1,5 @@
 import { APIResponse, expect } from '@playwright/test'
-import { ListBankAccountResponse } from '../Types/ModelTypes'
+import { ListBankAccountResponse } from '../Types/Responses'
 
 export class ListBankAccountAssertion {
   private response: APIResponse

@@ -19,6 +19,7 @@ test('setup new user @API', async ({ page, request }) => {
   const signUpRequestDto = UserGenerator.generateRandomUser()
   await allure.step('sign up', async () => {
     await allure.attachRequest(signUpRequestDto)
+    ApiCache.cacheUserData(signUpRequestDto)
     response = await client.signUp(signUpRequestDto)
   })
 

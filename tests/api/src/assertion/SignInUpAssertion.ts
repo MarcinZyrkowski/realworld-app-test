@@ -1,5 +1,6 @@
 import { APIResponse, expect } from '@playwright/test'
-import { SignUpRequestDto, SignInUpResponseDto } from '../Types/ModelTypes'
+import { SignInUpResponseDto } from '../Types/Responses'
+import { SignUpRequestDto } from '../Types/Requests'
 
 export class SignInUpAssertion {
   readonly response: APIResponse

@@ -1,15 +1,7 @@
-export type SignInRequestDto = {
-  type: 'LOGIN'
-  username: string
-  password: string
-}
-
-export type SignUpRequestDto = {
-  firstName: string
-  lastName: string
-  username: string
-  password: string
-  confirmPassword: string
+export type GraphQLQuery = {
+  operationName: string
+  query: string
+  variables?: object
 }
 
 export type SignInUpResponseDto = {
@@ -24,19 +16,6 @@ export type SignInUpResponseDto = {
     createdAt: string
     modifiedAt: string
   }
-}
-
-export type GraphQLQuery = {
-  operationName: string
-  query: string
-  variables?: object
-}
-
-export type BankAccount = {
-  userId: string
-  bankName: string
-  accountNumber: string
-  routingNumber: string
 }
 
 export type CreateBankAccountResponse = {
@@ -69,5 +48,11 @@ export type ListBankAccountResponse = {
         modifiedAt: string
       },
     ]
+  }
+}
+
+export type DeletedBankAccountResponse = {
+  data: {
+    deleteBankAccount: boolean
   }
 }
