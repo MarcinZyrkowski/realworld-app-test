@@ -61,4 +61,8 @@ export class Client {
       headers: { Cookie: cookie },
     })
   }
+
+  async fetchUserProfilByUsername(username: string) {
+    return this.request.get(Client.baseUrl + `/users/profile/${username}`)
+  }
 }
