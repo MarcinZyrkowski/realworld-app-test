@@ -16,11 +16,11 @@ test('setup new user @API', async ({ page, request }) => {
 
   await allure.suite('setup')
 
-  const signUpRequestDto = UserGenerator.generateRandomUser()
+  const signUpRequest = UserGenerator.generateRandomUser()
   await allure.step('sign up', async () => {
-    await allure.attachRequest(signUpRequestDto)
-    ApiCache.cacheUserData(signUpRequestDto)
-    response = await client.signUp(signUpRequestDto)
+    await allure.attachRequest(signUpRequest)
+    ApiCache.cacheUserData(signUpRequest)
+    response = await client.signUp(signUpRequest)
   })
 
   signInUpAssertion = new SignInUpAssertion(response!)
@@ -30,13 +30,13 @@ test('setup new user @API', async ({ page, request }) => {
     const body = await signInUpAssertion.extractBody()
     ApiCache.cacheUserId(body.user.id)
     await allure.attachResponseBody(body)
-    signInUpAssertion.verifyResponse(body, signUpRequestDto)
+    signInUpAssertion.verifyResponse(body, signUpRequest)
   })
 
   await allure.step('sign in', async () => {
-    const signInRequestDto = UserGenerator.of(signUpRequestDto)
-    await allure.attachRequest(signInRequestDto)
-    response = await client.signIn(signInRequestDto)
+    const signInRequest = UserGenerator.of(signUpRequest)
+    await allure.attachRequest(signInRequest)
+    response = await client.signIn(signInRequest)
   })
 
   signInUpAssertion = new SignInUpAssertion(response!)
@@ -46,7 +46,7 @@ test('setup new user @API', async ({ page, request }) => {
     ApiCache.cacheCookie(response!.headers()['set-cookie'])
     const body = await signInUpAssertion.extractBody()
     await allure.attachResponseBody(body)
-    signInUpAssertion.verifyResponse(body, signUpRequestDto)
+    signInUpAssertion.verifyResponse(body, signUpRequest)
   })
 
   let bankAccount

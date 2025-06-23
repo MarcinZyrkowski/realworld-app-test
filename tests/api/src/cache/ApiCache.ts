@@ -1,6 +1,6 @@
 import * as fs from 'fs'
 import * as path from 'path'
-import { SignUpRequestDto } from '../Types/Requests'
+import { SignUpRequest } from '../Types/Requests'
 
 export class ApiCache {
   private static cookiePath = '../../../../playwright/api/cookie'
@@ -52,11 +52,11 @@ export class ApiCache {
     return this.retrieveCache(ApiCache.userPath, ApiCache.userIdFile, false)
   }
 
-  static cacheUserData(userData: SignUpRequestDto): void {
+  static cacheUserData(userData: SignUpRequest): void {
     this.cache(userData, ApiCache.userPath, ApiCache.userDataFile)
   }
 
-  static retriveUserData(): SignUpRequestDto {
+  static retriveUserData(): SignUpRequest {
     return this.retrieveCache(ApiCache.userPath, ApiCache.userDataFile, true)
   }
 }

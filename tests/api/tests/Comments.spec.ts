@@ -1,11 +1,13 @@
 import { APIResponse } from '@playwright/test'
 import { test } from 'allure-playwright'
 import { Allure } from '../../Allure'
+import { TransactionsPageAssertion } from '../src/assertion/TransactionsPageAssertion'
 import { ApiCache } from '../src/cache/ApiCache'
 import { Client } from '../src/client/Client'
-import { TransactionsPageAssertion } from '../src/assertion/TransactionsPageAssertion'
+import { getRandomTransaction } from '../src/Types/utils/ModelUtils'
+import { TransactionsPageResponse } from '../src/Types/Responses'
 
-test.describe('transactions tests @API', () => {
+test.describe('comments tests @API', () => {
   let client: Client
   let allure: Allure
   let response: APIResponse
@@ -18,20 +20,27 @@ test.describe('transactions tests @API', () => {
     cookie = ApiCache.retrieveCookie()
   })
 
-  test('fetch list of public transactions', async () => {
-    await allure.suite('transactions')
+  test('comment random transaction', async () => {
+    await allure.suite('comments')
 
     await allure.step('fetch list of public transactions', async () => {
       response = await client.fetchPublicTransactions(cookie)
     })
 
     transactionsPageAssertion = new TransactionsPageAssertion(response)
-    await allure.step('verify list of public transactions response', async () => {
+    let body: TransactionsPageResponse
+    await allure.step('show list of public transactions response', async () => {
       await allure.attachResponse(response)
-      transactionsPageAssertion.statusIsOk()
-      const body = await transactionsPageAssertion.extractBody()
+      body = await transactionsPageAssertion.extractBody()
       await allure.attachResponseBody(body)
-      transactionsPageAssertion.assertTransactionsListInNotEmpty(body)
     })
+
+    let transaction
+    await allure.step('select random transaction', async () => {
+      transaction = getRandomTransaction(body!)
+      await allure.attachment(transaction)
+    })
+
+    // TODO make a comment
   })
 })

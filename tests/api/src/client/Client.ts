@@ -1,25 +1,25 @@
 import { APIRequestContext, APIResponse } from '@playwright/test'
 import { GraphQLQuery } from '../Types/Responses'
 import { BankAccount } from '../Types/Model'
-import { SignUpRequestDto } from '../Types/Requests'
-import { SignInRequestDto } from '../Types/Requests'
+import { CommentRequest, SignUpRequest } from '../Types/Requests'
+import { SignInRequest } from '../Types/Requests'
 import { CREATE_BANK_ACCOUNT, DELETE_BANK_ACCOUNT, LIST_BANK_ACCOUNT } from '../graphql/GraphQL'
 
 export class Client {
-  private static baseUrl = 'http://localhost:3002'
+  private static baseUrl = process.env.base_url_be
   private request: APIRequestContext
 
   constructor(request: APIRequestContext) {
     this.request = request
   }
 
-  async signIn(login: SignInRequestDto): Promise<APIResponse> {
+  async signIn(login: SignInRequest): Promise<APIResponse> {
     return await this.request.post(Client.baseUrl + '/login', {
       data: login,
     })
   }
 
-  async signUp(signUp: SignUpRequestDto): Promise<APIResponse> {
+  async signUp(signUp: SignUpRequest): Promise<APIResponse> {
     return await this.request.post(Client.baseUrl + '/users', {
       data: signUp,
     })
@@ -74,6 +74,18 @@ export class Client {
 
   async fetchPublicTransactions(cookie: string) {
     return this.request.get(Client.baseUrl + '/transactions/public', {
+      headers: { Cookie: cookie },
+    })
+  }
+
+  async publishComment(cookie: string, transactionId: string, comment: string) {
+    const request: CommentRequest = {
+      transactionId: transactionId,
+      content: comment,
+    }
+
+    return this.request.post(Client.baseUrl + `/comments/`, {
+      data: request,
       headers: { Cookie: cookie },
     })
   }

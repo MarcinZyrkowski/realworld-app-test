@@ -1,6 +1,6 @@
-import { APIResponse } from "@playwright/test"
-import { expect } from "allure-playwright"
-import { TransactionsPageResponse } from "../Types/Responses"
+import { APIResponse } from '@playwright/test'
+import { expect } from 'allure-playwright'
+import { TransactionsPageResponse } from '../Types/Responses'
 
 export class TransactionsPageAssertion {
   readonly response: APIResponse

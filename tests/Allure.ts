@@ -40,6 +40,10 @@ export class Allure {
     )
   }
 
+  async attachment(obj: unknown) {
+    await allure.attachment('attachement', JSON.stringify(obj, null, 2), 'application/json')
+  }
+
   async attachVideoIfExists() {
     const videoPath = await this.page.video()?.path()
     if (videoPath) {

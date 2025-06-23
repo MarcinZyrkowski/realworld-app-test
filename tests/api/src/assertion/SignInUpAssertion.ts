@@ -1,6 +1,6 @@
 import { APIResponse, expect } from '@playwright/test'
 import { SignInUpResponseDto } from '../Types/Responses'
-import { SignUpRequestDto } from '../Types/Requests'
+import { SignUpRequest } from '../Types/Requests'
 
 export class SignInUpAssertion {
   readonly response: APIResponse
@@ -21,11 +21,11 @@ export class SignInUpAssertion {
     return await this.response.json()
   }
 
-  verifyResponse(response: SignInUpResponseDto, signUpRequestDto: SignUpRequestDto) {
+  verifyResponse(response: SignInUpResponseDto, signUpRequest: SignUpRequest) {
     expect(response.user).toMatchObject({
-      firstName: signUpRequestDto.firstName,
-      lastName: signUpRequestDto.lastName,
-      username: signUpRequestDto.username,
+      firstName: signUpRequest.firstName,
+      lastName: signUpRequest.lastName,
+      username: signUpRequest.username,
     })
   }
 }

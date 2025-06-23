@@ -10,7 +10,7 @@ export default defineConfig({
   workers: 8,
   use: {
     // baseURL: "http://localhost:3000", default url if project doesn't override it
-    baseURL: process.env.base_url,
+    baseURL: process.env.base_url_fe,
     launchOptions: {
       slowMo: 0,
     },
@@ -69,6 +69,10 @@ export default defineConfig({
       'allure-playwright',
       {
         resultsDir: 'reports/allure-results',
+        environmentInfo: {
+          URL_FE: process.env.base_url_fe,
+          URL_BE: process.env.base_url_be,
+        },
       },
     ],
     ['list'],
