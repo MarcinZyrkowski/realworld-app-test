@@ -65,4 +65,16 @@ export class Client {
   async fetchUserProfilByUsername(username: string) {
     return this.request.get(Client.baseUrl + `/users/profile/${username}`)
   }
+
+  async fetchListOfUsers(cookie: string) {
+    return this.request.get(Client.baseUrl + '/users', {
+      headers: { Cookie: cookie },
+    })
+  }
+
+  async fetchPublicTransactions(cookie: string) {
+    return this.request.get(Client.baseUrl + '/transactions/public', {
+      headers: { Cookie: cookie },
+    })
+  }
 }
