@@ -83,3 +83,32 @@ export type UserDetails = {
   createdAt: string
   modifiedAt: string
 }
+
+export type TransactionsPageResponse = {
+  pageData: {
+    page: number
+    limit: number
+    hasNextPages: boolean
+    totalPages: number
+  }
+  results: Transaction[]
+}
+
+export type Transaction = {
+  receiverName: string
+  senderName: string
+  receiverAvatar: string
+  senderAvatar: string
+  likes: object[]
+  comments: Comment[]
+}
+
+export type Comment = {
+  id: string
+  uuid: string
+  content: string
+  userId: string
+  transactionId: string
+  createdAt: string
+  modifiedAt: string
+}
