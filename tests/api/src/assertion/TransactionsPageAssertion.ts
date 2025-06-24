@@ -1,6 +1,6 @@
-import { APIResponse } from "@playwright/test"
-import { expect } from "allure-playwright"
-import { TransactionsPageResponse } from "../Types/Responses"
+import { APIResponse } from '@playwright/test'
+import { expect } from 'allure-playwright'
+import { TransactionsPageResponse } from '../Types/Responses'
 
 export class TransactionsPageAssertion {
   readonly response: APIResponse
@@ -19,5 +19,22 @@ export class TransactionsPageAssertion {
 
   assertTransactionsListInNotEmpty(response: TransactionsPageResponse) {
     expect(response.results.length).toBeGreaterThan(0)
+  }
+
+  assertCommentIsVisible(
+    response: TransactionsPageResponse,
+    transactionId: string,
+    expectedComment: string,
+    userId: string,
+  ) {
+    const transaction = response.results.find((t) => t.id === transactionId)
+
+    if (typeof transaction === 'undefined') {
+      throw new Error(`didn't find transaction with id: ${transactionId}`)
+    }
+
+    const isPresent = transaction.comments.filter((c) => c.userId === userId).find((c) => c.content)
+
+    expect(isPresent).toBeTruthy()
   }
 }

@@ -5,7 +5,7 @@ import { ApiCache } from '../src/cache/ApiCache'
 import { Client } from '../src/client/Client'
 import { TransactionsPageAssertion } from '../src/assertion/TransactionsPageAssertion'
 
-test.describe('transactions @API', () => {
+test.describe('transactions tests @API', () => {
   let client: Client
   let allure: Allure
   let response: APIResponse

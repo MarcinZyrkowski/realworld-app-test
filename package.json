@@ -13,7 +13,8 @@
     "prettier:write": "npx prettier . --write",
     "codecheck": "npm run lint && npm run prettier:check",
     "test:ui": "npx playwright test -g '@UI' --project='chrome ui'",
-    "test:api": "npx playwright test -g '@API' --project='chrome api'"
+    "test:api": "npx playwright test -g '@API' --project='chrome api'",
+    "test:all": "npm run test:api && npm run test:ui"
   },
   "keywords": [],
   "author": "",
