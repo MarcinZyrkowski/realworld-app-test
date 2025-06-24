@@ -33,9 +33,8 @@ export class TransactionsPageAssertion {
       throw new Error(`didn't find transaction with id: ${transactionId}`)
     }
 
-    const isPresent = transaction.comments.filter(c => c.userId === userId)
-      .find(c => c.content)
-    
+    const isPresent = transaction.comments.filter((c) => c.userId === userId).find((c) => c.content)
+
     expect(isPresent).toBeTruthy()
   }
 }
