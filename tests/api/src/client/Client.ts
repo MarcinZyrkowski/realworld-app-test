@@ -48,7 +48,7 @@ export class Client {
     })
   }
 
-  async deleteBankAccount(cookie: string, bankId: string) {
+  async deleteBankAccount(cookie: string, bankId: string): Promise<APIResponse> {
     const query: GraphQLQuery = {
       operationName: 'DeleteBankAccount',
       query: DELETE_BANK_ACCOUNT,
@@ -62,7 +62,7 @@ export class Client {
     })
   }
 
-  async fetchUserProfilByUsername(username: string) {
+  async fetchUserProfilByUsername(username: string): Promise<APIResponse> {
     return this.request.get(Client.baseUrl + `/users/profile/${username}`)
   }
 
@@ -72,19 +72,23 @@ export class Client {
     })
   }
 
-  async fetchPublicTransactions(cookie: string) {
+  async fetchPublicTransactions(cookie: string): Promise<APIResponse> {
     return this.request.get(Client.baseUrl + '/transactions/public', {
       headers: { Cookie: cookie },
     })
   }
 
-  async publishComment(cookie: string, transactionId: string, comment: string) {
+  async publishComment(
+    cookie: string,
+    transactionId: string,
+    comment: string,
+  ): Promise<APIResponse> {
     const request: CommentRequest = {
       transactionId: transactionId,
       content: comment,
     }
 
-    return this.request.post(Client.baseUrl + `/comments/`, {
+    return this.request.post(Client.baseUrl + `/comments/${transactionId}`, {
       data: request,
       headers: { Cookie: cookie },
     })

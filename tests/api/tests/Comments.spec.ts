@@ -1,11 +1,11 @@
-import { APIResponse } from '@playwright/test'
+import { APIResponse, expect } from '@playwright/test'
 import { test } from 'allure-playwright'
 import { Allure } from '../../Allure'
 import { TransactionsPageAssertion } from '../src/assertion/TransactionsPageAssertion'
 import { ApiCache } from '../src/cache/ApiCache'
 import { Client } from '../src/client/Client'
 import { getRandomTransaction } from '../src/Types/utils/ModelUtils'
-import { TransactionsPageResponse } from '../src/Types/Responses'
+import { Transaction, TransactionsPageResponse } from '../src/Types/Responses'
 
 test.describe('comments tests @API', () => {
   let client: Client
@@ -35,12 +35,45 @@ test.describe('comments tests @API', () => {
       await allure.attachResponseBody(body)
     })
 
-    let transaction
+    let transaction: Transaction
     await allure.step('select random transaction', async () => {
       transaction = getRandomTransaction(body!)
       await allure.attachment(transaction)
     })
 
-    // TODO make a comment
+    let comment: string
+    await allure.step('publish comment', async () => {
+      comment = ApiCache.retriveUserData().username + ' comment'
+      await allure.attachRequest(comment)
+      response = await client.publishComment(cookie, transaction!.id, comment)
+    })
+
+    await allure.step('verify published comment response', async () => {
+      await allure.attachResponse(response)
+      const body = await response.text()
+      await allure.attachResponseBody(body)
+      expect(body).toBe('OK')
+    })
+
+    await allure.step('fetch list of public transactions', async () => {
+      response = await client.fetchPublicTransactions(cookie)
+    })
+
+    transactionsPageAssertion = new TransactionsPageAssertion(response)
+    await allure.step(
+      'assert published comment is visible in fetched list of public transactions',
+      async () => {
+        await allure.attachResponse(response)
+        const body = await transactionsPageAssertion.extractBody()
+        await allure.attachResponseBody(body)
+
+        transactionsPageAssertion.assertCommentIsVisible(
+          body,
+          transaction.id,
+          comment,
+          ApiCache.retrieveUserId(),
+        )
+      },
+    )
   })
 })

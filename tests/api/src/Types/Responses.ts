@@ -101,6 +101,20 @@ export type Transaction = {
   senderAvatar: string
   likes: object[]
   comments: Comment[]
+  id: string
+  uuid: string
+  source: string
+  amount: number
+  description: string
+  privacyLevel: string
+  receiverId: string
+  senderId: string
+  balanceAtCompletion: number
+  status: string
+  requestStatus: string
+  requestResolvedAt: string
+  createdAt: string
+  modifiedAt: string
 }
 
 export type Comment = {
