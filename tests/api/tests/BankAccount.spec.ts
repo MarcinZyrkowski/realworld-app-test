@@ -5,7 +5,7 @@ import { ApiCache } from '../src/cache/ApiCache'
 import { ListBankAccountAssertion } from '../src/assertion/ListBankAccountAssertion'
 import { BankAccountGenerator } from '../src/generator/BankAccountGenerator'
 import { CreateBankAccountAssertion } from '../src/assertion/CreateBankAccountAssertion'
-import { CreateBankAccountResponse } from '../src/Types/Responses'
+import { CreateBankAccountResponse } from '../src/Types/graphql/GraphqlResponse'
 import { DeleteBankAccountAccountAssertion } from '../src/assertion/DeleteBankAccountAssertion'
 
 test.describe('bank accounts tests @API', () => {

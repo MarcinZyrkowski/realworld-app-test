@@ -1,9 +1,14 @@
 import { APIRequestContext, APIResponse } from '@playwright/test'
-import { GraphQLQuery } from '../Types/Responses'
-import { BankAccount } from '../Types/Model'
-import { CommentRequest, SignUpRequest } from '../Types/Requests'
-import { SignInRequest } from '../Types/Requests'
-import { CREATE_BANK_ACCOUNT, DELETE_BANK_ACCOUNT, LIST_BANK_ACCOUNT } from '../graphql/GraphQL'
+import { GraphqlQuery } from '../Types/graphql/GraphqlRequest'
+import { BankAccountRequest } from '../Types/graphql/GraphqlRequest'
+import { SignUpRequest } from '../Types/rest/request/RestUserRequest'
+import { CommentRequest } from '../Types/rest/request/RestCommentRequest'
+import { SignInRequest } from '../Types/rest/request/RestUserRequest'
+import {
+  CREATE_BANK_ACCOUNT,
+  DELETE_BANK_ACCOUNT,
+  LIST_BANK_ACCOUNT,
+} from '../graphql/GraphqlQueryMutation'
 
 export class Client {
   private static baseUrl = process.env.base_url_be
@@ -25,8 +30,8 @@ export class Client {
     })
   }
 
-  async createBankAccount(cookie: string, bankAccount: BankAccount): Promise<APIResponse> {
-    const query: GraphQLQuery = {
+  async createBankAccount(cookie: string, bankAccount: BankAccountRequest): Promise<APIResponse> {
+    const query: GraphqlQuery = {
       operationName: 'CreateBankAccount',
       query: CREATE_BANK_ACCOUNT,
       variables: bankAccount,
@@ -38,7 +43,7 @@ export class Client {
   }
 
   async fetchBankAccounts(cookie: string): Promise<APIResponse> {
-    const query: GraphQLQuery = {
+    const query: GraphqlQuery = {
       operationName: 'ListBankAccount',
       query: LIST_BANK_ACCOUNT,
     }
@@ -49,7 +54,7 @@ export class Client {
   }
 
   async deleteBankAccount(cookie: string, bankId: string): Promise<APIResponse> {
-    const query: GraphQLQuery = {
+    const query: GraphqlQuery = {
       operationName: 'DeleteBankAccount',
       query: DELETE_BANK_ACCOUNT,
       variables: {

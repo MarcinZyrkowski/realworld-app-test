@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker'
-import { SignUpRequest } from '../Types/Requests'
-import { SignInRequest } from '../Types/Requests'
+import { SignUpRequest } from '../Types/rest/request/RestUserRequest'
+import { SignInRequest } from '../Types/rest/request/RestUserRequest'
 
 export class UserGenerator {
   static generateRandomUser(): SignUpRequest {

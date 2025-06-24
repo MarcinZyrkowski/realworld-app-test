@@ -1,8 +1,8 @@
-import { BankAccount } from '../Types/Model'
+import { BankAccountRequest } from '../Types/graphql/GraphqlRequest'
 import { MathUtils } from '../utils/MathUtils'
 
 export class BankAccountGenerator {
-  static generateRandomBankDetails(userId: string): BankAccount {
+  static generateRandomBankDetails(userId: string): BankAccountRequest {
     return {
       userId: userId,
       bankName: `Bank ${Math.random().toString(36).substring(2, 15)}`,

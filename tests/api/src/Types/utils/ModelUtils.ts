@@ -1,5 +1,6 @@
 import { CollectionsUtils } from '../../utils/CollectionsUtils'
-import { Transaction, TransactionsPageResponse } from '../Responses'
+import { TransactionsPageResponse } from '../rest/response/RestTransactionResponse'
+import { Transaction } from '../Model'
 
 export const getRandomTransaction = (page: TransactionsPageResponse): Transaction => {
   if (page.results.length === 0) {

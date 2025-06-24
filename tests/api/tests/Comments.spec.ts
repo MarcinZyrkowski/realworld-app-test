@@ -5,7 +5,8 @@ import { TransactionsPageAssertion } from '../src/assertion/TransactionsPageAsse
 import { ApiCache } from '../src/cache/ApiCache'
 import { Client } from '../src/client/Client'
 import { getRandomTransaction } from '../src/Types/utils/ModelUtils'
-import { Transaction, TransactionsPageResponse } from '../src/Types/Responses'
+import { TransactionsPageResponse } from '../src/Types/rest/response/RestTransactionResponse'
+import { Transaction } from '../src/Types/Model'
 
 test.describe('comments tests @API', () => {
   let client: Client

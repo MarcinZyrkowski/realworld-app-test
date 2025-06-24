@@ -4,7 +4,7 @@ import { Allure } from '../../Allure'
 import { ApiCache } from '../src/cache/ApiCache'
 import { Client } from '../src/client/Client'
 import { UserListAssertion } from '../src/assertion/UserListAssertion'
-import { UserListResponse } from '../src/Types/Responses'
+import { UserListResponse } from '../src/Types/rest/response/RestUserResponse'
 
 test.describe('users tests @API', () => {
   let client: Client
