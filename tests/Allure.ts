@@ -40,8 +40,8 @@ export class Allure {
     )
   }
 
-  async attachment(obj: unknown) {
-    await allure.attachment('attachement', JSON.stringify(obj, null, 2), 'application/json')
+  async attachment(obj: unknown, name = 'attachement') {
+    await allure.attachment(name, JSON.stringify(obj, null, 2), 'application/json')
   }
 
   async attachVideoIfExists() {

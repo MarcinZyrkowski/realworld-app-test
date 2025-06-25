@@ -32,6 +32,7 @@ test('setup new user @API', async ({ page, request }) => {
     signInUpAssertion.statusIsCreated()
     const body = await signInUpAssertion.extractBody()
     ApiCache.cacheUserId(body.user.id)
+    await allure.attachment(ApiCache.retrieveUserId(), 'userId')
     await allure.attachResponseBody(body)
     signInUpAssertion.verifyResponse(body, signUpRequest)
   })

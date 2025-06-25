@@ -7,7 +7,7 @@ export default defineConfig({
   testDir: './tests',
   retries: 1,
   fullyParallel: true,
-  workers: 3,
+  workers: 6,
   use: {
     // baseURL: "http://localhost:3000", default url if project doesn't override it
     baseURL: process.env.base_url_fe,
@@ -64,7 +64,7 @@ export default defineConfig({
     {
       name: 'setup api',
       ...devices['Desktop Chrome'],
-      testMatch: 'SetUp.spec.ts',
+      testMatch: 'SetUp.setup.ts',
     },
     {
       name: 'chrome api',

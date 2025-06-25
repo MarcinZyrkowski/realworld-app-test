@@ -36,6 +36,14 @@ export class TransactionsPageAssertion {
     const isPresent = transaction.comments
       .filter((c) => c.userId === userId)
       .find((c) => c.content === expectedComment)
+
+    if (!isPresent) {
+      console.log(transaction)
+
+      const usersComment = transaction.comments.filter((c) => c.userId === userId)
+      console.log(usersComment)
+    }
+
     expect(isPresent).toBeTruthy()
   }
 }
