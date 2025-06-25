@@ -3,7 +3,7 @@ import { test } from 'allure-playwright'
 import { Allure } from '../../Allure'
 import { ApiCache } from '../src/cache/ApiCache'
 import { UserListAssertion } from '../src/assertion/rest/UserListAssertion'
-import { UserListResponse } from '../src/Types/rest/response/RestUserResponse'
+import { UserListResponse } from '../src/typess/rest/response/RestUserResponse'
 import { RestClient } from '../src/client/RestClient'
 
 test.describe('users tests @API', () => {

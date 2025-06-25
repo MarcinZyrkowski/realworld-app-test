@@ -4,7 +4,7 @@ import { ApiCache } from '../src/cache/ApiCache'
 import { ListBankAccountAssertion } from '../src/assertion/graphql/ListBankAccountAssertion'
 import { BankAccountGenerator } from '../src/generator/BankAccountGenerator'
 import { CreateBankAccountAssertion } from '../src/assertion/graphql/CreateBankAccountAssertion'
-import { CreateBankAccountResponse } from '../src/Types/graphql/GraphqlResponse'
+import { CreateBankAccountResponse } from '../src/typess/graphql/GraphqlResponse'
 import { DeleteBankAccountAccountAssertion } from '../src/assertion/graphql/DeleteBankAccountAssertion'
 import { GraphqlClient } from '../src/client/GraphqlClient'
 

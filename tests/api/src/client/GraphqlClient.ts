@@ -4,7 +4,7 @@ import {
   LIST_BANK_ACCOUNT,
   DELETE_BANK_ACCOUNT,
 } from '../graphql/GraphqlQueryMutation'
-import { BankAccountRequest, GraphqlQuery } from '../Types/graphql/GraphqlRequest'
+import { BankAccountRequest, GraphqlQuery } from '../typess/graphql/GraphqlRequest'
 import { Client } from './Client'
 
 export class GraphqlClient extends Client {

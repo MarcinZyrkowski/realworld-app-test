@@ -48,6 +48,7 @@ export default defineConfig({
           mode: 'on-first-retry',
         },
       },
+      testMatch: 'tests/e2e/**/**.spec.ts',
       dependencies: ['setup first login ui'],
     },
     {
@@ -59,6 +60,7 @@ export default defineConfig({
           mode: 'on-first-retry',
         },
       },
+      testMatch: 'tests/e2e/**/**.spec.ts',
       dependencies: ['setup first login ui'],
     },
     {
@@ -72,6 +74,7 @@ export default defineConfig({
         ...devices['Desktop Chrome'],
         // baseURL: "http://localhost:3000", we can set a default baseURL here
       },
+      testMatch: 'tests/api/**/**.spec.ts',
       dependencies: ['setup api'],
     },
   ],

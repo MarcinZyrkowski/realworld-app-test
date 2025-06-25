@@ -1,6 +1,6 @@
 import { APIResponse } from '@playwright/test'
 import { expect } from 'allure-playwright'
-import { TransactionsPageResponse } from '../../Types/rest/response/RestTransactionResponse'
+import { TransactionsPageResponse } from '../../typess/rest/response/RestTransactionResponse'
 
 export class TransactionsPageAssertion {
   readonly response: APIResponse

@@ -1,4 +1,4 @@
-import { SignInRequest, SignUpRequest } from '../Types/rest/request/RestUserRequest'
+import { SignInRequest, SignUpRequest } from '../typess/rest/request/RestUserRequest'
 
 export class ModelMapper {
   static mapSignUpToSignInRequest(signUpRequest: SignUpRequest): SignInRequest {

@@ -1,6 +1,6 @@
 import { APIResponse, expect } from '@playwright/test'
-import { SignInUpResponse } from '../../Types/rest/response/RestUserResponse'
-import { SignUpRequest } from '../../Types/rest/request/RestUserRequest'
+import { SignInUpResponse } from '../../typess/rest/response/RestUserResponse'
+import { SignUpRequest } from '../../typess/rest/request/RestUserRequest'
 
 export class SignInUpAssertion {
   readonly response: APIResponse
