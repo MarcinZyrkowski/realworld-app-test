@@ -39,7 +39,7 @@ test.describe('comments tests @API', () => {
     let transaction: Transaction
     await allure.step('select random transaction', async () => {
       transaction = getRandomTransaction(body!)
-      await allure.attachment(transaction)
+      await allure.attachment(transaction, 'transaction')
     })
 
     let comment: string
