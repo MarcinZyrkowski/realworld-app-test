@@ -10,6 +10,7 @@ import {
   LIST_BANK_ACCOUNT,
 } from '../graphql/GraphqlQueryMutation'
 
+// TODO: split to rest and grapql clients
 export class Client {
   private static baseUrl = process.env.base_url_be
   private request: APIRequestContext

@@ -6,6 +6,7 @@ import { Allure } from '../../Allure'
 import { ApiCache } from '../src/cache/ApiCache'
 import { BankAccountGenerator } from '../src/generator/BankAccountGenerator'
 import { CreateBankAccountAssertion } from '../src/assertion/CreateBankAccountAssertion'
+import { ModelMapper } from '../src/mapper/ModelMapper'
 
 test('setup new user @API', async ({ page, request }) => {
   const client = new Client(request)
@@ -34,7 +35,7 @@ test('setup new user @API', async ({ page, request }) => {
   })
 
   await allure.step('sign in', async () => {
-    const signInRequest = UserGenerator.of(signUpRequest)
+    const signInRequest = ModelMapper.mapSignUpToSignInRequest(signUpRequest)
     await allure.attachRequest(signInRequest)
     response = await client.signIn(signInRequest)
   })
