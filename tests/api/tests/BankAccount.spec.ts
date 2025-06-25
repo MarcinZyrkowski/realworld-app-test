@@ -1,15 +1,15 @@
 import test, { APIResponse, expect } from '@playwright/test'
 import { Allure } from '../../Allure'
-import { Client } from '../src/client/Client'
 import { ApiCache } from '../src/cache/ApiCache'
-import { ListBankAccountAssertion } from '../src/assertion/ListBankAccountAssertion'
+import { ListBankAccountAssertion } from '../src/assertion/graphql/ListBankAccountAssertion'
 import { BankAccountGenerator } from '../src/generator/BankAccountGenerator'
-import { CreateBankAccountAssertion } from '../src/assertion/CreateBankAccountAssertion'
-import { CreateBankAccountResponse } from '../src/Types/Responses'
-import { DeleteBankAccountAccountAssertion } from '../src/assertion/DeleteBankAccountAssertion'
+import { CreateBankAccountAssertion } from '../src/assertion/graphql/CreateBankAccountAssertion'
+import { CreateBankAccountResponse } from '../src/Types/graphql/GraphqlResponse'
+import { DeleteBankAccountAccountAssertion } from '../src/assertion/graphql/DeleteBankAccountAssertion'
+import { GraphqlClient } from '../src/client/GraphqlClient'
 
 test.describe('bank accounts tests @API', () => {
-  let client: Client
+  let graphqlClient: GraphqlClient
   let cookie: string
   let allure: Allure
   let listBankAccountAssertion: ListBankAccountAssertion
@@ -18,7 +18,7 @@ test.describe('bank accounts tests @API', () => {
   let response: APIResponse
 
   test.beforeEach(async ({ page, request }) => {
-    client = new Client(request)
+    graphqlClient = new GraphqlClient(request)
     cookie = ApiCache.retrieveCookie()
     allure = new Allure(page)
   })
@@ -27,7 +27,7 @@ test.describe('bank accounts tests @API', () => {
     await allure.suite('bank account')
 
     await allure.step('fetch users bank accounts', async () => {
-      response = await client.fetchBankAccounts(cookie)
+      response = await graphqlClient.fetchBankAccounts(cookie)
     })
 
     listBankAccountAssertion = new ListBankAccountAssertion(response)
@@ -48,7 +48,7 @@ test.describe('bank accounts tests @API', () => {
     await allure.step('create bank account', async () => {
       bankAccount = BankAccountGenerator.generateRandomBankDetails(ApiCache.retrieveUserId())
       await allure.attachRequest(bankAccount)
-      response = await client.createBankAccount(cookie, bankAccount)
+      response = await graphqlClient.createBankAccount(cookie, bankAccount)
     })
 
     createBankAccountAssertion = new CreateBankAccountAssertion(response!)
@@ -62,7 +62,7 @@ test.describe('bank accounts tests @API', () => {
     })
 
     await allure.step('delete bank account', async () => {
-      response = await client.deleteBankAccount(
+      response = await graphqlClient.deleteBankAccount(
         cookie,
         createdBankAccountResponse.data.createBankAccount.id,
       )

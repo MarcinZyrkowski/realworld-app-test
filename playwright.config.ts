@@ -7,7 +7,7 @@ export default defineConfig({
   testDir: './tests',
   retries: 1,
   fullyParallel: true,
-  workers: 8,
+  workers: 3,
   use: {
     // baseURL: "http://localhost:3000", default url if project doesn't override it
     baseURL: process.env.base_url_fe,
@@ -15,9 +15,6 @@ export default defineConfig({
       slowMo: 0,
     },
     viewport: { width: 1280, height: 720 },
-    video: {
-      mode: 'on-first-retry',
-    },
     trace: 'on-first-retry',
   },
   projects: [
@@ -25,18 +22,31 @@ export default defineConfig({
       name: 'setup new user ui',
       ...devices['Desktop Chrome'],
       testMatch: 'SetUpNewUser.setup.ts',
+      use: {
+        video: {
+          mode: 'on-first-retry',
+        },
+      },
     },
     {
       name: 'setup first login ui',
       ...devices['Desktop Chrome'],
       testMatch: 'SetUpFirstLogin.setup.ts',
       dependencies: ['setup new user ui'],
+      use: {
+        video: {
+          mode: 'on-first-retry',
+        },
+      },
     },
     {
       name: 'chrome ui',
       use: {
         ...devices['Desktop Chrome'],
         // baseURL: "http://localhost:3000", we can set a default baseURL here
+        video: {
+          mode: 'on-first-retry',
+        },
       },
       dependencies: ['setup first login ui'],
     },
@@ -45,6 +55,9 @@ export default defineConfig({
       use: {
         ...devices['Desktop Firefox'],
         // baseURL: "http://localhost:3000", we can set a default baseURL here
+        video: {
+          mode: 'on-first-retry',
+        },
       },
       dependencies: ['setup first login ui'],
     },

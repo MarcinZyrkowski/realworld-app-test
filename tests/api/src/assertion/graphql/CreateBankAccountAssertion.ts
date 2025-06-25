@@ -1,6 +1,6 @@
 import { APIResponse, expect } from '@playwright/test'
-import { CreateBankAccountResponse } from '../Types/Responses'
-import { BankAccount } from '../Types/Model'
+import { CreateBankAccountResponse } from '../../Types/graphql/GraphqlResponse'
+import { BankAccountRequest } from '../../Types/graphql/GraphqlRequest'
 
 export class CreateBankAccountAssertion {
   private response: APIResponse
@@ -17,7 +17,7 @@ export class CreateBankAccountAssertion {
     return await this.response.json()
   }
 
-  verifyResponse(response: CreateBankAccountResponse, bankAccount: BankAccount) {
+  verifyResponse(response: CreateBankAccountResponse, bankAccount: BankAccountRequest) {
     expect(response.data.createBankAccount).toMatchObject({
       userId: bankAccount.userId,
       bankName: bankAccount.bankName,

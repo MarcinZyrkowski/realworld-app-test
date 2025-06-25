@@ -1,17 +1,17 @@
 import test, { APIResponse } from '@playwright/test'
-import { Client } from '../src/client/Client'
 import { Allure } from '../../Allure'
 import { ApiCache } from '../src/cache/ApiCache'
-import { UserProfileAssertion } from '../src/assertion/UserProfileAssertion'
+import { UserProfileAssertion } from '../src/assertion/rest/UserProfileAssertion'
+import { RestClient } from '../src/client/RestClient'
 
 test.describe('user tests @API', () => {
-  let client: Client
+  let restClient: RestClient
   let allure: Allure
   let userProfileAssertion: UserProfileAssertion
   let response: APIResponse
 
   test.beforeEach(async ({ page, request }) => {
-    client = new Client(request)
+    restClient = new RestClient(request)
     allure = new Allure(page)
   })
 
@@ -20,7 +20,7 @@ test.describe('user tests @API', () => {
 
     const useData = ApiCache.retriveUserData()
     await allure.step('fetch user profile', async () => {
-      response = await client.fetchUserProfilByUsername(useData.username)
+      response = await restClient.fetchUserProfilByUsername(useData.username)
     })
 
     userProfileAssertion = new UserProfileAssertion(response)

@@ -25,8 +25,8 @@ export class SignInPage {
   }
 
   async fillForm(signInData: SignInData) {
-    if (signInData.userName) {
-      await this.userNameInput.fill(signInData.userName)
+    if (signInData.username) {
+      await this.userNameInput.fill(signInData.username)
     }
     if (signInData.password) {
       await this.passwordInput.fill(signInData.password)

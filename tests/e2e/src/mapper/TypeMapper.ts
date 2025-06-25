@@ -4,7 +4,7 @@ import { SignUpData } from '../types/page/SignUpTypes'
 export class TypeMapper {
   static mapSignUpDataToSignInData(signUpData: SignUpData): SignInData {
     return {
-      userName: signUpData.userName,
+      username: signUpData.userName,
       password: signUpData.password,
     }
   }

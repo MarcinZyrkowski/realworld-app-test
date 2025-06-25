@@ -1,4 +1,4 @@
 export type SignInData = {
-  userName?: string
+  username?: string
   password?: string
 }

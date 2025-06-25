@@ -2,19 +2,19 @@ import { APIResponse } from '@playwright/test'
 import { test } from 'allure-playwright'
 import { Allure } from '../../Allure'
 import { ApiCache } from '../src/cache/ApiCache'
-import { Client } from '../src/client/Client'
-import { UserListAssertion } from '../src/assertion/UserListAssertion'
-import { UserListResponse } from '../src/Types/Responses'
+import { UserListAssertion } from '../src/assertion/rest/UserListAssertion'
+import { UserListResponse } from '../src/Types/rest/response/RestUserResponse'
+import { RestClient } from '../src/client/RestClient'
 
 test.describe('users tests @API', () => {
-  let client: Client
+  let restClient: RestClient
   let allure: Allure
   let response: APIResponse
   let cookie: string
   let userListAssertion: UserListAssertion
 
   test.beforeEach(async ({ page, request }) => {
-    client = new Client(request)
+    restClient = new RestClient(request)
     allure = new Allure(page)
     cookie = ApiCache.retrieveCookie()
   })
@@ -23,7 +23,7 @@ test.describe('users tests @API', () => {
     await allure.suite('users')
 
     await allure.step('fetch list of all users', async () => {
-      response = await client.fetchListOfUsers(cookie)
+      response = await restClient.fetchListOfUsers(cookie)
     })
 
     userListAssertion = new UserListAssertion(response)

@@ -1,6 +1,6 @@
 import { APIResponse, expect } from '@playwright/test'
-import { SignInUpResponseDto } from '../Types/Responses'
-import { SignUpRequest } from '../Types/Requests'
+import { SignInUpResponse } from '../../Types/rest/response/RestUserResponse'
+import { SignUpRequest } from '../../Types/rest/request/RestUserRequest'
 
 export class SignInUpAssertion {
   readonly response: APIResponse
@@ -17,11 +17,11 @@ export class SignInUpAssertion {
     expect(this.response.status()).toBe(200)
   }
 
-  async extractBody(): Promise<SignInUpResponseDto> {
+  async extractBody(): Promise<SignInUpResponse> {
     return await this.response.json()
   }
 
-  verifyResponse(response: SignInUpResponseDto, signUpRequest: SignUpRequest) {
+  verifyResponse(response: SignInUpResponse, signUpRequest: SignUpRequest) {
     expect(response.user).toMatchObject({
       firstName: signUpRequest.firstName,
       lastName: signUpRequest.lastName,

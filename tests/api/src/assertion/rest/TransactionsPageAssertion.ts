@@ -1,6 +1,6 @@
 import { APIResponse } from '@playwright/test'
 import { expect } from 'allure-playwright'
-import { TransactionsPageResponse } from '../Types/Responses'
+import { TransactionsPageResponse } from '../../Types/rest/response/RestTransactionResponse'
 
 export class TransactionsPageAssertion {
   readonly response: APIResponse
@@ -33,8 +33,9 @@ export class TransactionsPageAssertion {
       throw new Error(`didn't find transaction with id: ${transactionId}`)
     }
 
-    const isPresent = transaction.comments.filter((c) => c.userId === userId).find((c) => c.content)
-
+    const isPresent = transaction.comments
+      .filter((c) => c.userId === userId)
+      .find((c) => c.content === expectedComment)
     expect(isPresent).toBeTruthy()
   }
 }

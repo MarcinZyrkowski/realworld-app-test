@@ -1,21 +1,22 @@
 import { APIResponse, expect } from '@playwright/test'
 import { test } from 'allure-playwright'
 import { Allure } from '../../Allure'
-import { TransactionsPageAssertion } from '../src/assertion/TransactionsPageAssertion'
+import { TransactionsPageAssertion } from '../src/assertion/rest/TransactionsPageAssertion'
 import { ApiCache } from '../src/cache/ApiCache'
-import { Client } from '../src/client/Client'
 import { getRandomTransaction } from '../src/Types/utils/ModelUtils'
-import { Transaction, TransactionsPageResponse } from '../src/Types/Responses'
+import { TransactionsPageResponse } from '../src/Types/rest/response/RestTransactionResponse'
+import { Transaction } from '../src/Types/Model'
+import { RestClient } from '../src/client/RestClient'
 
 test.describe('comments tests @API', () => {
-  let client: Client
+  let restClient: RestClient
   let allure: Allure
   let response: APIResponse
   let cookie: string
   let transactionsPageAssertion: TransactionsPageAssertion
 
   test.beforeEach(async ({ page, request }) => {
-    client = new Client(request)
+    restClient = new RestClient(request)
     allure = new Allure(page)
     cookie = ApiCache.retrieveCookie()
   })
@@ -24,7 +25,7 @@ test.describe('comments tests @API', () => {
     await allure.suite('comments')
 
     await allure.step('fetch list of public transactions', async () => {
-      response = await client.fetchPublicTransactions(cookie)
+      response = await restClient.fetchPublicTransactions(cookie)
     })
 
     transactionsPageAssertion = new TransactionsPageAssertion(response)
@@ -45,7 +46,7 @@ test.describe('comments tests @API', () => {
     await allure.step('publish comment', async () => {
       comment = ApiCache.retriveUserData().username + ' comment'
       await allure.attachRequest(comment)
-      response = await client.publishComment(cookie, transaction!.id, comment)
+      response = await restClient.publishComment(cookie, transaction!.id, comment)
     })
 
     await allure.step('verify published comment response', async () => {
@@ -56,7 +57,7 @@ test.describe('comments tests @API', () => {
     })
 
     await allure.step('fetch list of public transactions', async () => {
-      response = await client.fetchPublicTransactions(cookie)
+      response = await restClient.fetchPublicTransactions(cookie)
     })
 
     transactionsPageAssertion = new TransactionsPageAssertion(response)
