@@ -88,9 +88,9 @@ export class MenuDrawer {
 
   constructor(page: Page) {
     this.page = page
-    this.userFullName = this.page.locator('[data-test="sidenav-user-full-name"]')
-    this.username = this.page.locator('[data-test="sidenav-username"]')
-    this.accountBalanceValue = this.page.locator('[data-test="sidenav-user-balance"]')
+    this.userFullName = this.page.getByTestId('sidenav-user-full-name')
+    this.username = this.page.getByTestId('sidenav-username')
+    this.accountBalanceValue = this.page.getByTestId('sidenav-user-balance')
     this.accountBalanceTitle = this.page.getByText('Account Balance')
     this.homeButton = this.page.getByRole('button', { name: 'Home' })
     this.myAccountButton = this.page.getByRole('button', { name: 'My Account' })

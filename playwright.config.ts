@@ -9,6 +9,7 @@ export default defineConfig({
   fullyParallel: true,
   workers: 6,
   use: {
+    testIdAttribute: 'data-test',
     // baseURL: "http://localhost:3000", default url if project doesn't override it
     baseURL: process.env.base_url_fe,
     launchOptions: {

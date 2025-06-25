@@ -12,7 +12,7 @@ export class MyAccountPage {
 
   constructor(page: Page) {
     this.page = page
-    this.title = this.page.locator('[data-test="main"] h2')
+    this.title = this.page.getByTestId('main').locator('h2')
     this.firstNameInput = this.page.locator('[id="user-settings-firstName-input"]')
     this.lastNameInput = this.page.locator('[id="user-settings-lastName-input"]')
     this.emailInput = this.page.locator('[id="user-settings-email-input"]')
