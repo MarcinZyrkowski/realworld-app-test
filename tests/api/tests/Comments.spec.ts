@@ -3,9 +3,9 @@ import { test } from 'allure-playwright'
 import { Allure } from '../../Allure'
 import { TransactionsPageAssertion } from '../src/assertion/rest/TransactionsPageAssertion'
 import { ApiCache } from '../src/cache/ApiCache'
-import { getRandomTransaction } from '../src/typess/utils/ModelUtils'
-import { TransactionsPageResponse } from '../src/typess/rest/response/RestTransactionResponse'
-import { Transaction } from '../src/typess/Model'
+import { getRandomTransaction } from '../src/types/utils/ModelUtils'
+import { TransactionsPageResponse } from '../src/types/rest/response/RestTransactionResponse'
+import { Transaction } from '../src/types/Model'
 import { RestClient } from '../src/client/RestClient'
 
 test.describe('comments tests @API', () => {

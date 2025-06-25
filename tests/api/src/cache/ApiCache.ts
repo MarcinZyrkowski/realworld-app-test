@@ -1,6 +1,6 @@
 import * as fs from 'fs'
 import * as path from 'path'
-import { SignUpRequest } from '../typess/rest/request/RestUserRequest'
+import { SignUpRequest } from '../types/rest/request/RestUserRequest'
 
 export class ApiCache {
   private static cookiePath = '../../../../playwright/api/cookie'

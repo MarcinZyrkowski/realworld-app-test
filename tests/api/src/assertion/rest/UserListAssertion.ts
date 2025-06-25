@@ -1,5 +1,5 @@
 import { APIResponse, expect } from '@playwright/test'
-import { UserListResponse } from '../../typess/rest/response/RestUserResponse'
+import { UserListResponse } from '../../types/rest/response/RestUserResponse'
 
 export class UserListAssertion {
   readonly response: APIResponse

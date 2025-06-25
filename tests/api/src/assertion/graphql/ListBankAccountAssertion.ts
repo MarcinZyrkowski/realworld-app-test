@@ -1,5 +1,5 @@
 import { APIResponse, expect } from '@playwright/test'
-import { ListBankAccountResponse } from '../../typess/graphql/GraphqlResponse'
+import { ListBankAccountResponse } from '../../types/graphql/GraphqlResponse'
 
 export class ListBankAccountAssertion {
   private response: APIResponse

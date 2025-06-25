@@ -1,4 +1,4 @@
-import { BankAccountRequest } from '../typess/graphql/GraphqlRequest'
+import { BankAccountRequest } from '../types/graphql/GraphqlRequest'
 import { MathUtils } from '../utils/MathUtils'
 
 export class BankAccountGenerator {

@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { SignUpRequest } from '../typess/rest/request/RestUserRequest'
+import { SignUpRequest } from '../types/rest/request/RestUserRequest'
 
 export class UserGenerator {
   static generateRandomUser(): SignUpRequest {

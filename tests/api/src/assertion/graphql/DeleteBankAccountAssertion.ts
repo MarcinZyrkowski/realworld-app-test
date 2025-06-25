@@ -1,5 +1,5 @@
 import { APIResponse, expect } from '@playwright/test'
-import { DeletedBankAccountResponse } from '../../typess/graphql/GraphqlResponse'
+import { DeletedBankAccountResponse } from '../../types/graphql/GraphqlResponse'
 
 export class DeleteBankAccountAccountAssertion {
   private response: APIResponse

@@ -1,6 +1,6 @@
 import { APIResponse, expect } from '@playwright/test'
-import { CreateBankAccountResponse } from '../../typess/graphql/GraphqlResponse'
-import { BankAccountRequest } from '../../typess/graphql/GraphqlRequest'
+import { CreateBankAccountResponse } from '../../types/graphql/GraphqlResponse'
+import { BankAccountRequest } from '../../types/graphql/GraphqlRequest'
 
 export class CreateBankAccountAssertion {
   private response: APIResponse

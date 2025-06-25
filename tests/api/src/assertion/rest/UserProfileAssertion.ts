@@ -1,5 +1,5 @@
 import { APIResponse, expect } from '@playwright/test'
-import { UserProfileResponse } from '../../typess/rest/response/RestUserResponse'
+import { UserProfileResponse } from '../../types/rest/response/RestUserResponse'
 
 export class UserProfileAssertion {
   private response: APIResponse
