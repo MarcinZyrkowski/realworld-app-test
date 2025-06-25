@@ -14,7 +14,7 @@ export class TransactionsPageAssertion {
   }
 
   async extractBody(): Promise<TransactionsPageResponse> {
-    return await this.response.json()
+    return this.response.json()
   }
 
   assertTransactionsListInNotEmpty(response: TransactionsPageResponse) {

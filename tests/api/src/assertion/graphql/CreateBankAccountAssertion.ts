@@ -14,7 +14,7 @@ export class CreateBankAccountAssertion {
   }
 
   async extractBody(): Promise<CreateBankAccountResponse> {
-    return await this.response.json()
+    return this.response.json()
   }
 
   verifyResponse(response: CreateBankAccountResponse, bankAccount: BankAccountRequest) {

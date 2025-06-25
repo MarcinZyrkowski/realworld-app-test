@@ -13,6 +13,6 @@ export class DeleteBankAccountAccountAssertion {
   }
 
   async extractBody(): Promise<DeletedBankAccountResponse> {
-    return await this.response.json()
+    return this.response.json()
   }
 }

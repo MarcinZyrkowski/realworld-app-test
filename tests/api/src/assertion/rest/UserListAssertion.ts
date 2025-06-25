@@ -13,7 +13,7 @@ export class UserListAssertion {
   }
 
   async extractBody(): Promise<UserListResponse> {
-    return await this.response.json()
+    return this.response.json()
   }
 
   assertUserIsNotInList(response: UserListResponse, userId: string) {

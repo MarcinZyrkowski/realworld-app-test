@@ -13,7 +13,7 @@ export class UserProfileAssertion {
   }
 
   async extractBody(): Promise<UserProfileResponse> {
-    return await this.response.json()
+    return this.response.json()
   }
 
   verifyUserProfileResponse(

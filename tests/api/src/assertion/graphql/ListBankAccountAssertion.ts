@@ -13,7 +13,7 @@ export class ListBankAccountAssertion {
   }
 
   async extractBody(): Promise<ListBankAccountResponse> {
-    return await this.response.json()
+    return this.response.json()
   }
 
   assertListBankAccountIsNotEmpty(response: ListBankAccountResponse): void {

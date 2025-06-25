@@ -18,7 +18,7 @@ export class SignInUpAssertion {
   }
 
   async extractBody(): Promise<SignInUpResponse> {
-    return await this.response.json()
+    return this.response.json()
   }
 
   verifyResponse(response: SignInUpResponse, signUpRequest: SignUpRequest) {
