@@ -11,6 +11,7 @@ test.describe('my account tests @UI', () => {
   let homePage: HomePage
   let myAccountPage: MyAccountPage
   let allure: Allure
+  let signInPage: SignInPage
   let signInSteps: SignInSteps
   let myAccountAssertion: MyAccountAssertion
 
@@ -18,7 +19,8 @@ test.describe('my account tests @UI', () => {
     homePage = new HomePage(page)
     myAccountPage = new MyAccountPage(page)
     allure = new Allure(page)
-    signInSteps = new SignInSteps(page, new SignInPage(page), allure)
+    signInPage = new SignInPage(page)
+    signInSteps = new SignInSteps(page, signInPage, allure)
     myAccountAssertion = new MyAccountAssertion(myAccountPage)
   })
 
