@@ -1,5 +1,4 @@
-import { Bank } from "../Model"
-
+import { Bank } from '../Model'
 
 export type GraphqlResponse<T> = {
   data: T

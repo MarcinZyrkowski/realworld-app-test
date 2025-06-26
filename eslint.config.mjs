@@ -37,6 +37,7 @@ export default [
     rules: {
       ...playwrightRecommended.rules,
       'playwright/expect-expect': 'off',
+      'playwright/no-standalone-expect': 'off',
     },
     ignores: ['**/node_modules/**', '**/reports/**', '**/playwright-report/**'],
   },

@@ -7,7 +7,7 @@ export default defineConfig({
   testDir: './tests',
   retries: 1,
   fullyParallel: true,
-  workers: 6,
+  workers: 5,
   use: {
     testIdAttribute: 'data-test',
     // baseURL: "http://localhost:3000", default url if project doesn't override it
@@ -16,7 +16,6 @@ export default defineConfig({
       slowMo: 0,
     },
     viewport: { width: 1280, height: 720 },
-    trace: 'on-first-retry',
   },
   projects: [
     {
@@ -25,8 +24,9 @@ export default defineConfig({
       testMatch: 'SetUpNewUser.setup.ts',
       use: {
         video: {
-          mode: 'on-first-retry',
+          mode: 'retain-on-failure',
         },
+        trace: 'retain-on-failure',
       },
     },
     {
@@ -36,8 +36,9 @@ export default defineConfig({
       dependencies: ['setup new user ui'],
       use: {
         video: {
-          mode: 'on-first-retry',
+          mode: 'retain-on-failure',
         },
+        trace: 'retain-on-failure',
       },
     },
     {
@@ -46,8 +47,9 @@ export default defineConfig({
         ...devices['Desktop Chrome'],
         // baseURL: "http://localhost:3000", we can set a default baseURL here
         video: {
-          mode: 'on-first-retry',
+          mode: 'retain-on-failure',
         },
+        trace: 'retain-on-failure',
       },
       testMatch: 'tests/e2e/**/**.spec.ts',
       dependencies: ['setup first login ui'],
@@ -58,23 +60,19 @@ export default defineConfig({
         ...devices['Desktop Firefox'],
         // baseURL: "http://localhost:3000", we can set a default baseURL here
         video: {
-          mode: 'on-first-retry',
+          mode: 'retain-on-failure',
         },
+        trace: 'retain-on-failure',
       },
       testMatch: 'tests/e2e/**/**.spec.ts',
       dependencies: ['setup first login ui'],
     },
     {
       name: 'setup api',
-      ...devices['Desktop Chrome'],
       testMatch: 'SetUp.setup.ts',
     },
     {
       name: 'chrome api',
-      use: {
-        ...devices['Desktop Chrome'],
-        // baseURL: "http://localhost:3000", we can set a default baseURL here
-      },
       testMatch: 'tests/api/**/**.spec.ts',
       dependencies: ['setup api'],
     },
