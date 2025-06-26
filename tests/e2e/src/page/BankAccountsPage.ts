@@ -10,7 +10,7 @@ export class BankAccountsPage {
   constructor(page: Page) {
     this.page = page
     this.createBankAccountButton = this.page.getByRole('button', { name: 'Create' })
-    this.bankList = this.page.locator('[data-test="bankaccount-list"]')
+    this.bankList = this.page.getByTestId('bankaccount-list')
     this.createBankAccountForm = new CreateBankAccountFormComponent(page)
   }
 

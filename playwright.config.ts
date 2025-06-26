@@ -9,6 +9,7 @@ export default defineConfig({
   fullyParallel: true,
   workers: 6,
   use: {
+    testIdAttribute: 'data-test',
     // baseURL: "http://localhost:3000", default url if project doesn't override it
     baseURL: process.env.base_url_fe,
     launchOptions: {
@@ -48,6 +49,7 @@ export default defineConfig({
           mode: 'on-first-retry',
         },
       },
+      testMatch: 'tests/e2e/**/**.spec.ts',
       dependencies: ['setup first login ui'],
     },
     {
@@ -59,6 +61,7 @@ export default defineConfig({
           mode: 'on-first-retry',
         },
       },
+      testMatch: 'tests/e2e/**/**.spec.ts',
       dependencies: ['setup first login ui'],
     },
     {
@@ -72,6 +75,7 @@ export default defineConfig({
         ...devices['Desktop Chrome'],
         // baseURL: "http://localhost:3000", we can set a default baseURL here
       },
+      testMatch: 'tests/api/**/**.spec.ts',
       dependencies: ['setup api'],
     },
   ],

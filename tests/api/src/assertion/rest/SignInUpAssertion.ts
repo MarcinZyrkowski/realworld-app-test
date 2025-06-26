@@ -1,6 +1,6 @@
 import { APIResponse, expect } from '@playwright/test'
-import { SignInUpResponse } from '../../Types/rest/response/RestUserResponse'
-import { SignUpRequest } from '../../Types/rest/request/RestUserRequest'
+import { SignInUpResponse } from '../../types/rest/response/RestUserResponse'
+import { SignUpRequest } from '../../types/rest/request/RestUserRequest'
 
 export class SignInUpAssertion {
   readonly response: APIResponse
@@ -18,7 +18,7 @@ export class SignInUpAssertion {
   }
 
   async extractBody(): Promise<SignInUpResponse> {
-    return await this.response.json()
+    return this.response.json()
   }
 
   verifyResponse(response: SignInUpResponse, signUpRequest: SignUpRequest) {

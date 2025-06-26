@@ -1,6 +1,6 @@
 import { APIResponse } from '@playwright/test'
 import { expect } from 'allure-playwright'
-import { TransactionsPageResponse } from '../../Types/rest/response/RestTransactionResponse'
+import { TransactionsPageResponse } from '../../types/rest/response/RestTransactionResponse'
 
 export class TransactionsPageAssertion {
   readonly response: APIResponse
@@ -14,7 +14,7 @@ export class TransactionsPageAssertion {
   }
 
   async extractBody(): Promise<TransactionsPageResponse> {
-    return await this.response.json()
+    return this.response.json()
   }
 
   assertTransactionsListInNotEmpty(response: TransactionsPageResponse) {

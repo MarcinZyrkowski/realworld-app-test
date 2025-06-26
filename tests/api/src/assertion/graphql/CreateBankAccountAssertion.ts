@@ -1,6 +1,6 @@
 import { APIResponse, expect } from '@playwright/test'
-import { CreateBankAccountResponse } from '../../Types/graphql/GraphqlResponse'
-import { BankAccountRequest } from '../../Types/graphql/GraphqlRequest'
+import { CreateBankAccountResponse } from '../../types/graphql/GraphqlResponse'
+import { BankAccountRequest } from '../../types/graphql/GraphqlRequest'
 
 export class CreateBankAccountAssertion {
   private response: APIResponse
@@ -14,7 +14,7 @@ export class CreateBankAccountAssertion {
   }
 
   async extractBody(): Promise<CreateBankAccountResponse> {
-    return await this.response.json()
+    return this.response.json()
   }
 
   verifyResponse(response: CreateBankAccountResponse, bankAccount: BankAccountRequest) {

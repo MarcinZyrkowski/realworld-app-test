@@ -1,5 +1,5 @@
 import { APIResponse, expect } from '@playwright/test'
-import { UserProfileResponse } from '../../Types/rest/response/RestUserResponse'
+import { UserProfileResponse } from '../../types/rest/response/RestUserResponse'
 
 export class UserProfileAssertion {
   private response: APIResponse
@@ -13,7 +13,7 @@ export class UserProfileAssertion {
   }
 
   async extractBody(): Promise<UserProfileResponse> {
-    return await this.response.json()
+    return this.response.json()
   }
 
   verifyUserProfileResponse(

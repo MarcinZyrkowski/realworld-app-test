@@ -1,5 +1,5 @@
 import { APIResponse, expect } from '@playwright/test'
-import { ListBankAccountResponse } from '../../Types/graphql/GraphqlResponse'
+import { ListBankAccountResponse } from '../../types/graphql/GraphqlResponse'
 
 export class ListBankAccountAssertion {
   private response: APIResponse
@@ -13,7 +13,7 @@ export class ListBankAccountAssertion {
   }
 
   async extractBody(): Promise<ListBankAccountResponse> {
-    return await this.response.json()
+    return this.response.json()
   }
 
   assertListBankAccountIsNotEmpty(response: ListBankAccountResponse): void {

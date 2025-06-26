@@ -1,5 +1,5 @@
 import { APIResponse, expect } from '@playwright/test'
-import { DeletedBankAccountResponse } from '../../Types/graphql/GraphqlResponse'
+import { DeletedBankAccountResponse } from '../../types/graphql/GraphqlResponse'
 
 export class DeleteBankAccountAccountAssertion {
   private response: APIResponse
@@ -13,6 +13,6 @@ export class DeleteBankAccountAccountAssertion {
   }
 
   async extractBody(): Promise<DeletedBankAccountResponse> {
-    return await this.response.json()
+    return this.response.json()
   }
 }

@@ -1,5 +1,5 @@
 import { APIResponse, expect } from '@playwright/test'
-import { UserListResponse } from '../../Types/rest/response/RestUserResponse'
+import { UserListResponse } from '../../types/rest/response/RestUserResponse'
 
 export class UserListAssertion {
   readonly response: APIResponse
@@ -13,7 +13,7 @@ export class UserListAssertion {
   }
 
   async extractBody(): Promise<UserListResponse> {
-    return await this.response.json()
+    return this.response.json()
   }
 
   assertUserIsNotInList(response: UserListResponse, userId: string) {

@@ -1,7 +1,7 @@
 import { APIResponse } from '@playwright/test'
-import { SignUpRequest } from '../Types/rest/request/RestUserRequest'
-import { CommentRequest } from '../Types/rest/request/RestCommentRequest'
-import { SignInRequest } from '../Types/rest/request/RestUserRequest'
+import { SignUpRequest } from '../types/rest/request/RestUserRequest'
+import { CommentRequest } from '../types/rest/request/RestCommentRequest'
+import { SignInRequest } from '../types/rest/request/RestUserRequest'
 import { Client } from './Client'
 
 export class RestClient extends Client {
