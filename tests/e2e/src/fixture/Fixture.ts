@@ -4,7 +4,6 @@ import { MyAccountAssertion } from '../assertion/MyAccountAssertion'
 import { HomePage } from '../page/HomePage'
 import { MyAccountPage } from '../page/MyAccountPage'
 import { SignInPage } from '../page/SignInPage'
-import { SignInSteps } from '../steps/SignInSteps'
 import { HomeAssertion } from '../assertion/HomeAssertion'
 import { BankAccountsPage } from '../page/BankAccountsPage'
 import { BankAccountsAssertion } from '../assertion/BankAccountsAssertion'
@@ -19,7 +18,6 @@ type UiFixture = {
   signUpPage: SignUpPage
   bankAccountsPage: BankAccountsPage
   allure: Allure
-  signInSteps: SignInSteps
   homeAssertion: HomeAssertion
   myAccountAssertion: MyAccountAssertion
   bankAccountsAssertion: BankAccountsAssertion
@@ -45,9 +43,6 @@ export const uiTest = base.extend<UiFixture>({
   },
   allure: async ({ page }, use) => {
     await use(new Allure(page))
-  },
-  signInSteps: async ({ page, signInPage, allure }, use) => {
-    await use(new SignInSteps(page, signInPage, allure))
   },
   myAccountAssertion: async ({ myAccountPage }, use) => {
     await use(new MyAccountAssertion(myAccountPage))

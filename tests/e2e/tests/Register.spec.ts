@@ -3,6 +3,9 @@ import { SignInPage } from '../src/page/SignInPage'
 import { SignUpPage } from '../src/page/SignUpPage'
 import { uiTest } from '../src/fixture/Fixture'
 
+// assures storage state is empty and user is not logged in
+uiTest.use({ storageState: { cookies: [], origins: [] } })
+
 uiTest('verify sign up form @UI', async ({ page, allure, signInPage, signUpAssertion }) => {
   await allure.suite('register')
 

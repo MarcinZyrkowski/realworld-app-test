@@ -1,30 +1,31 @@
 import { faker } from '@faker-js/faker'
 import { uiTest } from '../src/fixture/Fixture'
 
-uiTest(
-  'verify my accounts elements @UI',
-  async ({ allure, signInSteps, homePage, myAccountAssertion }) => {
-    await allure.suite('my account')
+uiTest('verify my accounts elements @UI', async ({ allure, homePage, myAccountAssertion }) => {
+  await allure.suite('my account')
 
-    await signInSteps.loginWithExistingUser()
+  await allure.step('open home page', async () => {
+    await homePage.open()
+  })
 
-    await allure.step('open my account', async () => {
-      await homePage.menuDrawer.myAccountButton.click()
-      await allure.makeScreenshot('My Account Page')
-    })
+  await allure.step('open my account', async () => {
+    await homePage.menuDrawer.myAccountButton.click()
+    await allure.makeScreenshot('My Account Page')
+  })
 
-    await allure.step('verify my account elements', async () => {
-      await myAccountAssertion.assertUserSettingsVisible()
-    })
-  },
-)
+  await allure.step('verify my account elements', async () => {
+    await myAccountAssertion.assertUserSettingsVisible()
+  })
+})
 
 uiTest(
   'update user account details @UI',
-  async ({ allure, signInSteps, homePage, myAccountPage, myAccountAssertion }) => {
+  async ({ allure, homePage, myAccountPage, myAccountAssertion }) => {
     await allure.suite('my account')
 
-    await signInSteps.loginWithExistingUser()
+    await allure.step('open home page', async () => {
+      await homePage.open()
+    })
 
     await allure.step('open my account', async () => {
       await homePage.menuDrawer.myAccountButton.click()
