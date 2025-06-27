@@ -1,6 +1,5 @@
 import { Page } from '@playwright/test'
 import * as allure from 'allure-js-commons'
-import * as fs from 'fs'
 
 export class Allure {
   readonly page: Page
@@ -42,12 +41,5 @@ export class Allure {
 
   async attachment(obj: unknown, name = 'attachement') {
     await allure.attachment(name, JSON.stringify(obj, null, 2), 'application/json')
-  }
-
-  async attachVideoIfExists() {
-    const videoPath = await this.page.video()?.path()
-    if (videoPath) {
-      allure.attachment('Test Video', fs.readFileSync(videoPath), 'video/webm')
-    }
   }
 }

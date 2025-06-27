@@ -1,66 +1,50 @@
-import { test } from 'allure-playwright'
-import { SignInPage } from '../src/page/SignInPage'
-import { Allure } from '../../Allure'
-import { SignInSteps } from '../src/steps/SignInSteps'
-import { HomePage } from '../src/page/HomePage'
-import { HomeAssertion } from '../src/assertion/HomeAssertion'
 import { UiCache } from '../src/cache/UiCache'
 import { CollectionsUtils } from '../src/utils/CollectionsUtils'
+import { uiTest } from '../src/fixture/Fixture'
 
-test.describe('home page tests @UI', () => {
-  let homePage: HomePage
-  let allure: Allure
-  let signInSteps: SignInSteps
-  let homeAssertion: HomeAssertion
+uiTest('verify account balance @UI', async ({ allure, signInSteps, homeAssertion }) => {
+  await allure.suite('home page')
 
-  test.beforeEach(async ({ page }) => {
-    homePage = new HomePage(page)
-    allure = new Allure(page)
-    signInSteps = new SignInSteps(page, new SignInPage(page), allure)
-    homeAssertion = new HomeAssertion(homePage)
+  await signInSteps.loginWithExistingUser()
+
+  await allure.step('assert home page account balance is visible', async () => {
+    await homeAssertion.assertAccountBalanceVisible()
   })
 
-  test('verify account balance', async () => {
-    await allure.suite('home page')
+  await allure.step('assert home page account balance value is $0.00', async () => {
+    await homeAssertion.assertAccountBalanceValue('$0.00')
+  })
+})
 
-    await signInSteps.loginWithExistingUser()
+uiTest('verify home page elements @UI', async ({ allure, signInSteps, homeAssertion }) => {
+  await allure.suite('home page')
 
-    await allure.step('assert home page account balance is visible', async () => {
-      await homeAssertion.assertAccountBalanceVisible()
-    })
+  await signInSteps.loginWithExistingUser()
 
-    await allure.step('assert home page account balance value is $0.00', async () => {
-      await homeAssertion.assertAccountBalanceValue('$0.00')
-    })
+  await allure.step('assert home page elements are visible', async () => {
+    await homeAssertion.assertHomePageElementsVisible()
   })
 
-  test('verify home page elements', async () => {
-    await allure.suite('home page')
-
-    await signInSteps.loginWithExistingUser()
-
-    await allure.step('assert home page elements are visible', async () => {
-      await homeAssertion.assertHomePageElementsVisible()
-    })
-
-    await allure.step('assert menu drawer is visible', async () => {
-      await homeAssertion.assertMenuDrawerVisible()
-    })
+  await allure.step('assert menu drawer is visible', async () => {
+    await homeAssertion.assertMenuDrawerVisible()
   })
+})
 
-  test('verify user account details', async () => {
-    await allure.suite('home page')
+uiTest('verify user account details @UI', async ({ allure, signInSteps, homeAssertion }) => {
+  await allure.suite('home page')
 
-    await signInSteps.loginWithExistingUser()
+  await signInSteps.loginWithExistingUser()
 
-    await allure.step('verify user account details', async () => {
-      const expectedDisplayName = UiCache.retrieveDisplayName()
-      const expectedUsername = '@' + UiCache.retrieveUsername()
-      await homeAssertion.verifyUserAccountDetails(expectedDisplayName, expectedUsername)
-    })
+  await allure.step('verify user account details', async () => {
+    const expectedDisplayName = UiCache.retrieveDisplayName()
+    const expectedUsername = '@' + UiCache.retrieveUsername()
+    await homeAssertion.verifyUserAccountDetails(expectedDisplayName, expectedUsername)
   })
+})
 
-  test('transactions history is displayed', async () => {
+uiTest(
+  'transactions history is displayed @UI',
+  async ({ allure, signInSteps, homePage, homeAssertion }) => {
     await allure.suite('home page')
 
     await signInSteps.loginWithExistingUser()
@@ -73,32 +57,28 @@ test.describe('home page tests @UI', () => {
     await allure.step('assert transactions history is displayed', async () => {
       await homeAssertion.assertTransactionsHistoryIsDisplayed()
     })
+  },
+)
+
+uiTest('open transaction details @UI', async ({ allure, signInSteps, homePage, homeAssertion }) => {
+  await allure.suite('home page')
+
+  await signInSteps.loginWithExistingUser()
+
+  await allure.step('wait for transactions', async () => {
+    await homePage.waitForTransactionsList()
+    await allure.makeScreenshot('Transactions List')
   })
 
-  test('open transaction details', async () => {
-    await allure.suite('home page')
-
-    await signInSteps.loginWithExistingUser()
-
-    await allure.step('wait for transactions', async () => {
-      await homePage.waitForTransactionsList()
-      await allure.makeScreenshot('Transactions List')
-    })
-
-    await allure.step('open a random transaction details', async () => {
-      const transactions = await homePage.getVisibleTransactions()
-      const transactionToOpen = CollectionsUtils.randomElement(transactions)
-      await transactionToOpen.click()
-    })
-
-    await allure.step('verify transaction details', async () => {
-      const details = await homePage.getOpenedTransactionDetails()
-      await homeAssertion.verifyTransactionDetails(details)
-      await allure.makeScreenshot('Transaction Details')
-    })
+  await allure.step('open a random transaction details', async () => {
+    const transactions = await homePage.getVisibleTransactions()
+    const transactionToOpen = CollectionsUtils.randomElement(transactions)
+    await transactionToOpen.click()
   })
 
-  test.afterEach(async () => {
-    await allure.attachVideoIfExists()
+  await allure.step('verify transaction details', async () => {
+    const details = await homePage.getOpenedTransactionDetails()
+    await homeAssertion.verifyTransactionDetails(details)
+    await allure.makeScreenshot('Transaction Details')
   })
 })

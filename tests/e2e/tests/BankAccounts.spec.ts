@@ -1,28 +1,9 @@
-import { test } from 'allure-playwright'
-import { SignInPage } from '../src/page/SignInPage'
-import { Allure } from '../../Allure'
-import { SignInSteps } from '../src/steps/SignInSteps'
-import { HomePage } from '../src/page/HomePage'
-import { BankAccountsPage } from '../src/page/BankAccountsPage'
 import { BankDetailsGenerator } from '../src/generator/BankDetailsGenerator'
-import { BankAccountsAssertion } from '../src/assertion/BankAccountsAssertion'
+import { uiTest } from '../src/fixture/Fixture'
 
-test.describe('bank accounts tests @UI', () => {
-  let homePage: HomePage
-  let bankAccountsPage: BankAccountsPage
-  let allure: Allure
-  let signInSteps: SignInSteps
-  let bankAccountsAssertion: BankAccountsAssertion
-
-  test.beforeEach(async ({ page }) => {
-    homePage = new HomePage(page)
-    bankAccountsPage = new BankAccountsPage(page)
-    allure = new Allure(page)
-    signInSteps = new SignInSteps(page, new SignInPage(page), allure)
-    bankAccountsAssertion = new BankAccountsAssertion(bankAccountsPage)
-  })
-
-  test('create new bank account', async () => {
+uiTest(
+  'create new bank account @UI',
+  async ({ allure, signInSteps, homePage, bankAccountsPage, bankAccountsAssertion }) => {
     await allure.suite('bank accounts')
 
     await signInSteps.loginWithExistingUser()
@@ -52,9 +33,12 @@ test.describe('bank accounts tests @UI', () => {
       await bankAccountsAssertion.assertBankAccountVisible(bankDetails.bankName!)
       await allure.makeScreenshot('Bank Account List Updated')
     })
-  })
+  },
+)
 
-  test('delete bank account', async () => {
+uiTest(
+  'delete bank account @UI',
+  async ({ allure, signInSteps, homePage, bankAccountsPage, bankAccountsAssertion }) => {
     await allure.suite('bank accounts')
 
     await signInSteps.loginWithExistingUser()
@@ -90,9 +74,5 @@ test.describe('bank accounts tests @UI', () => {
       // deleted bank account should still be visible with "(Deleted)" suffix
       await bankAccountsAssertion.assertBankAccountVisible(bankDetails.bankName! + ' (Deleted)')
     })
-  })
-
-  test.afterEach(async () => {
-    await allure.attachVideoIfExists()
-  })
-})
+  },
+)

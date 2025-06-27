@@ -1,15 +1,11 @@
-import { expect, test } from '@playwright/test'
+import { expect } from '@playwright/test'
 import { UiCache } from '../src/cache/UiCache'
 import { SignInPage } from '../src/page/SignInPage'
 import { SignUpPage } from '../src/page/SignUpPage'
 import { UserGenerator } from '../src/generator/UserGenerator'
-import { Allure } from '../../Allure'
+import { uiTest } from '../src/fixture/Fixture'
 
-test('setup: register new user @UI', async ({ page }) => {
-  const signInPage = new SignInPage(page)
-  const signUpPage = new SignUpPage(page)
-  const allure = new Allure(page)
-
+uiTest('setup: register new user @UI', async ({ page, allure, signInPage, signUpPage }) => {
   await allure.suite('setup register new user')
 
   await allure.step('open sign in page', async () => {
