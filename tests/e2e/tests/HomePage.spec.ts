@@ -2,10 +2,12 @@ import { UiCache } from '../src/cache/UiCache'
 import { CollectionsUtils } from '../src/utils/CollectionsUtils'
 import { uiTest } from '../src/fixture/Fixture'
 
-uiTest('verify account balance @UI', async ({ allure, signInSteps, homeAssertion }) => {
+uiTest('verify account balance @UI', async ({ allure, homePage, homeAssertion }) => {
   await allure.suite('home page')
 
-  await signInSteps.loginWithExistingUser()
+  await allure.step('open home page', async () => {
+    await homePage.open()
+  })
 
   await allure.step('assert home page account balance is visible', async () => {
     await homeAssertion.assertAccountBalanceVisible()
@@ -16,10 +18,12 @@ uiTest('verify account balance @UI', async ({ allure, signInSteps, homeAssertion
   })
 })
 
-uiTest('verify home page elements @UI', async ({ allure, signInSteps, homeAssertion }) => {
+uiTest('verify home page elements @UI', async ({ allure, homePage, homeAssertion }) => {
   await allure.suite('home page')
 
-  await signInSteps.loginWithExistingUser()
+  await allure.step('open home page', async () => {
+    await homePage.open()
+  })
 
   await allure.step('assert home page elements are visible', async () => {
     await homeAssertion.assertHomePageElementsVisible()
@@ -30,10 +34,12 @@ uiTest('verify home page elements @UI', async ({ allure, signInSteps, homeAssert
   })
 })
 
-uiTest('verify user account details @UI', async ({ allure, signInSteps, homeAssertion }) => {
+uiTest('verify user account details @UI', async ({ allure, homePage, homeAssertion }) => {
   await allure.suite('home page')
 
-  await signInSteps.loginWithExistingUser()
+  await allure.step('open home page', async () => {
+    await homePage.open()
+  })
 
   await allure.step('verify user account details', async () => {
     const expectedDisplayName = UiCache.retrieveDisplayName()
@@ -42,28 +48,29 @@ uiTest('verify user account details @UI', async ({ allure, signInSteps, homeAsse
   })
 })
 
-uiTest(
-  'transactions history is displayed @UI',
-  async ({ allure, signInSteps, homePage, homeAssertion }) => {
-    await allure.suite('home page')
-
-    await signInSteps.loginWithExistingUser()
-
-    await allure.step('wait for transactions', async () => {
-      await homePage.waitForTransactionsList()
-      await allure.makeScreenshot('Transactions List')
-    })
-
-    await allure.step('assert transactions history is displayed', async () => {
-      await homeAssertion.assertTransactionsHistoryIsDisplayed()
-    })
-  },
-)
-
-uiTest('open transaction details @UI', async ({ allure, signInSteps, homePage, homeAssertion }) => {
+uiTest('transactions history is displayed @UI', async ({ allure, homePage, homeAssertion }) => {
   await allure.suite('home page')
 
-  await signInSteps.loginWithExistingUser()
+  await allure.step('open home page', async () => {
+    await homePage.open()
+  })
+
+  await allure.step('wait for transactions', async () => {
+    await homePage.waitForTransactionsList()
+    await allure.makeScreenshot('Transactions List')
+  })
+
+  await allure.step('assert transactions history is displayed', async () => {
+    await homeAssertion.assertTransactionsHistoryIsDisplayed()
+  })
+})
+
+uiTest('open transaction details @UI', async ({ allure, homePage, homeAssertion }) => {
+  await allure.suite('home page')
+
+  await allure.step('open home page', async () => {
+    await homePage.open()
+  })
 
   await allure.step('wait for transactions', async () => {
     await homePage.waitForTransactionsList()

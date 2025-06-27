@@ -1,3 +1,4 @@
+import { Page } from '@playwright/test'
 import { TypeMapper } from '../mapper/TypeMapper'
 import { SignInData } from '../types/page/SignInTypes'
 import { SignUpData } from '../types/page/SignUpTypes'
@@ -6,7 +7,15 @@ import * as path from 'path'
 
 export class UiCache {
   private static userPath = '../../../../playwright/ui/user'
+  private static authPath = '../../../../playwright/ui/.auth'
+  private static authFile = 'user.json'
   private static signUpDataFile = 'signUpData.json'
+
+  static async cacheStorageState(page: Page) {
+    const authDir = path.resolve(__dirname, UiCache.authPath)
+    const authFile = path.join(authDir, UiCache.authFile)
+    await page.context().storageState({ path: authFile })
+  }
 
   static cacheSignUpData(signUpData: SignUpData): void {
     const userDir = path.resolve(__dirname, UiCache.userPath)

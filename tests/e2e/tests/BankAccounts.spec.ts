@@ -3,10 +3,12 @@ import { uiTest } from '../src/fixture/Fixture'
 
 uiTest(
   'create new bank account @UI',
-  async ({ allure, signInSteps, homePage, bankAccountsPage, bankAccountsAssertion }) => {
+  async ({ allure, homePage, bankAccountsPage, bankAccountsAssertion }) => {
     await allure.suite('bank accounts')
 
-    await signInSteps.loginWithExistingUser()
+    await allure.step('open home page', async () => {
+      await homePage.open()
+    })
 
     await allure.step('open bank accounts page', async () => {
       await homePage.menuDrawer.bankAccountsButton.click()
@@ -38,10 +40,12 @@ uiTest(
 
 uiTest(
   'delete bank account @UI',
-  async ({ allure, signInSteps, homePage, bankAccountsPage, bankAccountsAssertion }) => {
+  async ({ allure, homePage, bankAccountsPage, bankAccountsAssertion }) => {
     await allure.suite('bank accounts')
 
-    await signInSteps.loginWithExistingUser()
+    await allure.step('open home page', async () => {
+      await homePage.open()
+    })
 
     await allure.step('open bank accounts page', async () => {
       await homePage.menuDrawer.bankAccountsButton.click()

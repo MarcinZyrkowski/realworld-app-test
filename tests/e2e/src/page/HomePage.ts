@@ -34,6 +34,10 @@ export class HomePage {
     this.finishedDialog = new FinishedDialog(page)
   }
 
+  async open() {
+    await this.page.goto(HomePage.url)
+  }
+
   async waitForTransactionsList(): Promise<void> {
     await this.transactionsList.waitFor({ state: 'visible' })
   }

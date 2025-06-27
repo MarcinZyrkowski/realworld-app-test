@@ -46,6 +46,7 @@ export default defineConfig({
       use: {
         ...devices['Desktop Chrome'],
         // baseURL: "http://localhost:3000", we can set a default baseURL here
+        storageState: 'playwright/ui/.auth/user.json',
         video: {
           mode: 'retain-on-failure',
         },

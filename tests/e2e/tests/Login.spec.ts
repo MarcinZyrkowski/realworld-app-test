@@ -4,6 +4,9 @@ import { HomePage } from '../src/page/HomePage'
 import { SignInPage } from '../src/page/SignInPage'
 import { uiTest } from '../src/fixture/Fixture'
 
+// assures storage state is empty and user is not logged in
+uiTest.use({ storageState: { cookies: [], origins: [] } })
+
 uiTest('login with existing user @UI', async ({ page, allure, signInPage }) => {
   await allure.suite('login')
 

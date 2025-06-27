@@ -21,8 +21,18 @@ uiTest(
       const signInData = UiCache.retrieveSignInData()
       await signInPage.fillForm(signInData)
       await allure.makeScreenshot('Filled Sign In Form')
+    })
+
+    await allure.step('sign in', async () => {
       await signInPage.signInButton.click()
+    })
+
+    await allure.step('verify user is signed in', async () => {
       await expect(page).toHaveURL(HomePage.url)
+    })
+
+    await allure.step('store session', async () => {
+      await UiCache.cacheStorageState(page)
     })
 
     await allure.step('get started is visible', async () => {
