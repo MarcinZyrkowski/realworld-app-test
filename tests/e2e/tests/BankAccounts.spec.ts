@@ -22,7 +22,9 @@ uiTest(
 
     const bankDetails = BankDetailsGenerator.generateRandomBankDetails()
     await allure.step('fill bank account form', async () => {
-      await bankAccountsPage.createBankAccountForm.fillBankAccountForm(bankDetails)
+      await bankAccountsPage.createBankAccountForm.fillBankAccountForm(
+        bankDetails,
+      )
       await allure.makeScreenshot('Filled Bank Account Form')
     })
 
@@ -32,7 +34,9 @@ uiTest(
     })
 
     await allure.step('verify bank account creation', async () => {
-      await bankAccountsAssertion.assertBankAccountVisible(bankDetails.bankName!)
+      await bankAccountsAssertion.assertBankAccountVisible(
+        bankDetails.bankName!,
+      )
       await allure.makeScreenshot('Bank Account List Updated')
     })
   },
@@ -59,7 +63,9 @@ uiTest(
 
     const bankDetails = BankDetailsGenerator.generateRandomBankDetails()
     await allure.step('fill bank account form', async () => {
-      await bankAccountsPage.createBankAccountForm.fillBankAccountForm(bankDetails)
+      await bankAccountsPage.createBankAccountForm.fillBankAccountForm(
+        bankDetails,
+      )
       await allure.makeScreenshot('Filled Bank Account Form')
     })
 
@@ -76,7 +82,9 @@ uiTest(
     await allure.step('verify bank account is deleted', async () => {
       await bankAccountsAssertion.assertBankAccountAbsent(bankDetails.bankName!)
       // deleted bank account should still be visible with "(Deleted)" suffix
-      await bankAccountsAssertion.assertBankAccountVisible(bankDetails.bankName! + ' (Deleted)')
+      await bankAccountsAssertion.assertBankAccountVisible(
+        bankDetails.bankName! + ' (Deleted)',
+      )
     })
   },
 )

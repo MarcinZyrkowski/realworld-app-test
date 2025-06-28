@@ -43,9 +43,12 @@ export class RestClient extends Client {
       content: comment,
     }
 
-    return this.request.post(RestClient.baseUrl + `/comments/${transactionId}`, {
-      data: request,
-      headers: { Cookie: cookie },
-    })
+    return this.request.post(
+      RestClient.baseUrl + `/comments/${transactionId}`,
+      {
+        data: request,
+        headers: { Cookie: cookie },
+      },
+    )
   }
 }

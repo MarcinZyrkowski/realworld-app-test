@@ -17,7 +17,10 @@ export class CreateBankAccountAssertion {
     return this.response.json()
   }
 
-  verifyResponse(response: CreateBankAccountResponse, bankAccount: BankAccountRequest) {
+  verifyResponse(
+    response: CreateBankAccountResponse,
+    bankAccount: BankAccountRequest,
+  ) {
     expect(response.data.createBankAccount).toMatchObject({
       userId: bankAccount.userId,
       bankName: bankAccount.bankName,

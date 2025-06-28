@@ -40,7 +40,9 @@ export class TransactionsPageAssertion {
     if (!isPresent) {
       console.log(transaction)
 
-      const usersComment = transaction.comments.filter((c) => c.userId === userId)
+      const usersComment = transaction.comments.filter(
+        (c) => c.userId === userId,
+      )
       console.log(usersComment)
     }
 

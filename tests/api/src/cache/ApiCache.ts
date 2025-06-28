@@ -40,7 +40,11 @@ export class ApiCache {
   }
 
   static retrieveCookie(): string {
-    const cookieString = this.retrieveCache(ApiCache.cookiePath, ApiCache.cookieFile, false)
+    const cookieString = this.retrieveCache(
+      ApiCache.cookiePath,
+      ApiCache.cookieFile,
+      false,
+    )
     return cookieString.split(';')[0].trim()
   }
 

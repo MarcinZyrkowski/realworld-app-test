@@ -18,7 +18,9 @@ export class SignUpPage {
     this.lastNameInput = this.page.locator('input[name="lastName"]')
     this.userNameInput = this.page.locator('input[name="username"]')
     this.passwordInput = this.page.locator('input[name="password"]')
-    this.confirmPasswordInput = this.page.locator('input[name="confirmPassword"]')
+    this.confirmPasswordInput = this.page.locator(
+      'input[name="confirmPassword"]',
+    )
     this.signUpButton = this.page.getByRole('button', {
       exact: true,
       name: 'Sign Up',

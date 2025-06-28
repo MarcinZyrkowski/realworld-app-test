@@ -46,7 +46,11 @@ test.describe('comments tests @API', () => {
     await allure.step('publish comment', async () => {
       comment = ApiCache.retriveUserData().username + ' comment'
       await allure.attachRequest(comment)
-      response = await restClient.publishComment(cookie, transaction!.id, comment)
+      response = await restClient.publishComment(
+        cookie,
+        transaction!.id,
+        comment,
+      )
     })
 
     await allure.step('verify published comment response', async () => {

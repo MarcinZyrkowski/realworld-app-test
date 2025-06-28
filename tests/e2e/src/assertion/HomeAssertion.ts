@@ -37,13 +37,14 @@ export class HomeAssertion {
   }
 
   async assertHomePageElementsVisible(): Promise<void> {
-    await expect(this.homePage.logo).toBeVisible()
-    await expect(this.homePage.everyoneTab).toBeVisible()
-    await expect(this.homePage.friendsTab).toBeVisible()
-    await expect(this.homePage.mineTab).toBeVisible()
-    await expect(this.homePage.newTransactionButton).toBeVisible()
-    await expect(this.homePage.notificationsBellButton).toBeVisible()
-    await expect(this.homePage.transactionsList).toBeVisible()
+    const home = this.homePage
+    await expect(home.logo).toBeVisible()
+    await expect(home.everyoneTab).toBeVisible()
+    await expect(home.friendsTab).toBeVisible()
+    await expect(home.mineTab).toBeVisible()
+    await expect(home.newTransactionButton).toBeVisible()
+    await expect(home.notificationsBellButton).toBeVisible()
+    await expect(home.transactionsList).toBeVisible()
   }
 
   async assertMenuDrawerVisible(): Promise<void> {
@@ -60,7 +61,10 @@ export class HomeAssertion {
     await expect(drawer.logOutButton).toBeVisible()
   }
 
-  async verifyUserAccountDetails(userFullName: string, username: string): Promise<void> {
+  async verifyUserAccountDetails(
+    userFullName: string,
+    username: string,
+  ): Promise<void> {
     const drawer = this.homePage.menuDrawer
     await expect(drawer.userFullName).toHaveText(userFullName)
     await expect(drawer.username).toHaveText(username)
@@ -74,7 +78,8 @@ export class HomeAssertion {
   async verifyTransactionDetails(details: TransactionDetails): Promise<void> {
     expect([' requested ', ' paid ', ' charged ']).toContain(details.action)
     expect(
-      details.description.includes('Request: ') || details.description.includes('Payment: '),
+      details.description.includes('Request: ') ||
+        details.description.includes('Payment: '),
     ).toBe(true)
     expect(details.title).toBe('Transaction Detail')
     expect(details.sender).not.toBeNull()

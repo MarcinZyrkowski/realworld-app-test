@@ -26,12 +26,15 @@ test.describe('transactions tests @API', () => {
     })
 
     transactionsPageAssertion = new TransactionsPageAssertion(response)
-    await allure.step('verify list of public transactions response', async () => {
-      await allure.attachResponse(response)
-      transactionsPageAssertion.statusIsOk()
-      const body = await transactionsPageAssertion.extractBody()
-      await allure.attachResponseBody(body)
-      transactionsPageAssertion.assertTransactionsListInNotEmpty(body)
-    })
+    await allure.step(
+      'verify list of public transactions response',
+      async () => {
+        await allure.attachResponse(response)
+        transactionsPageAssertion.statusIsOk()
+        const body = await transactionsPageAssertion.extractBody()
+        await allure.attachResponseBody(body)
+        transactionsPageAssertion.assertTransactionsListInNotEmpty(body)
+      },
+    )
   })
 })

@@ -4,13 +4,19 @@ import {
   LIST_BANK_ACCOUNT,
   DELETE_BANK_ACCOUNT,
 } from '../graphql/GraphqlQueryMutation'
-import { BankAccountRequest, GraphqlQuery } from '../types/graphql/GraphqlRequest'
+import {
+  BankAccountRequest,
+  GraphqlQuery,
+} from '../types/graphql/GraphqlRequest'
 import { Client } from './Client'
 
 export class GraphqlClient extends Client {
   private static graphqlUrl = Client.baseUrl + '/graphql'
 
-  async createBankAccount(cookie: string, bankAccount: BankAccountRequest): Promise<APIResponse> {
+  async createBankAccount(
+    cookie: string,
+    bankAccount: BankAccountRequest,
+  ): Promise<APIResponse> {
     const query: GraphqlQuery = {
       operationName: 'CreateBankAccount',
       query: CREATE_BANK_ACCOUNT,
@@ -33,7 +39,10 @@ export class GraphqlClient extends Client {
     })
   }
 
-  async deleteBankAccount(cookie: string, bankId: string): Promise<APIResponse> {
+  async deleteBankAccount(
+    cookie: string,
+    bankId: string,
+  ): Promise<APIResponse> {
     const query: GraphqlQuery = {
       operationName: 'DeleteBankAccount',
       query: DELETE_BANK_ACCOUNT,

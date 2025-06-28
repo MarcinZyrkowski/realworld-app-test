@@ -27,7 +27,9 @@ export class HomePage {
     this.friendsTab = this.page.getByRole('tab', { name: 'Friends' })
     this.mineTab = this.page.getByRole('tab', { name: 'Mine' })
     this.newTransactionButton = this.page.getByRole('button', { name: 'New' })
-    this.notificationsBellButton = this.page.locator('[data-test="nav-top-notifications-link"]')
+    this.notificationsBellButton = this.page.locator(
+      '[data-test="nav-top-notifications-link"]',
+    )
     this.transactionsList = this.page.locator('[data-test="transaction-list"]')
     this.getStartedDialog = new GetStartedDialog(page)
     this.createBankAccountDialog = new CreateBankAccountFormComponent(page)
@@ -43,11 +45,15 @@ export class HomePage {
   }
 
   async getVisibleTransactions(): Promise<Locator[]> {
-    return this.transactionsList.locator('[data-test^="transaction-item-"]').all()
+    return this.transactionsList
+      .locator('[data-test^="transaction-item-"]')
+      .all()
   }
 
   async getOpenedTransactionDetails(): Promise<TransactionDetails> {
-    const title = await this.page.locator('[data-test="transaction-detail-header"]').textContent()
+    const title = await this.page
+      .locator('[data-test="transaction-detail-header"]')
+      .textContent()
     const sender = await this.page
       .locator('[data-test^="transaction-sender-"]')
       .last()
@@ -56,11 +62,15 @@ export class HomePage {
       .locator('[data-test^="transaction-receiver-"]')
       .last()
       .textContent()
-    const action = await this.page.locator('[data-test^="transaction-action-"]').textContent()
+    const action = await this.page
+      .locator('[data-test^="transaction-action-"]')
+      .textContent()
     const description = await this.page
       .locator('[data-test="transaction-description"]')
       .textContent()
-    const amount = await this.page.locator('[data-test^="transaction-amount-"]').textContent()
+    const amount = await this.page
+      .locator('[data-test^="transaction-amount-"]')
+      .textContent()
     const likeCount = await this.page
       .locator('[data-test^="transaction-like-count-"]')
       .textContent()
@@ -98,8 +108,12 @@ export class MenuDrawer {
     this.accountBalanceTitle = this.page.getByText('Account Balance')
     this.homeButton = this.page.getByRole('button', { name: 'Home' })
     this.myAccountButton = this.page.getByRole('button', { name: 'My Account' })
-    this.bankAccountsButton = this.page.getByRole('button', { name: 'Bank Accounts' })
-    this.notificationsButton = this.page.getByRole('button', { name: 'Notifications' })
+    this.bankAccountsButton = this.page.getByRole('button', {
+      name: 'Bank Accounts',
+    })
+    this.notificationsButton = this.page.getByRole('button', {
+      name: 'Notifications',
+    })
     this.logOutButton = this.page.getByRole('button', { name: 'Logout' })
   }
 }

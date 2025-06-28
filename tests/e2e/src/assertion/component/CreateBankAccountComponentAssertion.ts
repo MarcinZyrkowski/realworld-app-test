@@ -15,10 +15,11 @@ export class CreateBankAccountComponentAssertion {
   }
 
   async assertCreateBankAccountComponentVisible(): Promise<void> {
-    await expect(this.component.title).toBeVisible()
-    await expect(this.component.saveButton).toBeVisible()
-    await expect(this.component.bankNameInput).toBeVisible()
-    await expect(this.component.routingNumberInput).toBeVisible()
-    await expect(this.component.accountNumberInput).toBeVisible()
+    const form = this.component
+    await expect(form.title).toBeVisible()
+    await expect(form.saveButton).toBeVisible()
+    await expect(form.bankNameInput).toBeVisible()
+    await expect(form.routingNumberInput).toBeVisible()
+    await expect(form.accountNumberInput).toBeVisible()
   }
 }

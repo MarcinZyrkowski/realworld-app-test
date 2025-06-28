@@ -20,7 +20,12 @@ export class ListBankAccountAssertion {
     expect(response.data.listBankAccount.length).toBeGreaterThan(0)
   }
 
-  assertAllBankAccountsBelogngToUser(response: ListBankAccountResponse, userId: string) {
-    expect(response.data.listBankAccount.every((bank) => bank.userId === userId)).toBe(true)
+  assertAllBankAccountsBelogngToUser(
+    response: ListBankAccountResponse,
+    userId: string,
+  ) {
+    expect(
+      response.data.listBankAccount.every((bank) => bank.userId === userId),
+    ).toBe(true)
   }
 }

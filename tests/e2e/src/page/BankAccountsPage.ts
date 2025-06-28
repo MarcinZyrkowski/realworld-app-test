@@ -9,7 +9,9 @@ export class BankAccountsPage {
 
   constructor(page: Page) {
     this.page = page
-    this.createBankAccountButton = this.page.getByRole('button', { name: 'Create' })
+    this.createBankAccountButton = this.page.getByRole('button', {
+      name: 'Create',
+    })
     this.bankList = this.page.getByTestId('bankaccount-list')
     this.createBankAccountForm = new CreateBankAccountFormComponent(page)
   }
@@ -27,7 +29,10 @@ export class BankAccountsPage {
   }
 
   async deleteBankAccount(bankName: string): Promise<void> {
-    const bankElement = this.bankList.locator('li').filter({ hasText: bankName }).first()
+    const bankElement = this.bankList
+      .locator('li')
+      .filter({ hasText: bankName })
+      .first()
 
     if (await bankElement.isVisible()) {
       await bankElement.locator('button', { hasText: 'Delete' }).click()
