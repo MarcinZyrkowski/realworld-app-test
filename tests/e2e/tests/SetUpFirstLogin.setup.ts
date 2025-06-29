@@ -1,10 +1,10 @@
-import { SignInPage } from '../src/page/SignInPage'
-import { UiCache } from '../src/cache/UiCache'
-import { BankDetailsGenerator } from '../src/generator/BankDetailsGenerator'
 import { expect } from '@playwright/test'
-import { HomePage } from '../src/page/HomePage'
 import { CreateBankAccountComponentAssertion } from '../src/assertion/component/CreateBankAccountComponentAssertion'
+import { UiCache } from '../src/cache/UiCache'
 import { uiTest } from '../src/fixture/Fixture'
+import { BankDetailsGenerator } from '../src/generator/BankDetailsGenerator'
+import { HomePage } from '../src/page/HomePage'
+import { SignInPage } from '../src/page/SignInPage'
 
 uiTest(
   'setup: login new user for first time @UI',

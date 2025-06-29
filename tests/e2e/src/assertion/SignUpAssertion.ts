@@ -9,12 +9,13 @@ export class SignUpAssertion {
   }
 
   async assertSignUpFormVisible(): Promise<void> {
-    await expect(this.signUnPage.firstNameInput).toBeVisible()
-    await expect(this.signUnPage.lastNameInput).toBeVisible()
-    await expect(this.signUnPage.userNameInput).toBeVisible()
-    await expect(this.signUnPage.passwordInput).toBeVisible()
-    await expect(this.signUnPage.confirmPasswordInput).toBeVisible()
-    await expect(this.signUnPage.signUpButton).toBeVisible()
-    await expect(this.signUnPage.signInButton).toBeVisible()
+    const page = this.signUnPage
+    await expect(page.firstNameInput).toBeVisible()
+    await expect(page.lastNameInput).toBeVisible()
+    await expect(page.userNameInput).toBeVisible()
+    await expect(page.passwordInput).toBeVisible()
+    await expect(page.confirmPasswordInput).toBeVisible()
+    await expect(page.signUpButton).toBeVisible()
+    await expect(page.signInButton).toBeVisible()
   }
 }

@@ -24,11 +24,19 @@ export class Allure {
   }
 
   async attachRequest(request: unknown) {
-    await allure.attachment('request', JSON.stringify(request, null, 2), 'application/json')
+    await allure.attachment(
+      'request',
+      JSON.stringify(request, null, 2),
+      'application/json',
+    )
   }
 
   async attachResponse(response: unknown) {
-    await allure.attachment('response', JSON.stringify(response, null, 2), 'application/json')
+    await allure.attachment(
+      'response',
+      JSON.stringify(response, null, 2),
+      'application/json',
+    )
   }
 
   async attachResponseBody(responseBody: unknown) {
@@ -40,6 +48,10 @@ export class Allure {
   }
 
   async attachment(obj: unknown, name = 'attachement') {
-    await allure.attachment(name, JSON.stringify(obj, null, 2), 'application/json')
+    await allure.attachment(
+      name,
+      JSON.stringify(obj, null, 2),
+      'application/json',
+    )
   }
 }

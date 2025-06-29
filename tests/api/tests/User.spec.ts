@@ -29,7 +29,11 @@ test.describe('user tests @API', () => {
       userProfileAssertion.statusIsOk()
       const body = await userProfileAssertion.extractBody()
       await allure.attachResponseBody(body)
-      userProfileAssertion.verifyUserProfileResponse(body, useData.firstName, useData.lastName)
+      userProfileAssertion.verifyUserProfileResponse(
+        body,
+        useData.firstName,
+        useData.lastName,
+      )
     })
   })
 })

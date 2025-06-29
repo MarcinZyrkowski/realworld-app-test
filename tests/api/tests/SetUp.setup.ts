@@ -55,9 +55,14 @@ test('setup new user @API', async ({ page, request }) => {
 
   let bankAccount
   await allure.step('create bank account', async () => {
-    bankAccount = BankAccountGenerator.generateRandomBankDetails(ApiCache.retrieveUserId())
+    bankAccount = BankAccountGenerator.generateRandomBankDetails(
+      ApiCache.retrieveUserId(),
+    )
     await allure.attachRequest(bankAccount)
-    response = await graphqlClient.createBankAccount(ApiCache.retrieveCookie(), bankAccount)
+    response = await graphqlClient.createBankAccount(
+      ApiCache.retrieveCookie(),
+      bankAccount,
+    )
   })
 
   createBankAccountAssertion = new CreateBankAccountAssertion(response!)

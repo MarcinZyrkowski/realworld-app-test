@@ -37,7 +37,10 @@ test.describe('bank accounts tests @API', () => {
       const body = await listBankAccountAssertion.extractBody()
       await allure.attachResponseBody(body)
       listBankAccountAssertion.assertListBankAccountIsNotEmpty(body)
-      listBankAccountAssertion.assertAllBankAccountsBelogngToUser(body, ApiCache.retrieveUserId())
+      listBankAccountAssertion.assertAllBankAccountsBelogngToUser(
+        body,
+        ApiCache.retrieveUserId(),
+      )
     })
   })
 
@@ -46,7 +49,9 @@ test.describe('bank accounts tests @API', () => {
 
     let bankAccount
     await allure.step('create bank account', async () => {
-      bankAccount = BankAccountGenerator.generateRandomBankDetails(ApiCache.retrieveUserId())
+      bankAccount = BankAccountGenerator.generateRandomBankDetails(
+        ApiCache.retrieveUserId(),
+      )
       await allure.attachRequest(bankAccount)
       response = await graphqlClient.createBankAccount(cookie, bankAccount)
     })
@@ -68,7 +73,9 @@ test.describe('bank accounts tests @API', () => {
       )
     })
 
-    deleteBankAccountAccountAssertion = new DeleteBankAccountAccountAssertion(response!)
+    deleteBankAccountAccountAssertion = new DeleteBankAccountAccountAssertion(
+      response!,
+    )
     await allure.step('verify delete bank account response', async () => {
       await allure.attachResponse(response)
       deleteBankAccountAccountAssertion.statusIsOk()

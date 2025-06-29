@@ -22,15 +22,11 @@ export class UiCache {
     if (!fs.existsSync(userDir)) {
       fs.mkdirSync(userDir, { recursive: true })
     }
+
     fs.writeFileSync(
       path.join(userDir, UiCache.signUpDataFile),
       JSON.stringify(signUpData, null, 2),
     )
-  }
-
-  static retrieveSignInData(): SignInData {
-    const signUpData: SignUpData = this.retrieveSignUpData()
-    return TypeMapper.mapSignUpDataToSignInData(signUpData)
   }
 
   static retrieveSignUpData(): SignUpData {
@@ -40,12 +36,16 @@ export class UiCache {
       throw new Error('SignUp data is not cached')
     }
     const signUpDataRaw = fs.readFileSync(filePath, 'utf-8')
-    const signUpData: SignUpData = JSON.parse(signUpDataRaw)
-    return signUpData
+    return JSON.parse(signUpDataRaw)
+  }
+
+  static retrieveSignInData(): SignInData {
+    const signUpData = UiCache.retrieveSignUpData()
+    return TypeMapper.mapSignUpDataToSignInData(signUpData)
   }
 
   static retrieveDisplayName(): string {
-    const signUpData: SignUpData = this.retrieveSignUpData()
+    const signUpData = UiCache.retrieveSignUpData()
     if (!signUpData.firstName || !signUpData.lastName) {
       throw new Error('SignUp data does not contain first or last name')
     }
@@ -53,7 +53,7 @@ export class UiCache {
   }
 
   static retrieveUsername(): string {
-    const signUpData: SignUpData = this.retrieveSignUpData()
+    const signUpData = UiCache.retrieveSignUpData()
     if (!signUpData.userName) {
       throw new Error('SignUp data does not contain username')
     }

@@ -13,11 +13,19 @@ export class MyAccountPage {
   constructor(page: Page) {
     this.page = page
     this.title = this.page.getByTestId('main').locator('h2')
-    this.firstNameInput = this.page.locator('[id="user-settings-firstName-input"]')
-    this.lastNameInput = this.page.locator('[id="user-settings-lastName-input"]')
+    this.firstNameInput = this.page.locator(
+      '[id="user-settings-firstName-input"]',
+    )
+    this.lastNameInput = this.page.locator(
+      '[id="user-settings-lastName-input"]',
+    )
     this.emailInput = this.page.locator('[id="user-settings-email-input"]')
-    this.phoneInput = this.page.locator('[id="user-settings-phoneNumber-input"]')
-    this.saveButton = this.saveButton = this.page.getByRole('button', { name: 'Save' })
+    this.phoneInput = this.page.locator(
+      '[id="user-settings-phoneNumber-input"]',
+    )
+    this.saveButton = this.saveButton = this.page.getByRole('button', {
+      name: 'Save',
+    })
   }
 
   async fillUserDetails(data: MyAccountData) {

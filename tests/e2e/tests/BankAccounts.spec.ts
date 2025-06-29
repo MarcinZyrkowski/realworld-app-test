@@ -1,5 +1,5 @@
-import { BankDetailsGenerator } from '../src/generator/BankDetailsGenerator'
 import { uiTest } from '../src/fixture/Fixture'
+import { BankDetailsGenerator } from '../src/generator/BankDetailsGenerator'
 
 uiTest(
   'create new bank account @UI',
@@ -8,6 +8,7 @@ uiTest(
 
     await allure.step('open home page', async () => {
       await homePage.open()
+      await allure.makeScreenshot('Home Page')
     })
 
     await allure.step('open bank accounts page', async () => {
@@ -22,7 +23,9 @@ uiTest(
 
     const bankDetails = BankDetailsGenerator.generateRandomBankDetails()
     await allure.step('fill bank account form', async () => {
-      await bankAccountsPage.createBankAccountForm.fillBankAccountForm(bankDetails)
+      await bankAccountsPage.createBankAccountForm.fillBankAccountForm(
+        bankDetails,
+      )
       await allure.makeScreenshot('Filled Bank Account Form')
     })
 
@@ -32,7 +35,9 @@ uiTest(
     })
 
     await allure.step('verify bank account creation', async () => {
-      await bankAccountsAssertion.assertBankAccountVisible(bankDetails.bankName!)
+      await bankAccountsAssertion.assertBankAccountVisible(
+        bankDetails.bankName!,
+      )
       await allure.makeScreenshot('Bank Account List Updated')
     })
   },
@@ -45,6 +50,7 @@ uiTest(
 
     await allure.step('open home page', async () => {
       await homePage.open()
+      await allure.makeScreenshot('Home Page')
     })
 
     await allure.step('open bank accounts page', async () => {
@@ -59,7 +65,9 @@ uiTest(
 
     const bankDetails = BankDetailsGenerator.generateRandomBankDetails()
     await allure.step('fill bank account form', async () => {
-      await bankAccountsPage.createBankAccountForm.fillBankAccountForm(bankDetails)
+      await bankAccountsPage.createBankAccountForm.fillBankAccountForm(
+        bankDetails,
+      )
       await allure.makeScreenshot('Filled Bank Account Form')
     })
 
@@ -76,7 +84,9 @@ uiTest(
     await allure.step('verify bank account is deleted', async () => {
       await bankAccountsAssertion.assertBankAccountAbsent(bankDetails.bankName!)
       // deleted bank account should still be visible with "(Deleted)" suffix
-      await bankAccountsAssertion.assertBankAccountVisible(bankDetails.bankName! + ' (Deleted)')
+      await bankAccountsAssertion.assertBankAccountVisible(
+        bankDetails.bankName! + ' (Deleted)',
+      )
     })
   },
 )

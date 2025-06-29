@@ -1,8 +1,8 @@
 import { expect } from '@playwright/test'
 import { UiCache } from '../src/cache/UiCache'
+import { uiTest } from '../src/fixture/Fixture'
 import { HomePage } from '../src/page/HomePage'
 import { SignInPage } from '../src/page/SignInPage'
-import { uiTest } from '../src/fixture/Fixture'
 
 // assures storage state is empty and user is not logged in
 uiTest.use({ storageState: { cookies: [], origins: [] } })
@@ -33,16 +33,19 @@ uiTest('login with existing user @UI', async ({ page, allure, signInPage }) => {
   })
 })
 
-uiTest('verify sign in form @UI', async ({ page, allure, signInPage, signInAssertion }) => {
-  await allure.suite('login')
+uiTest(
+  'verify sign in form @UI',
+  async ({ page, allure, signInPage, signInAssertion }) => {
+    await allure.suite('login')
 
-  await allure.step('open sign in page', async () => {
-    await signInPage.open()
-    await expect(page).toHaveURL(SignInPage.url)
-    await allure.makeScreenshot('Sign In Page')
-  })
+    await allure.step('open sign in page', async () => {
+      await signInPage.open()
+      await expect(page).toHaveURL(SignInPage.url)
+      await allure.makeScreenshot('Sign In Page')
+    })
 
-  await allure.step('assert sign in form is visible', async () => {
-    await signInAssertion.assertSignInFormVisible()
-  })
-})
+    await allure.step('assert sign in form is visible', async () => {
+      await signInAssertion.assertSignInFormVisible()
+    })
+  },
+)
