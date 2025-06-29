@@ -8,6 +8,7 @@ uiTest(
 
     await allure.step('open home page', async () => {
       await homePage.open()
+      await allure.makeScreenshot('Home Page')
     })
 
     await allure.step('open bank accounts page', async () => {
@@ -49,6 +50,7 @@ uiTest(
 
     await allure.step('open home page', async () => {
       await homePage.open()
+      await allure.makeScreenshot('Home Page')
     })
 
     await allure.step('open bank accounts page', async () => {

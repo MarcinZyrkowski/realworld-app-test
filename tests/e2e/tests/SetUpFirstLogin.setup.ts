@@ -18,7 +18,7 @@ uiTest(
     })
 
     await allure.step('fill sign in form', async () => {
-      const signInData = await UiCache.retrieveSignInData()
+      const signInData = UiCache.retrieveSignInData()
       await signInPage.fillForm(signInData)
       await allure.makeScreenshot('Filled Sign In Form')
     })

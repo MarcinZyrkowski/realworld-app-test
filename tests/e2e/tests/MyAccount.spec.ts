@@ -8,6 +8,7 @@ uiTest(
 
     await allure.step('open home page', async () => {
       await homePage.open()
+      await allure.makeScreenshot('Home Page')
     })
 
     await allure.step('open my account', async () => {
@@ -28,6 +29,7 @@ uiTest(
 
     await allure.step('open home page', async () => {
       await homePage.open()
+      await allure.makeScreenshot('Home Page')
     })
 
     await allure.step('open my account', async () => {
@@ -36,7 +38,7 @@ uiTest(
     })
 
     const myAccountDataToUpdate =
-      AccountDataGenerator.generateMandatoryAndOrOptionalAccountData()
+      AccountDataGenerator.generateEmailAndPhoneAccountData()
 
     await allure.step('update user account details', async () => {
       await myAccountPage.fillUserDetails(myAccountDataToUpdate)

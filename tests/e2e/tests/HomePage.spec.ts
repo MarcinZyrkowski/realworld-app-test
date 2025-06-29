@@ -9,6 +9,7 @@ uiTest(
 
     await allure.step('open home page', async () => {
       await homePage.open()
+      await allure.makeScreenshot('Home Page')
     })
 
     await allure.step(
@@ -34,6 +35,7 @@ uiTest(
 
     await allure.step('open home page', async () => {
       await homePage.open()
+      await allure.makeScreenshot('Home Page')
     })
 
     await allure.step('assert home page elements are visible', async () => {
@@ -57,8 +59,8 @@ uiTest(
     })
 
     await allure.step('verify user account details', async () => {
-      const expectedDisplayName = await UiCache.retrieveDisplayName()
-      const expectedUsername = '@' + await UiCache.retrieveUsername()
+      const expectedDisplayName = UiCache.retrieveDisplayName()
+      const expectedUsername = '@' + UiCache.retrieveUsername()
       await homeAssertion.verifyUserAccountDetails(
         expectedDisplayName,
         expectedUsername,
@@ -74,6 +76,7 @@ uiTest(
 
     await allure.step('open home page', async () => {
       await homePage.open()
+      await allure.makeScreenshot('Home Page')
     })
 
     await allure.step('wait for transactions', async () => {
@@ -94,6 +97,7 @@ uiTest(
 
     await allure.step('open home page', async () => {
       await homePage.open()
+      await allure.makeScreenshot('Home Page')
     })
 
     await allure.step('wait for transactions', async () => {

@@ -1,6 +1,5 @@
 import { faker } from '@faker-js/faker'
 import { MyAccountData } from '../types/page/MyAccountTypes'
-import { CollectionsUtils } from '../utils/CollectionsUtils'
 
 type MyAccountDataFileds = Partial<keyof MyAccountData>
 
@@ -27,11 +26,8 @@ export class AccountDataGenerator {
     return data
   }
 
-  static generateMandatoryAndOrOptionalAccountData() {
+  static generateEmailAndPhoneAccountData() {
     const mandatory: MyAccountDataFileds[] = ['email', 'phone']
-    const optional: MyAccountDataFileds[] = ['firstName', 'lastName']
-    const randomOptional = CollectionsUtils.randomSubArray(optional)
-    const fieldsToGenerate = [...mandatory, ...randomOptional]
-    return AccountDataGenerator.generateAccountData(fieldsToGenerate)
+    return AccountDataGenerator.generateAccountData(mandatory)
   }
 }

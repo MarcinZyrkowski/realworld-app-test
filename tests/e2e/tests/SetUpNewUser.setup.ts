@@ -26,7 +26,7 @@ uiTest(
 
     await allure.step('fill sign up form', async () => {
       const signUpData = UserGenerator.generateRandomSignUpData()
-      await UiCache.cacheSignUpData(signUpData)
+      UiCache.cacheSignUpData(signUpData)
       await signUpPage.fillForm(signUpData)
       await allure.makeScreenshot('Filled Sign Up Form')
     })
