@@ -27,7 +27,6 @@ export class AccountDataGenerator {
   }
 
   static generateEmailAndPhoneAccountData() {
-    const mandatory: MyAccountDataFileds[] = ['email', 'phone']
-    return AccountDataGenerator.generateAccountData(mandatory)
+    return AccountDataGenerator.generateAccountData(['email', 'phone'])
   }
 }
