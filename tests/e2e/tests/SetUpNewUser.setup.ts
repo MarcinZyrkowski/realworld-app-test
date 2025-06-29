@@ -1,9 +1,9 @@
 import { expect } from '@playwright/test'
 import { UiCache } from '../src/cache/UiCache'
+import { uiTest } from '../src/fixture/Fixture'
+import { UserGenerator } from '../src/generator/UserGenerator'
 import { SignInPage } from '../src/page/SignInPage'
 import { SignUpPage } from '../src/page/SignUpPage'
-import { UserGenerator } from '../src/generator/UserGenerator'
-import { uiTest } from '../src/fixture/Fixture'
 
 uiTest(
   'setup: register new user @UI',
@@ -26,7 +26,7 @@ uiTest(
 
     await allure.step('fill sign up form', async () => {
       const signUpData = UserGenerator.generateRandomSignUpData()
-      UiCache.cacheSignUpData(signUpData)
+      await UiCache.cacheSignUpData(signUpData)
       await signUpPage.fillForm(signUpData)
       await allure.makeScreenshot('Filled Sign Up Form')
     })

@@ -1,6 +1,6 @@
 import { UiCache } from '../src/cache/UiCache'
-import { CollectionsUtils } from '../src/utils/CollectionsUtils'
 import { uiTest } from '../src/fixture/Fixture'
+import { CollectionsUtils } from '../src/utils/CollectionsUtils'
 
 uiTest(
   'verify account balance @UI',
@@ -53,11 +53,12 @@ uiTest(
 
     await allure.step('open home page', async () => {
       await homePage.open()
+      await allure.makeScreenshot('Home Page')
     })
 
     await allure.step('verify user account details', async () => {
-      const expectedDisplayName = UiCache.retrieveDisplayName()
-      const expectedUsername = '@' + UiCache.retrieveUsername()
+      const expectedDisplayName = await UiCache.retrieveDisplayName()
+      const expectedUsername = '@' + await UiCache.retrieveUsername()
       await homeAssertion.verifyUserAccountDetails(
         expectedDisplayName,
         expectedUsername,

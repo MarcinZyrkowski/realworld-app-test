@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test'
+import { uiTest } from '../src/fixture/Fixture'
 import { SignInPage } from '../src/page/SignInPage'
 import { SignUpPage } from '../src/page/SignUpPage'
-import { uiTest } from '../src/fixture/Fixture'
 
 // assures storage state is empty and user is not logged in
 uiTest.use({ storageState: { cookies: [], origins: [] } })

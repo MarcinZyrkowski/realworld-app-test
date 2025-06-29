@@ -1,5 +1,5 @@
-import { BankDetailsGenerator } from '../src/generator/BankDetailsGenerator'
 import { uiTest } from '../src/fixture/Fixture'
+import { BankDetailsGenerator } from '../src/generator/BankDetailsGenerator'
 
 uiTest(
   'create new bank account @UI',

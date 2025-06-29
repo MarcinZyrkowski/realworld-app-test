@@ -1,5 +1,5 @@
-import { faker } from '@faker-js/faker'
 import { uiTest } from '../src/fixture/Fixture'
+import { AccountDataGenerator } from '../src/generator/AccountDataGenerator'
 
 uiTest(
   'verify my accounts elements @UI',
@@ -35,10 +35,8 @@ uiTest(
       await allure.makeScreenshot('My Account Page')
     })
 
-    const myAccountDataToUpdate = {
-      email: faker.internet.email(),
-      phone: faker.phone.number({ style: 'international' }).substring(1), // Remove the leading '+' sign
-    }
+    const myAccountDataToUpdate =
+      AccountDataGenerator.generateMandatoryAndOrOptionalAccountData()
 
     await allure.step('update user account details', async () => {
       await myAccountPage.fillUserDetails(myAccountDataToUpdate)

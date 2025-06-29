@@ -1,8 +1,8 @@
 import { expect } from '@playwright/test'
 import { UiCache } from '../src/cache/UiCache'
+import { uiTest } from '../src/fixture/Fixture'
 import { HomePage } from '../src/page/HomePage'
 import { SignInPage } from '../src/page/SignInPage'
-import { uiTest } from '../src/fixture/Fixture'
 
 // assures storage state is empty and user is not logged in
 uiTest.use({ storageState: { cookies: [], origins: [] } })
@@ -17,7 +17,7 @@ uiTest('login with existing user @UI', async ({ page, allure, signInPage }) => {
   })
 
   await allure.step('fill sign in form', async () => {
-    const signInData = UiCache.retrieveSignInData()
+    const signInData = await UiCache.retrieveSignInData()
     await signInPage.fillForm(signInData)
     await allure.makeScreenshot('Filled Sign In Form')
   })
